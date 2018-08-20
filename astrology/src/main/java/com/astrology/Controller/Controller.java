@@ -6,7 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,9 +26,9 @@ public class Controller {
 	private static Gson gson = new GsonBuilder().create();
 	private static MessageVO messageVO = new MessageVO();
 	
-	@RequestMapping(value = "/test", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/test/{inputTime}", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String test() {
+	public String test(@PathVariable("inputTime") String inputTime) {
 		//OpenData openData = context.getBean(OpenData.class);
 		try {
 			
@@ -36,6 +37,6 @@ public class Controller {
 			logger.error(e.getMessage());
 			return gson.toJson(messageVO);
 		}
-		return gson.toJson("");
+		return gson.toJson(inputTime);
 	}
 }

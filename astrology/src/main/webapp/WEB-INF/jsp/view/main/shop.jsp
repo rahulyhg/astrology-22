@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<main class="gallery agile py-5">
-	<div class="container-fluid py-lg-5">
+<main class="gallery agile">
+	<div class="container-fluid">
 		<div class="agile_gallery_grids row w3-agile">
 			<div class="col-lg-4 col-md-12 mb-lg-0 mb-sm-5 mb-3 team_grid1">
 				<h1 class="heading text-uppercase">商城小物</h1>
