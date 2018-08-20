@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<script type="text/javascript">
+	app.controller('controller', function ($scope,$http) {
+		$('#JiSlider').JiSlider({
+			color: '#fff',
+			start: 1,
+			reverse: false
+		}).addClass('ff')
+		
+		$('#horizontalTab').easyResponsiveTabs({
+			type: 'default', //Types: default, vertical, accordion           
+			width: 'auto', //auto or any width like 600px
+			fit: true,   // 100% fit in a container
+			closed: 'accordion', // Start closed if in accordion view
+			activate: function(event) { // Callback function if tab is switched
+				var $tab = $(this);
+				var $info = $('#tabInfo');
+				var $name = $('span', $info);
+				$name.text($tab.text());
+				$info.show();
+			}
+		});
+	});
+</script>
