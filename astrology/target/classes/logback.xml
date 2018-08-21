@@ -9,7 +9,7 @@
 	</appender>
 
 	<appender name="log" class="ch.qos.logback.core.FileAppender">
-		<file>D:/astrology/error.log</file>
+		<file>/usr/temp/error.log</file>
 		<encoder>
 			<pattern>%d{yyyy-MM-dd HH:mm:ss} %level [%file:%line] %msg%n
 			</pattern>
