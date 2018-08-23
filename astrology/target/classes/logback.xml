@@ -22,7 +22,7 @@
 
 	<logger name="logs" level="DEBUG" additivity="false">
 		<appender-ref ref="STDOUT" />
-<!-- 		<appender-ref ref="log" /> -->
+		<appender-ref ref="log" />
 	</logger>
 
 
