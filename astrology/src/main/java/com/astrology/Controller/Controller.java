@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,11 +42,11 @@ public class Controller {
 
 	private static Gson gson = new GsonBuilder().create();
 	private static MessageVO messageVO = new MessageVO();
-	private DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-	@GetMapping(value = "/getChartData/{inputTime}/{sidereal}/{addr}", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/getChartData/{inputTime}/{timezone}/{addr}", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String getChartData(@PathVariable("inputTime") String inputTime, @PathVariable("sidereal") String sidereal, @PathVariable("addr") String addr) {
+	public String getChartData(@PathVariable("inputTime") String inputTime, @PathVariable("timezone") int timezone, @PathVariable("addr") String addr) {
 		Map<String, Object> resultMap = new HashMap<>();
 		try {
 			double latitude = 25.03;
@@ -53,8 +54,8 @@ public class Controller {
 			if (StringUtils.isNotBlank(addr)) {
 				if (StringUtils.startsWith(addr, "!")) {
 					addr = addr.substring(1, addr.length());
-					latitude = Double.parseDouble(addr.split("-")[1]);
 					longitude = Double.parseDouble(addr.split("-")[0]);
+					latitude = Double.parseDouble(addr.split("-")[1]);
 				} else {
 					CloseableHttpClient httpclient = HttpClients.createDefault();
 					HttpGet httpget = new HttpGet("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyC1iYs4jh9N5Mz6ZkFPHkVJbWjqQhW-fjg&address=" + addr);
@@ -76,21 +77,21 @@ public class Controller {
 					}
 				}
 			}
-			inputTime += ":00";
 			
-			Cusp cuspEphemeris = new CuspBuilder(LocalDateTime.parse(inputTime, format))
-					.houses("Placidus")
-					.topo(latitude, longitude, 0)
-					.zodiac(sidereal)
+			Cusp cuspEphemeris = new CuspBuilder(LocalDateTime.parse(inputTime, format).minusHours(timezone))
+					.topo(longitude, latitude, 0)
 					.build();
 			resultMap.put("cusps", cuspEphemeris.getCusps());
 			
-			Planet planetEphemeris = new PlanetBuilder(LocalDateTime.parse(inputTime, format))
-					.planet("Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, Lilith, NNode")
-					.topo(latitude, longitude, 0)
-					.zodiac(sidereal)
+			Planet planetEphemeris = new PlanetBuilder(LocalDateTime.parse(inputTime, format).minusHours(timezone))
+					.planet("Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto")
+					.topo(longitude, latitude, 0)
 					.build();
-			resultMap.put("planets", planetEphemeris.getPlanets());
+			Map<String, List<Double>> planetMap = planetEphemeris.getPlanets();
+			planetMap.values().forEach(planetList -> {
+				planetList.remove(1);
+			});
+			resultMap.put("planets", planetMap);
 		} catch (Exception e) {
 			messageVO.setResMessage("發生錯誤:" + e.getMessage());
 			logger.error(e.getMessage());
