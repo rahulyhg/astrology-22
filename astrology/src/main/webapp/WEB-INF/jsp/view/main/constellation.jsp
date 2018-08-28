@@ -4,9 +4,9 @@
 	<h3 class="alert alert-primary heading text-center" style="font-size:30px;padding:.25rem 1rem">星座命盤分析</h3>
 	<div class="form-group col-lg-5 offset-lg-4 col-md-10 offset-md-1">
 		<label><span class="badge badge-pill badge-primary">第一步：</span>請輸入陽曆(國曆)西元出生時間</label>
-		<div>
+		<div class="d-none d-sm-block">
 		 	西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year"/>年&nbsp;
-      	 		<select ng-model="month" ng-options="m for m in monthList">
+      	 	<select ng-model="month" ng-options="m for m in monthList">
 	 		</select>月&nbsp;
 	 		<select ng-model="date" ng-options="m for m in dateList">
 	 		</select>日&nbsp;
@@ -15,6 +15,28 @@
 	 		<select ng-model="min" ng-options="m for m in minList">
 	 		</select>分
 		</div>
+		<table class="d-block d-sm-none">
+			<tr>
+				<td style="width:55%">
+					西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year"/>年&nbsp;
+				</td>
+				<td>
+					<select ng-model="month" ng-options="m for m in monthList">
+ 					</select>月&nbsp;
+ 					<select ng-model="date" ng-options="m for m in dateList">
+ 					</select>日&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<select ng-model="hour" ng-options="m for m in hourList">
+ 					</select>時&nbsp;
+ 					<select ng-model="min" ng-options="m for m in minList">
+ 					</select>分
+				</td>
+			</tr>
+		</table>
     </div>
     <div class="form-group col-lg-5 offset-lg-4 col-md-10 offset-md-1">
 		<label><span class="badge badge-pill badge-primary">第二步：</span>請設定出生地點</label>
@@ -30,14 +52,12 @@
         	<select ng-model="timezone" ng-options="m.timezone as m.timename for m in timezoneList" ng-init="timezone = timezoneList[3].timezone"
         			class="form-control">
 			</select>
-			
-			<div>
-				<span class="custom-control custom-checkbox">
-    				<input ng-model="savelight" type="checkbox" class="custom-control-input" id="customControlInline">
-    				<label class="custom-control-label" for="customControlInline">日光節約時間</label>
-    				<span style="font-size:8px;color:blue">台灣地區實施日期為（1945-1979年之間）</span>
-  				</span>
-			</div>
+			<div class="custom-control custom-checkbox">
+    			<input ng-model="savelight" type="checkbox" class="custom-control-input" id="customControlInline">
+    			<label class="custom-control-label" for="customControlInline">日光節約時間</label>
+    			<span class="d-none d-sm-inline" style="font-size:8px;color:blue">台灣地區實施日期為（1945-1979年之間）</span>
+    			<span class="d-block d-sm-none" style="font-size:8px;color:blue">台灣地區實施日期為（1945-1979年之間）</span>
+  			</div>
 		</div>
     </div>
     <div class="text-center">
@@ -50,10 +70,10 @@
 		</h4>
 		<div class="row">
 			<section class="col-lg-6 col-md-12">
-				<div class="col-md-11 offset-md-1 col-12" style="font-size:14px;color:blue">
+				<div class="col-lg-10 offset-lg-1 col-md-10 offset-md-2 col-12" style="font-size:14px;color:blue">
 					＊移動鼠標至<span style="color:red">星座圖之行星、星座符號</span>，可以顯示該中文標示。
 				</div>
-				<div class="col-md-11 offset-md-1 col-12" style="font-size:14px;color:blue">
+				<div class="col-lg-10 offset-lg-1 col-md-10 offset-md-2 col-12" style="font-size:14px;color:blue">
 					＊移動鼠標至<span style="color:red">表格之行星細項</span>，可以顯示星座圖該行星對應之位置。
 				</div>
 				<div id="chart"></div>

@@ -146,6 +146,12 @@
 		        	$timeout(function() {
 			            anchorSmoothScroll.scrollTo("resultAnchor");
 			            d3.select("#astrology").call(tip);
+			            if ($window.innerWidth >= 768 && $window.innerWidth < 1024) {
+			            	d3.select("#astrology").attr("transform","translate(100,0)");
+			            	d3.select("svg").attr("width","600")
+			            } else {
+			            	d3.select("#astrology").attr("transform","translate(-10,0)");
+			            }
 		        	}, 100);
 		        }
 		    }, function(response) {
