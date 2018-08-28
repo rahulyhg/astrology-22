@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<tiles:insertAttribute name="head" />
-		<title>星座解析</title>
+		<title>李探長塔羅占星事務所</title>
 		<tiles:insertAttribute name="script-common" />
 	</head>
 	<body ng-app="myApp" ng-controller="controller as ctrl">

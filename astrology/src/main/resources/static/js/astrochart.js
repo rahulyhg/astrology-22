@@ -163,10 +163,10 @@
 	
 	// Aspects	
 	astrology.ASPECTS = { 
-		"conjunction":{"degree":0, "orbit":10, "color":"transparent"}, 
-		"square":{"degree":90, "orbit":8, "color":"#FF4500"}, 
-		"trine":{"degree":120, "orbit":8, "color":"#27AE60"},
-		"opposition":{"degree":180, "orbit":10, "color":"#27AE60"}
+		"conjunction":{"degree":60, "orbit":28, "color":"#00FF00"}, 
+		"square":{"degree":90, "orbit":26, "color":"red"}, 
+		"trine":{"degree":120, "orbit":28, "color":"#00FF00"},
+		"opposition":{"degree":180, "orbit":24, "color":"red"}
 		};	
 	
 	// Dignities
@@ -192,6 +192,7 @@
 	astrology.ANIMATION_CUSPS_ROTATION_SPEED = 2;
 	
 	astrology.DEBUG = false;
+	astrology.TIP = null;
 									       	      
 }( window.astrology = window.astrology || {}));
 // ## SVG #####################
@@ -229,6 +230,17 @@
 						
 		context = this;
 	};	
+	
+	/**
+	 * Get constellation Id of Chart . 
+	 * 
+	 * @param {String} constellation
+	 * 
+	 * @return {String} id
+	 */
+	astrology.SVG.prototype.addIdByConstellation = function(constellation) {
+		return "astrology-constellation-" + constellation;
+	}
 	
 	/**
 	 * Get a required symbol. 
@@ -830,8 +842,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " -0.9,-0.9 0,-1.8 0.9,-1.8 1.8,-0.8999998 1.8,0 1.8,0.8999998 0.9,0.9 0.9,1.8 0.9,4.5 m -9,-5.4 1.8,-1.8 1.8,0 1.8,0.9 0.9,0.9 0.9,1.8 0.9,3.6 0,9.9 m 8.1,-12.6 0.9,-0.9 0,-1.8 -0.9,-1.8 -1.8,-0.8999998 -1.8,0 -1.8,0.8999998 -0.9,0.9 -0.9,1.8 -0.9,4.5 m 9,-5.4 -1.8,-1.8 -1.8,0 -1.8,0.9 -0.9,0.9 -0.9,1.8 -0.9,3.6 0,9.9");																						
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");	
-			
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 											
 		return wrapper;
@@ -861,7 +872,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " 1,4 1,2 2,2 3,1 4,0 3,-1 2,-2 1,-2 1,-4 m -18,0 1,3 1,2 2,2 3,1 4,0 3,-1 2,-2 1,-2 1,-3 m -11,8 -2,1 -1,1 -1,2 0,3 1,2 2,2 2,1 2,0 2,-1 2,-2 1,-2 0,-3 -1,-2 -1,-1 -2,-1 m -4,1 -2,1 -1,2 0,3 1,3 m 8,0 1,-3 0,-3 -1,-2 -2,-1");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");												
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 											
 		return wrapper;
@@ -891,7 +902,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " 0,11.546414 m 0.9622011,-10.5842129 0,9.6220117 m 7.6976097,-9.6220117 0,9.6220117 m 0.962201,-10.5842128 0,11.546414 m -13.4708165,-14.4330172 1.9244023,1.924402 1.9244024,0.9622012 2.8866038,0.9622011 3.848804,0 2.886604,-0.9622011 1.924402,-0.9622012 1.924403,-1.924402 m -17.3196215,17.3196207 1.9244023,-1.9244024 1.9244024,-0.9622011 2.8866038,-0.9622012 3.848804,0 2.886604,0.9622012 1.924402,0.9622011 1.924403,1.9244024");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");												
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 											
 		return wrapper;
@@ -921,7 +932,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " -15,0 -2,1 -1,2 0,2 1,2 2,1 2,0 2,-1 1,-2 0,-2 -1,-2 11,0 m -18,3 1,2 1,1 2,1 m 4,-4 -1,-2 -1,-1 -2,-1 m -4,15 15,0 2,-1 1,-2 0,-2 -1,-2 -2,-1 -2,0 -2,1 -1,2 0,2 1,2 -11,0 m 18,-3 -1,-2 -1,-1 -2,-1 m -4,4 1,2 1,1 2,1");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");												
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 											
 		return wrapper;
@@ -951,7 +962,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " -2,-1 -1,0 -2,1 -1,2 0,1 1,2 2,1 1,0 2,-1 1,-2 0,-1 -1,-2 -5,-5 -1,-2 0,-3 1,-2 2,-1 3,-1 4,0 4,1 2,2 1,2 0,3 -1,3 -3,3 -1,2 0,2 1,2 2,0 1,-1 1,-2 m -13,-5 -2,-3 -1,-2 0,-3 1,-2 1,-1 m 7,-1 3,1 2,2 1,2 0,3 -1,3 -2,3");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");												
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 											
 		return wrapper;
@@ -981,7 +992,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " 2.5894868,-2.5894868 1.7263245,2.5894868 0,9.4947847 m -2.5894868,-11.2211092 1.7263245,2.5894867 0,8.6316225 m 0.8631623,-9.4947847 2.5894867,-2.5894868 1.72632451,2.5894868 0,8.6316224 m -2.58948671,-10.3579469 1.72632447,2.5894867 0,7.7684602 m 0.86316224,-8.6316224 2.58948679,-2.5894868 1.7263244,2.5894868 0,13.8105959 m -2.5894867,-15.5369204 1.7263245,2.5894867 0,12.9474337 m 0.8631622,-13.8105959 2.5894868,-2.5894868 0.8631622,1.7263245 0.8631623,2.5894868 0,2.5894867 -0.8631623,2.58948673 -0.8631622,1.72632447 -1.7263245,1.7263245 -2.5894867,1.7263245 -4.3158113,1.7263245 m 7.7684602,-15.5369204 0.8631623,0.8631622 0.8631622,2.5894868 0,2.5894867 -0.8631622,2.58948673 -0.8631623,1.72632447 -1.7263245,1.7263245 -2.5894867,1.7263245 -3.452649,1.7263245");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");												
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 											
 		return wrapper;
@@ -1011,7 +1022,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " -1.7142857,-0.8571429 -0.8571429,0 -1.7142857,0.8571429 -0.8571429,1.7142857 0,0.8571429 0.8571429,1.7142857 1.7142857,0.8571428 0.8571429,0 1.7142857,-0.8571428 0.8571428,-1.7142857 0,-0.8571429 -0.8571428,-1.7142857 -2.5714286,-3.42857143 -0.8571429,-2.57142857 0,-1.7142857 0.8571429,-2.5714286 1.7142857,-1.7142857 2.5714283,-0.8571429 3.428572,0 2.571428,0.8571429 1.714286,1.7142857 0.857143,2.5714286 0,1.7142857 -0.857143,2.57142857 -2.571429,3.42857143 -0.857142,1.7142857 0,0.8571429 0.857142,1.7142857 1.714286,0.8571428 0.857143,0 1.714286,-0.8571428 0.857143,-1.7142857 0,-0.8571429 -0.857143,-1.7142857 -1.714286,-0.8571429 -0.857143,0 -1.714286,0.8571429 m -10.2857139,-7.7142857 0.8571429,-1.7142857 1.7142857,-1.7142857 2.5714283,-0.8571429 3.428572,0 2.571428,0.8571429 1.714286,1.7142857 0.857143,1.7142857");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");												
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 											
 		return wrapper;
@@ -1041,7 +1052,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " 2.3781101,-2.3781101 2.3781101,2.3781101 0,9.5124404 m -3.1708135,-11.0978471 2.3781101,2.3781101 0,8.719737 m 0.7927034,-9.5124404 2.3781101,-2.3781101 2.37811007,2.3781101 0,9.5124404 m -3.17081347,-11.0978471 2.3781101,2.3781101 0,8.719737 m 0.79270337,-9.5124404 2.37811013,-2.3781101 2.3781101,2.3781101 0,8.719737 1.5854067,1.5854068 m -4.7562202,-11.8905505 2.3781101,2.3781101 0,8.719737 1.5854067,1.5854067 2.3781101,-2.3781101");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);					
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");													
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 													
 		return wrapper;
@@ -1071,7 +1082,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " -17.11444,17.11444 m 17.11444,-17.11444 -3.2089575,1.0696525 -6.417915,0 m 7.4875675,1.0696525 -3.2089575,0 -4.27861,-1.0696525 m 9.6268725,-1.0696525 -1.0696525,3.2089575 0,6.41791504 m -1.0696525,-7.48756754 0,3.2089575 1.0696525,4.27861004 m -8.55722,0 -7.4875675,0 m 6.417915,1.06965246 -3.2089575,0 -3.2089575,-1.06965246 m 7.4875675,0 0,7.48756746 m -1.0696525,-6.417915 0,3.2089575 1.0696525,3.2089575");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");												
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);	
 											
 		return wrapper;
@@ -1101,7 +1112,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " 1.8047633,-3.6095267 4.5119084,9.0238168 m -4.5119084,-7.2190534 4.5119084,9.0238167 2.707145,-6.3166717 4.5119084,0 2.707145,-0.9023817 0.9023817,-1.8047633 0,-1.8047634 -0.9023817,-1.8047633 -1.8047634,-0.9023817 -0.9023816,0 -1.8047634,0.9023817 -0.9023817,1.8047633 0,1.8047634 0.9023817,2.707145 0.9023817,1.80476336 0.9023817,2.70714504 0,2.707145 -1.8047634,1.8047633 m 1.8047634,-16.2428701 -0.9023817,0.9023817 -0.9023817,1.8047633 0,1.8047634 1.8047634,3.6095267 0.9023816,2.707145 0,2.707145 -0.9023816,1.8047634 -1.8047634,0.9023816");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");												
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 													
 		return wrapper;
@@ -1131,7 +1142,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " 2.8866035,-2.8866035 3.8488047,1.9244023 m -4.8110059,-0.9622011 3.8488047,1.9244023 2.8866035,-2.8866035 2.8866035,1.9244023 m -3.84880467,-0.9622011 2.88660347,1.9244023 2.8866035,-2.8866035 1.9244024,1.9244023 m -2.8866035,-0.9622011 1.9244023,1.9244023 2.8866035,-2.8866035 m -17.319621,8.6598105 2.8866035,-2.88660348 3.8488047,1.92440238 m -4.8110059,-0.96220121 3.8488047,1.92440231 2.8866035,-2.88660348 2.8866035,1.92440238 m -3.84880467,-0.96220121 2.88660347,1.92440231 2.8866035,-2.88660348 1.9244024,1.92440238 m -2.8866035,-0.96220121 1.9244023,1.92440231 2.8866035,-2.88660348");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");													
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 													
 		return wrapper;
@@ -1161,7 +1172,7 @@
 			node.setAttribute("d", "m " + x + ", " + y + " 4,2 2,2 1,3 0,3 -1,3 -2,2 -4,2 m 0,-17 3,1 2,1 2,2 1,3 m 0,3 -1,3 -2,2 -2,1 -3,1 m 16,-17 -3,1 -2,1 -2,2 -1,3 m 0,3 1,3 2,2 2,1 3,1 m 0,-17 -4,2 -2,2 -1,3 0,3 1,3 2,2 4,2 m -17,-9 18,0 m -18,1 18,0");				
 			node.setAttribute("stroke", astrology.SIGNS_COLOR);		 
 			node.setAttribute("stroke-width", astrology.SIGNS_STROKE);			
-			node.setAttribute("fill", "none");												
+			node.setAttribute("fill", "none");
 			wrapper.appendChild(node);
 													
 		return wrapper;
@@ -1819,14 +1830,15 @@
 	astrology.Radix.prototype.drawUniverse = function(){
 		var universe = this.universe;		
 		var wrapper = astrology.utils.getEmptyWrapper( universe, astrology.ID_CHART + "-" + astrology.ID_RADIX + "-" + astrology.ID_SIGNS);
-						
+		
 		// colors 
         for( var i = 0, step = 30, start = this.shift, len = astrology.COLORS_SIGNS.length; i < len; i++ ){ 
         	        	        	       	        	                	        	        	     
         	var segment = this.paper.segment( this.cx, this.cy, this.radius, start, start+step, this.radius-this.radius/astrology.INNER_CIRCLE_RADIUS_RATIO);        	        	
         	segment.setAttribute("fill", astrology.STROKE_ONLY ? "none" : astrology.COLORS_SIGNS[i]);        	        	        	
         	segment.setAttribute("stroke", astrology.STROKE_ONLY ? astrology.CIRCLE_COLOR: "none");		 				 				 		
- 			segment.setAttribute("stroke-width", astrology.STROKE_ONLY ? 1 : 0); 				
+ 			segment.setAttribute("stroke-width", astrology.STROKE_ONLY ? 1 : 0);
+ 			segment.setAttribute("id", this.paper.addIdByConstellation(astrology.SYMBOL_SIGNS[i]));
         	wrapper.appendChild( segment );
         	        	        	        	        	        	               	
 			start += step;
@@ -1837,7 +1849,20 @@
         	var position = astrology.utils.getPointPosition( this.cx, this.cy, this.radius - (this.radius/astrology.INNER_CIRCLE_RADIUS_RATIO)/2, start);       	        	                	
         	wrapper.appendChild( this.paper.getSymbol( astrology.SYMBOL_SIGNS[i], position.x, position.y));        	        	        	               		
 			start += step;
-        }        
+        }      
+        
+        //星座標記
+        d3.select(wrapper).selectAll("path")
+        .on("mouseenter", function() {
+			var node = d3.select(this);
+			if (node[0][0].id && node[0][0].id.indexOf("astrology-constellation") > -1) {
+				var id = node[0][0].id.split("-")[2];
+				astrology.TIP.show(id);
+			}
+		})
+		.on("mouseout", function() {
+			astrology.TIP.hide();
+		});
 	};
 	
 	/**
@@ -1893,6 +1918,20 @@
 			var symbol = this.paper.getSymbol(point.name, point.x, point.y);
         	symbol.setAttribute('id', astrology.ID_CHART + "-" + astrology.ID_RADIX + "-" + astrology.ID_POINTS + "-" + point.name);        	
         	wrapper.appendChild( symbol );
+        	
+        	//行星標記
+        	d3.select(wrapper).selectAll("g")
+            .on("mouseenter", function() {
+    			var node = d3.select(this);
+    			if (node[0][0].id && node[0][0].id.indexOf("astrology-radix-planets") > -1) {
+    				var id = node[0][0].id.split("-")[3];
+    				astrology.TIP.show(id);
+    			}
+    		})
+    		.on("mouseout", function() {
+    			astrology.TIP.hide();
+    		});
+        	
         	        	        	        
         	// draw point descriptions
         	var textsToShow = [(Math.round(this.data.planets[point.name][0]) % 30).toString()];
@@ -1906,10 +1945,10 @@
         	}
         	textsToShow = textsToShow.concat(zodiac.getDignities({"name":point.name, "position":this.data.planets[point.name][0]}, astrology.DIGNITIES_EXACT_EXALTATION_DEFAULT).join(","));        	
         	        	        	        	        	        	      	        	         	        	        	      
-        	var pointDescriptions = astrology.utils.getDescriptionPosition(point, textsToShow);         	
-        	pointDescriptions.forEach(function(dsc){        		        		        		     
-				wrapper.appendChild( this.paper.text( dsc.text, dsc.x, dsc.y, astrology.POINTS_TEXT_SIZE, astrology.SIGNS_COLOR) );	        		
-        	}, this);
+//        	var pointDescriptions = astrology.utils.getDescriptionPosition(point, textsToShow);         	
+//        	pointDescriptions.forEach(function(dsc){        		        		        		     
+//				wrapper.appendChild( this.paper.text( dsc.text, dsc.x, dsc.y, astrology.POINTS_TEXT_SIZE, astrology.SIGNS_COLOR) );	        		
+//        	}, this);
         	        	        	        	       	              	        	          			
 		}, this);		
 	};

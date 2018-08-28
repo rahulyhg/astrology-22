@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script src="js/astrochart.js"></script>
-
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="js/d3-tip-v4.js"></script>
 <script type="text/javascript">
-	app.controller('controller', function ($scope, $http, $location, anchorSmoothScroll, $timeout) {
-		$scope.inputTime = "1991-08-25 01:00"
+	app.controller('controller', function ($scope, $http, anchorSmoothScroll, $timeout, $window) {
 		$scope.result = false;
 		$scope.inputSite = false;
 		$scope.timezoneList = [];
@@ -43,16 +43,33 @@
 		$scope.hour = date.getHours();
 		$scope.min = date.getMinutes();
 		
+		//tip init 
+		var tip = d3.tip().attr('class', 'd3-tip')
+					.offset(function(d) {
+							return [-5, 5];
+					  })
+					.html(function(d) {
+							return translateChinese(d);
+						});
+		
 		//chart init
 		var settings = {
-				SYMBOL_SCALE : 1.1,
+				SYMBOL_SCALE : $window.innerWidth < 400 ? 0.9 : $window.innerWidth < 500 ? 1 : 1.1,
 				DIGNITIES_RULERSHIP : "",
 				DIGNITIES_DETRIMENT : "",
 				DIGNITIES_EXALTATION : "",
 				DIGNITIES_EXACT_EXALTATION : "",
 				DIGNITIES_FALL : "",
+				TIP : tip
 				};
-		var chart = new astrology.Chart("chart", 500, 500, settings);
+		var chart;
+		if ($window.innerWidth < 400) {
+			chart = new astrology.Chart("chart", 380, 380, settings);
+		} else if ($window.innerWidth < 500) {
+			chart = new astrology.Chart("chart", 400, 400, settings);
+		} else {
+			chart = new astrology.Chart("chart", 500, 500, settings);
+		}
 		
 		
 		$scope.submit = function() {
@@ -63,6 +80,12 @@
 					  type: 'error',
 					  title: '錯誤',
 					  text: '請選擇日期!'
+					});
+			} else if ($scope.inputSite && !$scope.addr) {
+				return swal({
+					  type: 'error',
+					  title: '錯誤',
+					  text: '請輸入地點!'
 					});
 			} else {
 				var month;
@@ -97,8 +120,9 @@
 			} else {
 				addr = "!" + $scope.city[0] + "-" + $scope.city[1];
 				$scope.timezone = 8;
+				$scope.savelight = false;
 			}
-			$http.get("/astrology/getChartData/" + inputTime + "/" + $scope.timezone + "/" + addr)
+			$http.get("/getChartData/" + inputTime + "/" + $scope.timezone + "/" + addr + "/" + $scope.savelight)
 		    .then(function(response) {
 		        if (response.data.resMessage) {
 		        	swal({
@@ -109,11 +133,19 @@
 		        } else {
 		        	$scope.result = true;
 		        	chart.radix(response.data).aspects();
-		        	$scope.dataList = [];
-		        	calculatePosition(response.data.planets);
+		        	$scope.data1List = [];
+		        	$scope.data2List = [];
+		        	getPlanetPosition(response.data.planets);
+		        	getEscalateConstellation(response.data.cusps);
+		        	
+		        	angular.forEach(angular.element("#planetAnalyze a"), function(value, key){
+					     angular.element(value).removeClass("active");
+					});
+		        	angular.element("#planetAnalyze a").first().addClass("active");
+		        	$scope.showV1 = true;
 		        	$timeout(function() {
-		        		$location.hash("top");
 			            anchorSmoothScroll.scrollTo("resultAnchor");
+			            d3.select("#astrology").call(tip);
 		        	}, 100);
 		        }
 		    }, function(response) {
@@ -128,19 +160,34 @@
 		$scope.chgInputSite = function() {
 			if (!$scope.inputSite) {
 				$scope.inputSite = true;
-				$scope.city = $scope.cityList[1].latlng;
+				$scope.city = $scope.cityList[1].lnglat;
 			} else {
 				$scope.inputSite = false;
 				$scope.addr = null; 
 			}
 		}
 		
-		$scope.hover = function(isHover,e) {
+		$scope.hover = function(isHover,e,planetEname) {
 			var element = e.target;
 			if (isHover) {
 				angular.element(element).parent().css({'color':'red','font-weight':'bold'});
+				angular.element("#astrology-radix-planets-" + planetEname).children().css({'stroke':'red'});
 			} else {
 				angular.element(element).parent().css({'color':'black','font-weight':'normal'});
+				angular.element("#astrology-radix-planets-" + planetEname).children().css({'stroke':'#000'});
+			}
+		}
+		
+		$scope.chgNav = function(e,tag) {
+			angular.forEach(angular.element("#planetAnalyze a"), function(value, key){
+			     angular.element(value).removeClass("active");
+			});
+			var element = e.target;
+			angular.element(element).addClass("active");
+			if (tag == 'V1') {
+				$scope.showV1 = true;
+			} else {
+				$scope.showV1 = false;
 			}
 		}
 		
@@ -163,41 +210,30 @@
     	    return lon1 + "°" + lon2 + "'" + lon3 + "\"";
 		}
 		
-		function calculatePosition(data) {
-			angular.forEach(data,function(vo, key) {
+		function getPlanetPosition(data) {
+			angular.forEach(data, function(vo, key) {
         		var index = Math.floor(vo[0] / 30) + 1;
-        		var planet;
         		var sortNo;
         		var constellation;
         		if (key == 'Saturn') {
-        			planet = '土星';
         			sortNo = 6;
         		} else if (key == 'Moon') {
-        			planet = '月亮';
         			sortNo = 1;
         		} else if (key == 'Uranus') {
-        			planet = '天王星';
         			sortNo = 7;
         		} else if (key == 'Sun') {
-        			planet = '太陽';
         			sortNo = 0;
         		} else if (key == 'Pluto') {
-        			planet = '冥王星';
         			sortNo = 9;
         		} else if (key == 'Mars') {
-        			planet = '火星';
         			sortNo = 4;
         		} else if (key == 'Neptune') {
-        			planet = '海王星';
         			sortNo = 8;
         		} else if (key == 'Jupiter') {
-        			planet = '木星';
         			sortNo = 5;
         		} else if (key == 'Venus') {
-        			planet = '金星';
         			sortNo = 3;
         		} else if (key == 'Mercury') {
-        			planet = '水星';
         			sortNo = 2;
         		}
         		if (index == 1) {
@@ -225,8 +261,114 @@
         		} else if (index == 12) {
         			constellation = '雙魚座';
         		}
-        		$scope.dataList.push({'constellation':constellation + " " + getDegree(vo[0]),'planet':planet,'sortNo':sortNo});
+        		if (key != 'NNode') {
+        			$scope.data1List.push({'constellation':constellation + " " + getDegree(vo[0]),
+            			'planet':translateChinese(key),'planetEname':key,'sortNo':sortNo});
+        		}
         	});
+		}
+		
+		function getEscalateConstellation(data) {
+			angular.forEach(data, function(vo, seq) {
+				var index = Math.floor(vo / 30) + 1;
+        		var planet;
+        		var sortNo;
+        		var constellation;
+				if (seq == 0) {
+					planet = '上升星座 (As)';
+					sortNo = 0;
+				} else if (seq == 3) {
+					planet = '天底星座 (Ic)';
+					sortNo = 3;
+				} else if (seq == 6) {
+					planet = '下降星座 (Ds)';
+					sortNo = 1;
+				} else if (seq == 9) {
+					planet = '天頂星座 (Mc)';
+					sortNo = 2;
+				}
+				if (index == 1) {
+        			constellation = '牧羊座';
+        		} else if (index == 2) {
+        			constellation = '金牛座';
+        		} else if (index == 3) {
+        			constellation = '雙子座';
+        		} else if (index == 4) {
+        			constellation = '巨蟹座';
+        		} else if (index == 5) {
+        			constellation = '獅子座';
+        		} else if (index == 6) {
+        			constellation = '處女座';
+        		} else if (index == 7) {
+        			constellation = '天秤座';
+        		} else if (index == 8) {
+        			constellation = '天蠍座';
+        		} else if (index == 9) {
+        			constellation = '射手座';
+        		} else if (index == 10) {
+        			constellation = '魔羯座';
+        		} else if (index == 11) {
+        			constellation = '水瓶座';
+        		} else if (index == 12) {
+        			constellation = '雙魚座';
+        		}
+				if ([0,3,6,9].indexOf(seq) > -1) {
+					$scope.data2List.push({'constellation':constellation + " " + getDegree(vo),
+            			'planet':planet,'sortNo':sortNo});
+				}
+			})
+		}
+		
+		function translateChinese(origin) {
+			var name = '';
+			if (origin == 'Saturn') {
+				name = '土星';
+    		} else if (origin == 'Moon') {
+    			name = '月亮';
+    		} else if (origin == 'Uranus') {
+    			name = '天王星';
+    		} else if (origin == 'Sun') {
+    			name = '太陽';
+    		} else if (origin == 'Pluto') {
+    			name = '冥王星';
+    		} else if (origin == 'Mars') {
+    			name = '火星';
+    		} else if (origin == 'Neptune') {
+    			name = '海王星';
+    		} else if (origin == 'Jupiter') {
+    			name = '木星';
+    		} else if (origin == 'Venus') {
+    			name = '金星';
+    		} else if (origin == 'Mercury') {
+    			name = '水星';
+    		} else if (origin == 'Aries') {
+    			name = '牧羊座';
+    		} else if (origin == 'Taurus') {
+    			name = '金牛座';
+    		} else if (origin == 'Gemini') {
+    			name = '雙子座';
+    		} else if (origin == 'Cancer') {
+    			name = '巨蟹座';
+    		} else if (origin == 'Leo') {
+    			name = '獅子座';
+    		} else if (origin == 'Virgo') {
+    			name = '處女座';
+    		} else if (origin == 'Libra') {
+    			name = '天秤座';
+    		} else if (origin == 'Scorpio') {
+    			name = '天蠍座';
+    		} else if (origin == 'Sagittarius') {
+    			name = '射手座';
+    		} else if (origin == 'Capricorn') {
+    			name = '摩羯座';
+    		} else if (origin == 'Aquarius') {
+    			name = '水瓶座';
+    		} else if (origin == 'Pisces') {
+    			name = '雙魚座';
+    		} else if (origin == 'NNode') {
+    			name = '北交點';
+    		}
+			return name;
 		}
 		
  	});

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 public class WebMvcConfig implements WebMvcConfigurer {
 	
 	/** 存放css/js等在resources/static內*/
+	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 	}

@@ -22,6 +22,11 @@ public class UIController {
 		return new ModelAndView("/main/mentalTest");
 	}
 	
+	@RequestMapping("/article")
+	public ModelAndView article() {
+		return new ModelAndView("/main/article");
+	}
+	
 	@RequestMapping("/shop")
 	public ModelAndView shop() {
 		return new ModelAndView("/main/shop");
