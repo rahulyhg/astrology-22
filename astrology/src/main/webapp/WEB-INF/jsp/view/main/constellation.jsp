@@ -53,7 +53,7 @@
         			class="form-control">
 			</select>
 			<div class="custom-control custom-checkbox">
-    			<input ng-model="savelight" type="checkbox" class="custom-control-input" id="customControlInline">
+    			<input ng-model="savelight" ng-init="savelight = false" type="checkbox" class="custom-control-input" id="customControlInline">
     			<label class="custom-control-label" for="customControlInline">日光節約時間</label>
     			<span class="d-none d-sm-inline" style="font-size:8px;color:blue">台灣地區實施日期為（1945-1979年之間）</span>
     			<span class="d-block d-sm-none" style="font-size:8px;color:blue">台灣地區實施日期為（1945-1979年之間）</span>

@@ -15,7 +15,7 @@
 				$scope.timezoneList.push({'timezone': i - 13,'timename':"GMT" + (i - 13) + ":00"});
 			}
 		}
-		$scope.cityList = [{'lnglat':[121.733, 25.133], 'city':'基隆'}, {'lnglat':[121.05, 25.05], 'city':'台北'}, {'lnglat':[121.3, 24.983], 'city':'桃園'}, {'lnglat':[120.966, 24.8], 'city':'新竹'},
+		$scope.cityList = [{'lnglat':[121.733, 25.133], 'city':'基隆'}, {'lnglat':[121.33, 25.1], 'city':'台北'}, {'lnglat':[121.3, 24.983], 'city':'桃園'}, {'lnglat':[120.966, 24.8], 'city':'新竹'},
 			{'lnglat':[120.816, 24.55], 'city':'苗栗'}, {'lnglat':[120.066, 24.15], 'city':'台中'}, {'lnglat':[120.533, 24.066], 'city':'彰化'}, {'lnglat':[120.683, 23.9], 'city':'南投'},
 			{'lnglat':[120.533, 23.7], 'city':'雲林'}, {'lnglat':[120.45, 23.483], 'city':'嘉義'}, {'lnglat':[120.2, 23], 'city':'台南'}, {'lnglat':[120.283, 22.633], 'city':'高雄'},
 			{'lnglat':[120.483, 22.066], 'city':'屏東'}, {'lnglat':[121.15, 22.75], 'city':'台東'}, {'lnglat':[121.6, 23.983], 'city':'花蓮'}, {'lnglat':[121.75, 24.766], 'city':'宜蘭'},
@@ -267,10 +267,8 @@
         		} else if (index == 12) {
         			constellation = '雙魚座';
         		}
-        		if (key != 'NNode') {
-        			$scope.data1List.push({'constellation':constellation + " " + getDegree(vo[0]),
-            			'planet':translateChinese(key),'planetEname':key,'sortNo':sortNo});
-        		}
+        		$scope.data1List.push({'constellation':constellation + " " + getDegree(vo[0]),
+        			'planet':translateChinese(key),'planetEname':key,'sortNo':sortNo});
         	});
 		}
 		
@@ -281,13 +279,13 @@
         		var sortNo;
         		var constellation;
 				if (seq == 0) {
-					planet = '上升星座 (As)';
+					planet = '上升星座 (Asc)';
 					sortNo = 0;
 				} else if (seq == 3) {
 					planet = '天底星座 (Ic)';
 					sortNo = 3;
 				} else if (seq == 6) {
-					planet = '下降星座 (Ds)';
+					planet = '下降星座 (Des)';
 					sortNo = 1;
 				} else if (seq == 9) {
 					planet = '天頂星座 (Mc)';
