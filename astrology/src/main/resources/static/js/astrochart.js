@@ -95,8 +95,8 @@
 	astrology.SYMBOL_NNODE = "NNode";
 	
 	// Axis
-	astrology.SYMBOL_AS = "As";
-	astrology.SYMBOL_DS = "Ds";
+	astrology.SYMBOL_AS = "Asc";
+	astrology.SYMBOL_DS = "Des";
 	astrology.SYMBOL_MC = "Mc";
 	astrology.SYMBOL_IC = "Ic";
 		
@@ -1191,13 +1191,22 @@
 		var wrapper = document.createElementNS(context.root.namespaceURI, "g");
 		wrapper.setAttribute("transform", "translate(" + ( -x * (astrology.SYMBOL_SCALE - 1)) + "," + (-y * (astrology.SYMBOL_SCALE - 1)) + ") scale(" + astrology.SYMBOL_SCALE + ")");
 		
-			var node = document.createElementNS( context.root.namespaceURI, "path");
-			node.setAttribute("d", "m " + x + ", " + y + " -0.563078,-1.1261527 -1.689228,-0.5630765 -1.689229,0 -1.68923,0.5630765 -0.563076,1.1261527 0.563076,1.12615272 1.126154,0.56307636 2.815381,0.56307635 1.126152,0.56307647 0.563078,1.1261526 0,0.5630763 -0.563078,1.1261528 -1.689228,0.5630764 -1.689229,0 -1.68923,-0.5630764 -0.563076,-1.1261528 m -6.756916,-10.135374 -4.504611,11.8246032 m 4.504611,-11.8246032 4.504611,11.8246032 m -7.3199925,-3.94153457 5.6307625,0");									
-			node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);		 
-			node.setAttribute("stroke-width", (astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE));			
-			node.setAttribute("fill", "none");	
-																			
-			wrapper.appendChild(node);
+//			var node = document.createElementNS( context.root.namespaceURI, "path");
+//			node.setAttribute("d", "m " + x + ", " + y + " -0.563078,-1.1261527 -1.689228,-0.5630765 -1.689229,0 -1.68923,0.5630765 -0.563076,1.1261527 0.563076,1.12615272 1.126154,0.56307636 2.815381,0.56307635 1.126152,0.56307647 0.563078,1.1261526 0,0.5630763 -0.563078,1.1261528 -1.689228,0.5630764 -1.689229,0 -1.68923,-0.5630764 -0.563076,-1.1261528 m -6.756916,-10.135374 -4.504611,11.8246032 m 4.504611,-11.8246032 4.504611,11.8246032 m -7.3199925,-3.94153457 5.6307625,0");									
+//			node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);		 
+//			node.setAttribute("stroke-width", (astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE));			
+//			node.setAttribute("fill", "none");
+//			wrapper.appendChild(node);
+			
+		var text = document.createElementNS( context.root.namespaceURI, "text");
+		text.setAttribute("x", x-20);	
+		text.setAttribute("y", y);
+		text.setAttribute("font-family", "fantasy");
+		text.setAttribute("dominant-baseline", "central");
+		text.setAttribute("style", "cursor:default");
+		text.appendChild( document.createTextNode( "Asc" ));
+	
+		wrapper.appendChild(text);
 													
 		return wrapper;
 	};
@@ -1215,13 +1224,23 @@
 		var wrapper = document.createElementNS(context.root.namespaceURI, "g");
 		wrapper.setAttribute("transform", "translate(" + ( -x * (astrology.SYMBOL_SCALE - 1)) + "," + (-y * (astrology.SYMBOL_SCALE - 1)) + ") scale(" + astrology.SYMBOL_SCALE + ")");
 				
-			var node = document.createElementNS( context.root.namespaceURI, "path");
-			node.setAttribute("d", "m " + x + ", " + y + " -0.5625,-1.125 -1.6875,-0.5625 -1.6875,0 -1.6875,0.5625 -0.5625,1.125 0.5625,1.125 1.125,0.5625 2.8125,0.5625 1.125,0.5625 0.5625,1.125 0,0.5625 -0.5625,1.125 -1.6875,0.5625 -1.6875,0 -1.6875,-0.5625 -0.5625,-1.125 m -11.25,-10.125 0,11.8125 m 0,-11.8125 3.9375,0 1.6875,0.5625 1.125,1.125 0.5625,1.125 0.5625,1.6875 0,2.8125 -0.5625,1.6875 -0.5625,1.125 -1.125,1.125 -1.6875,0.5625 -3.9375,0");				
-			node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);		 
-			node.setAttribute("stroke-width", (astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE));			
-			node.setAttribute("fill", "none");											
-			wrapper.appendChild(node);
-													
+//			var node = document.createElementNS( context.root.namespaceURI, "path");
+//			node.setAttribute("d", "m " + x + ", " + y + " -0.5625,-1.125 -1.6875,-0.5625 -1.6875,0 -1.6875,0.5625 -0.5625,1.125 0.5625,1.125 1.125,0.5625 2.8125,0.5625 1.125,0.5625 0.5625,1.125 0,0.5625 -0.5625,1.125 -1.6875,0.5625 -1.6875,0 -1.6875,-0.5625 -0.5625,-1.125 m -11.25,-10.125 0,11.8125 m 0,-11.8125 3.9375,0 1.6875,0.5625 1.125,1.125 0.5625,1.125 0.5625,1.6875 0,2.8125 -0.5625,1.6875 -0.5625,1.125 -1.125,1.125 -1.6875,0.5625 -3.9375,0");				
+//			node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);		 
+//			node.setAttribute("stroke-width", (astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE));			
+//			node.setAttribute("fill", "none");		
+//			wrapper.appendChild(node);
+		
+		var text = document.createElementNS( context.root.namespaceURI, "text");
+		text.setAttribute("x", x-20);	
+		text.setAttribute("y", y);
+		text.setAttribute("font-family", "fantasy");
+		text.setAttribute("dominant-baseline", "central");
+		text.setAttribute("style", "cursor:default");
+		text.appendChild( document.createTextNode( "Des" ));
+	
+		wrapper.appendChild(text);		
+		
 		return wrapper;
 	};
 	
@@ -1238,12 +1257,22 @@
 		var wrapper = document.createElementNS(context.root.namespaceURI, "g");
 		wrapper.setAttribute("transform", "translate(" + ( -x * (astrology.SYMBOL_SCALE - 1)) + "," + (-y * (astrology.SYMBOL_SCALE - 1)) + ") scale(" + astrology.SYMBOL_SCALE + ")");
 				
-			var node = document.createElementNS( context.root.namespaceURI, "path");
-			node.setAttribute("d", "m " + x + ", " + y + " -1.004085,-1.0040845 -1.004084,-0.5020423 -1.506127,0 -1.004085,0.5020423 -1.004084,1.0040845 -0.502043,1.50612689 0,1.00408458 0.502043,1.50612683 1.004084,1.0040846 1.004085,0.5020423 1.506127,0 1.004084,-0.5020423 1.004085,-1.0040846 m -17.57148,-9.0367612 0,10.5428881 m 0,-10.5428881 4.016338,10.5428881 m 4.016338,-10.5428881 -4.016338,10.5428881 m 4.016338,-10.5428881 0,10.5428881");				
-			node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);		 
-			node.setAttribute("stroke-width", (astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE));			
-			node.setAttribute("fill", "none");											
-			wrapper.appendChild(node);
+//			var node = document.createElementNS( context.root.namespaceURI, "path");
+//			node.setAttribute("d", "m " + x + ", " + y + " -1.004085,-1.0040845 -1.004084,-0.5020423 -1.506127,0 -1.004085,0.5020423 -1.004084,1.0040845 -0.502043,1.50612689 0,1.00408458 0.502043,1.50612683 1.004084,1.0040846 1.004085,0.5020423 1.506127,0 1.004084,-0.5020423 1.004085,-1.0040846 m -17.57148,-9.0367612 0,10.5428881 m 0,-10.5428881 4.016338,10.5428881 m 4.016338,-10.5428881 -4.016338,10.5428881 m 4.016338,-10.5428881 0,10.5428881");				
+//			node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);		 
+//			node.setAttribute("stroke-width", (astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE));			
+//			node.setAttribute("fill", "none");											
+//			wrapper.appendChild(node);
+		
+		var text = document.createElementNS( context.root.namespaceURI, "text");
+		text.setAttribute("x", x-20);	
+		text.setAttribute("y", y);
+		text.setAttribute("font-family", "fantasy");
+		text.setAttribute("dominant-baseline", "central");
+		text.setAttribute("style", "cursor:default");
+		text.appendChild( document.createTextNode( "Mc" ));
+	
+		wrapper.appendChild(text);
 													
 		return wrapper;
 	};
@@ -1261,12 +1290,22 @@
 		var wrapper = document.createElementNS(context.root.namespaceURI, "g");
 		wrapper.setAttribute("transform", "translate(" + ( -x * (astrology.SYMBOL_SCALE - 1)) + "," + (-y * (astrology.SYMBOL_SCALE - 1)) + ") scale(" + astrology.SYMBOL_SCALE + ")");
 				
-			var node = document.createElementNS( context.root.namespaceURI, "path");
-			node.setAttribute("d", "m " + x + ", " + y + " -1.208852,-1.2088514 -1.208851,-0.6044258 -1.813278,0 -1.208852,0.6044258 -1.20885,1.2088514 -0.604426,1.81327715 0,1.20885135 0.604426,1.8132772 1.20885,1.2088513 1.208852,0.6044259 1.813278,0 1.208851,-0.6044259 1.208852,-1.2088513 m -11.4840902,-10.8796629 0,12.6929401");				
-			node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);		 
-			node.setAttribute("stroke-width", (astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE));		
-			node.setAttribute("fill", "none");											
-			wrapper.appendChild(node);
+//			var node = document.createElementNS( context.root.namespaceURI, "path");
+//			node.setAttribute("d", "m " + x + ", " + y + " -1.208852,-1.2088514 -1.208851,-0.6044258 -1.813278,0 -1.208852,0.6044258 -1.20885,1.2088514 -0.604426,1.81327715 0,1.20885135 0.604426,1.8132772 1.20885,1.2088513 1.208852,0.6044259 1.813278,0 1.208851,-0.6044259 1.208852,-1.2088513 m -11.4840902,-10.8796629 0,12.6929401");				
+//			node.setAttribute("stroke", astrology.SYMBOL_AXIS_FONT_COLOR);		 
+//			node.setAttribute("stroke-width", (astrology.SYMBOL_AXIS_STROKE * astrology.SYMBOL_SCALE));		
+//			node.setAttribute("fill", "none");											
+//			wrapper.appendChild(node);
+		
+		var text = document.createElementNS( context.root.namespaceURI, "text");
+		text.setAttribute("x", x-20);	
+		text.setAttribute("y", y);
+		text.setAttribute("font-family", "fantasy");
+		text.setAttribute("dominant-baseline", "central");
+		text.setAttribute("style", "cursor:default");
+		text.appendChild( document.createTextNode( "Ic" ));
+	
+		wrapper.appendChild(text);
 													
 		return wrapper;
 	};
@@ -1287,7 +1326,7 @@
 			node.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			node.setAttribute("fill", "none");															
 			wrapper.appendChild(node);
-											
+			wrapper.setAttribute("id", "astrology-radix-cusps-1");							
 		return wrapper;
 	};
 	
@@ -1307,7 +1346,7 @@
 			node.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			node.setAttribute("fill", "none");															
 			wrapper.appendChild(node);
-											
+			wrapper.setAttribute("id", "astrology-radix-cusps-2");								
 		return wrapper;
 	};
 	
@@ -1327,7 +1366,7 @@
 			node.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			node.setAttribute("fill", "none");															
 			wrapper.appendChild(node);
-											
+			wrapper.setAttribute("id", "astrology-radix-cusps-3");	
 		return wrapper;
 	};
 	
@@ -1347,7 +1386,7 @@
 			node.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			node.setAttribute("fill", "none");															
 			wrapper.appendChild(node);
-											
+			wrapper.setAttribute("id", "astrology-radix-cusps-4");	
 		return wrapper;
 	};
 	
@@ -1367,7 +1406,7 @@
 			node.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			node.setAttribute("fill", "none");															
 			wrapper.appendChild(node);
-											
+			wrapper.setAttribute("id", "astrology-radix-cusps-5");								
 		return wrapper;
 	};
 	
@@ -1387,7 +1426,7 @@
 			node.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			node.setAttribute("fill", "none");															
 			wrapper.appendChild(node);
-											
+			wrapper.setAttribute("id", "astrology-radix-cusps-6");								
 		return wrapper;
 	};
 	
@@ -1407,7 +1446,7 @@
 			node.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			node.setAttribute("fill", "none");															
 			wrapper.appendChild(node);
-											
+			wrapper.setAttribute("id", "astrology-radix-cusps-7");								
 		return wrapper;
 	};
 	
@@ -1427,7 +1466,7 @@
 			node.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			node.setAttribute("fill", "none");															
 			wrapper.appendChild(node);
-											
+			wrapper.setAttribute("id", "astrology-radix-cusps-8");								
 		return wrapper;
 	};
 	
@@ -1447,7 +1486,7 @@
 			node.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			node.setAttribute("fill", "none");															
 			wrapper.appendChild(node);
-											
+			wrapper.setAttribute("id", "astrology-radix-cusps-9");								
 		return wrapper;
 	};
 	
@@ -1476,7 +1515,7 @@
 			zero.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			zero.setAttribute("fill", "none");												
 			wrapper.appendChild( zero );
-													
+			wrapper.setAttribute("id", "astrology-radix-cusps-10");										
 		return wrapper;
 	};
 	
@@ -1505,7 +1544,7 @@
 			one2.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			one2.setAttribute("fill", "none");												
 			wrapper.appendChild( one2 );
-													
+			wrapper.setAttribute("id", "astrology-radix-cusps-11");										
 		return wrapper;
 	};
 		
@@ -1534,7 +1573,7 @@
 			two.setAttribute("stroke-width", (astrology.CUSPS_STROKE * astrology.SYMBOL_SCALE));
 			two.setAttribute("fill", "none");												
 			wrapper.appendChild( two );
-													
+			wrapper.setAttribute("id", "astrology-radix-cusps-12");										
 		return wrapper;
 	};	
 			
@@ -2078,7 +2117,7 @@
 															
 		var aspectsList = customAspects != null && Array.isArray(customAspects) ? 
 						  customAspects : 
-						  new astrology.AspectCalculator( this.toPoints ).radix( this.data.planets );
+						  new astrology.AspectCalculator( this.toPoints, this.data.cusps).radix( this.data.planets );
 						  						  						 						  										
 		var universe = this.universe;		
 		var wrapper = astrology.utils.getEmptyWrapper( universe, astrology.ID_CHART + "-" + astrology.ID_ASPECTS);
@@ -2521,7 +2560,12 @@
 		this.settings.aspects = settings && settings.aspects || astrology.ASPECTS;
 							
 		this.toPoints = toPoints;
-																																												
+		this.cusps4 = [];
+		this.cusps4.push(settings[0]);
+		this.cusps4.push(settings[3]);
+		this.cusps4.push(settings[6]);
+		this.cusps4.push(settings[9]);
+		
 		context = this; 
 												 
 		return this;
@@ -2552,7 +2596,16 @@
 			return []; 
 		}
 							
-		var aspects = [];			
+		var aspects = [];	
+		var cuspsArr = ['Asc','Des','Mc','Ic'];
+		points.Asc = [this.cusps4[0]];
+		points.Des = [this.cusps4[2]];
+		points.Mc = [this.cusps4[3]];
+		points.Ic = [this.cusps4[1]];
+		this.toPoints.Asc = [this.cusps4[0]];
+		this.toPoints.Des = [this.cusps4[2]];
+		this.toPoints.Mc = [this.cusps4[3]];
+		this.toPoints.Ic = [this.cusps4[1]];
 		
 		for (var point in points) {
  		   if (points.hasOwnProperty( point )) {
@@ -2562,8 +2615,8 @@
  		   			
  		   			if( point != toPoint){ 		   				 		   			 		   			 		   
 	 		   			for(var aspect in this.settings.aspects){ 		   				
-	 		   				if(hasAspect( points[point][0], this.toPoints[toPoint][0], this.settings.aspects[aspect])){
-	 		   						
+	 		   				if ( hasAspect( points[point][0], this.toPoints[toPoint][0], this.settings.aspects[aspect]) && 
+	 		   					!(cuspsArr.indexOf(point) > -1 && cuspsArr.indexOf(toPoint) > -1) ) {
 	 		   					aspects.push(
 	 		   								{
 	 		   								"aspect":{"name":aspect, "degree":this.settings.aspects[aspect].degree, "orbit":this.settings.aspects[aspect].orbit, "color":this.settings.aspects[aspect].color}, 	 		   								 
@@ -2580,6 +2633,10 @@
  		   	} 		   	 		   	 		  
  		   } 		
  		}
+		
+		function cuspIntersect(points, toPoints) {
+			return cuspsArr.indexOf(points) > -1 && cuspsArr.indexOf(toPoints) > -1
+		}
  		 		 		  		 		 
 		return aspects.sort( compareAspectsByPrecision );
 	}; 

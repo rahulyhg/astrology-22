@@ -5,7 +5,7 @@
 	<div class="form-group col-lg-5 offset-lg-4 col-md-10 offset-md-1">
 		<label><span class="badge badge-pill badge-primary">第一步：</span>請輸入陽曆(國曆)西元出生時間</label>
 		<div class="d-none d-sm-block">
-		 	西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year"/>年&nbsp;
+		 	西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year" valid-number/>年&nbsp;
       	 	<select ng-model="month" ng-options="m for m in monthList">
 	 		</select>月&nbsp;
 	 		<select ng-model="date" ng-options="m for m in dateList">
@@ -18,7 +18,7 @@
 		<table class="d-block d-sm-none">
 			<tr>
 				<td style="width:55%">
-					西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year"/>年&nbsp;
+					西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year" valid-number/>年&nbsp;
 				</td>
 				<td>
 					<select ng-model="month" ng-options="m for m in monthList">
@@ -80,27 +80,39 @@
 			</section>
 			<section class="col-lg-6 col-md-12">
 				<nav class="nav nav-pills nav-justified" id="planetAnalyze">
-  					<a class="nav-item nav-link active" href="javascript:void(0)" ng-click="chgNav($event,'V1')">行星位置</a>
-  					<a class="nav-item nav-link" href="javascript:void(0)" ng-click="chgNav($event,'V2')">上升星座</a>
+  					<a class="nav-item nav-link active" href="javascript:void(0)" ng-click="chgNav($event,1)">行星位置</a>
+  					<a class="nav-item nav-link" href="javascript:void(0)" ng-click="chgNav($event,2)">上升星座</a>
+  					<a class="nav-item nav-link" href="javascript:void(0)" ng-click="chgNav($event,3)">星座比例</a>
 				</nav>
-				<table ng-show="showV1" class="table text-center">
+				<table ng-show="showTab == 1" class="table text-center">
   					<thead>
     					<tr>
-      						<th style="width:50%">行星</th>
-      						<th>星座</th>
+      						<th style="width:30%">行星</th>
+      						<th style="width:35%">星座</th>
+      						<th style="width:35%">宮位</th>
     					</tr>
   					</thead>
   					<tbody>
-    					<tr ng-repeat="vo in data1List | orderBy : 'sortNo'"
-    						ng-class="$index % 2 == 0 ? 'table-danger' : 'table-info'"
-    						ng-mousemove="hover(true,$event,vo.planetEname)"
-    						ng-mouseleave="hover(false,$event,vo.planetEname)">
-      						<td ng-bind="vo.planet"></td>
-      						<td ng-bind="vo.constellation"></td>
+    					<tr ng-repeat="vo in dataList | orderBy : 'sortNo' | before:12">
+      						<td ng-mousemove="hover(true,$event,vo,'planet',$index)"
+      							ng-mouseleave="hover(false,$event,vo,'planet',$index)"
+      							ng-class="$index % 2 == 0 ? 'table-danger' : 'table-info'" id="{{'planet' + $index}}" data-placement="bottom" data-trigger="manual">
+      							{{vo.planet}}
+      						</td>
+      						<td ng-mousemove="hover(true,$event,vo,'planet',$index)"
+      							ng-mouseleave="hover(false,$event,vo,'planet',$index)"
+      							ng-class="$index % 2 == 0 ? 'table-danger' : 'table-info'">
+      							{{vo.constellation}}
+      						</td>
+      						<td ng-mousemove="hover(true,$event,vo,'house',$index)"
+      							ng-mouseleave="hover(false,$event,vo,'house',$index)"
+      							ng-class="'table-warning'" id="{{'house' + $index}}" data-placement="bottom" data-trigger="manual">
+      							{{'第' + vo.house + '宮'}}
+      						</td>
     					</tr>
   					</tbody>
 				</table>
-				<table ng-show="!showV1" class="table text-center">
+				<table ng-show="showTab == 2" class="table text-center">
   					<thead>
     					<tr>
       						<th style="width:50%">四大尖軸</th>
@@ -108,10 +120,25 @@
     					</tr>
   					</thead>
   					<tbody>
-    					<tr ng-repeat="vo in data2List | orderBy : 'sortNo'"
+    					<tr ng-repeat="vo in dataList | orderBy : 'sortNo' | after:11"
     						ng-class="$index % 2 == 0 ? 'table-success' : 'table-warning'">
       						<td ng-bind="vo.planet"></td>
       						<td ng-bind="vo.constellation"></td>
+    					</tr>
+  					</tbody>
+				</table>
+				<table ng-show="showTab == 3" class="table text-center">
+  					<thead>
+    					<tr>
+      						<th style="width:50%">星座四象</th>
+      						<th>星座比例</th>
+    					</tr>
+  					</thead>
+  					<tbody>
+    					<tr ng-repeat="vo in data1List | orderBy : 'sortNo'"
+    						ng-class="vo.style">
+      						<td ng-bind="vo.planet"></td>
+      						<td>{{vo.rate + '%'}}</td>
     					</tr>
   					</tbody>
 				</table>

@@ -41,7 +41,6 @@
 					<div class="col-lg-6 col-sm-7  mb-sm-0 mb-4 inner-li">
 						<h5 class="mb-3">聯絡方式</h5>
 						<ul class="w3ls-footer-bottom-list">
-							<li> <span class="fas fa-map-marker"></span> <a href="#" id="googlemap"> 台北市信義區松德路8號1樓</a></li>
 							<li> <span class="fas fa-envelope"></span> <a href="mailto:nanwork0914@gmail.com"> nanwork0914@gmail.com</a></li>
 							<li> <span class="fas fa-phone"></span> 0980129134 </li>
 							<li> <span class="fas fa-clock"></span> 營業時間 : 10:00 a.m - 12:00 p.m</li>

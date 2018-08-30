@@ -15,7 +15,7 @@
 				$scope.timezoneList.push({'timezone': i - 13,'timename':"GMT" + (i - 13) + ":00"});
 			}
 		}
-		$scope.cityList = [{'lnglat':[121.733, 25.133], 'city':'基隆'}, {'lnglat':[121.33, 25.1], 'city':'台北'}, {'lnglat':[121.3, 24.983], 'city':'桃園'}, {'lnglat':[120.966, 24.8], 'city':'新竹'},
+		$scope.cityList = [{'lnglat':[121.733, 25.133], 'city':'基隆'}, {'lnglat':[121.5, 25.05], 'city':'台北'}, {'lnglat':[121.3, 24.983], 'city':'桃園'}, {'lnglat':[120.966, 24.8], 'city':'新竹'},
 			{'lnglat':[120.816, 24.55], 'city':'苗栗'}, {'lnglat':[120.066, 24.15], 'city':'台中'}, {'lnglat':[120.533, 24.066], 'city':'彰化'}, {'lnglat':[120.683, 23.9], 'city':'南投'},
 			{'lnglat':[120.533, 23.7], 'city':'雲林'}, {'lnglat':[120.45, 23.483], 'city':'嘉義'}, {'lnglat':[120.2, 23], 'city':'台南'}, {'lnglat':[120.283, 22.633], 'city':'高雄'},
 			{'lnglat':[120.483, 22.066], 'city':'屏東'}, {'lnglat':[121.15, 22.75], 'city':'台東'}, {'lnglat':[121.6, 23.983], 'city':'花蓮'}, {'lnglat':[121.75, 24.766], 'city':'宜蘭'},
@@ -44,23 +44,21 @@
 		$scope.min = date.getMinutes();
 		
 		//tip init 
-		var tip = d3.tip().attr('class', 'd3-tip')
-					.offset(function(d) {
-							return [-5, 5];
-					  })
-					.html(function(d) {
-							return translateChinese(d);
+		var tip_chart = d3.tip().attr('class', 'd3-tip')
+						.offset(function() {return [-5, 5];})
+						.html(function(data) {
+							return translateChinese(data);
 						});
 		
 		//chart init
 		var settings = {
-				SYMBOL_SCALE : $window.innerWidth < 400 ? 0.9 : $window.innerWidth < 500 ? 1 : 1.1,
+				SYMBOL_SCALE : $window.innerWidth < 400 ? 0.9 : 1,
 				DIGNITIES_RULERSHIP : "",
 				DIGNITIES_DETRIMENT : "",
 				DIGNITIES_EXALTATION : "",
 				DIGNITIES_EXACT_EXALTATION : "",
 				DIGNITIES_FALL : "",
-				TIP : tip
+				TIP : tip_chart
 				};
 		var chart;
 		if ($window.innerWidth < 400) {
@@ -133,19 +131,19 @@
 		        } else {
 		        	$scope.result = true;
 		        	chart.radix(response.data).aspects();
+		        	$scope.dataList = [];
 		        	$scope.data1List = [];
-		        	$scope.data2List = [];
-		        	getPlanetPosition(response.data.planets);
-		        	getEscalateConstellation(response.data.cusps);
+		        	getPlanetPosition(response.data);
+		        	getFourQuadrant();
 		        	
 		        	angular.forEach(angular.element("#planetAnalyze a"), function(value, key){
 					     angular.element(value).removeClass("active");
 					});
 		        	angular.element("#planetAnalyze a").first().addClass("active");
-		        	$scope.showV1 = true;
+		        	$scope.showTab = 1;
 		        	$timeout(function() {
 			            anchorSmoothScroll.scrollTo("resultAnchor");
-			            d3.select("#astrology").call(tip);
+			            d3.select("#astrology").call(tip_chart);
 			            if ($window.innerWidth >= 768 && $window.innerWidth < 1024) {
 			            	d3.select("#astrology").attr("transform","translate(100,0)");
 			            	d3.select("svg").attr("width","600")
@@ -173,14 +171,19 @@
 			}
 		}
 		
-		$scope.hover = function(isHover,e,planetEname) {
-			var element = e.target;
+		$scope.hover = function(isHover, e, vo, type, index) {
 			if (isHover) {
-				angular.element(element).parent().css({'color':'red','font-weight':'bold'});
-				angular.element("#astrology-radix-planets-" + planetEname).children().css({'stroke':'red'});
+				angular.element(e.target).parent().css({'color':'red','font-weight':'bold'});
+				angular.element("#astrology-radix-planets-" + vo.planetEname).children().css({'stroke':'red'});
+				angular.element("#astrology-radix-cusps-" + vo.house).children().css({'stroke':'red'});
+				
+				var message = "待開發";
+				angular.element("#" + type + index).attr("title",message).tooltip('show');
 			} else {
-				angular.element(element).parent().css({'color':'black','font-weight':'normal'});
-				angular.element("#astrology-radix-planets-" + planetEname).children().css({'stroke':'#000'});
+				angular.element(e.target).parent().css({'color':'black','font-weight':'normal'});
+				angular.element("#astrology-radix-planets-" + vo.planetEname).children().css({'stroke':'#000'});
+				angular.element("#astrology-radix-cusps-" + vo.house).children().css({'stroke':'#000'});
+				angular.element("#" + type + index).removeAttr("title").tooltip('hide');
 			}
 		}
 		
@@ -188,13 +191,8 @@
 			angular.forEach(angular.element("#planetAnalyze a"), function(value, key){
 			     angular.element(value).removeClass("active");
 			});
-			var element = e.target;
-			angular.element(element).addClass("active");
-			if (tag == 'V1') {
-				$scope.showV1 = true;
-			} else {
-				$scope.showV1 = false;
-			}
+			angular.element(e.target).addClass("active");
+			$scope.showTab = tag;
 		}
 		
 		function getDegree(position) {
@@ -217,7 +215,7 @@
 		}
 		
 		function getPlanetPosition(data) {
-			angular.forEach(data, function(vo, key) {
+			angular.forEach(data.planets, function(vo, key) {
         		var index = Math.floor(vo[0] / 30) + 1;
         		var sortNo;
         		var constellation;
@@ -241,6 +239,16 @@
         			sortNo = 3;
         		} else if (key == 'Mercury') {
         			sortNo = 2;
+        		} else if (key == 'NNode') {
+        			sortNo = 10;
+        		} else if (key == 'Asc') {
+        			sortNo = 11;
+        		} else if (key == 'Des') {
+        			sortNo = 12;
+        		} else if (key == 'Mc') {
+        			sortNo = 13;
+        		} else if (key == 'Ic') {
+        			sortNo = 14;
         		}
         		if (index == 1) {
         			constellation = '牧羊座';
@@ -267,60 +275,33 @@
         		} else if (index == 12) {
         			constellation = '雙魚座';
         		}
-        		$scope.data1List.push({'constellation':constellation + " " + getDegree(vo[0]),
-        			'planet':translateChinese(key),'planetEname':key,'sortNo':sortNo});
+        		$scope.dataList.push({'constellation':constellation + " " + getDegree(vo[0]),
+        			'planet':translateChinese(key),'planetEname':key,'sortNo':sortNo,'position':vo[0],'house':null});
         	});
-		}
-		
-		function getEscalateConstellation(data) {
-			angular.forEach(data, function(vo, seq) {
-				var index = Math.floor(vo / 30) + 1;
-        		var planet;
-        		var sortNo;
-        		var constellation;
-				if (seq == 0) {
-					planet = '上升星座 (Asc)';
-					sortNo = 0;
-				} else if (seq == 3) {
-					planet = '天底星座 (Ic)';
-					sortNo = 3;
-				} else if (seq == 6) {
-					planet = '下降星座 (Des)';
-					sortNo = 1;
-				} else if (seq == 9) {
-					planet = '天頂星座 (Mc)';
-					sortNo = 2;
+			
+			var max = _.max(data.cusps);
+			var max_index;
+			angular.forEach(data.cusps, function(cusp, index) {
+				if (cusp == max) {
+					max_index = index;
 				}
-				if (index == 1) {
-        			constellation = '牧羊座';
-        		} else if (index == 2) {
-        			constellation = '金牛座';
-        		} else if (index == 3) {
-        			constellation = '雙子座';
-        		} else if (index == 4) {
-        			constellation = '巨蟹座';
-        		} else if (index == 5) {
-        			constellation = '獅子座';
-        		} else if (index == 6) {
-        			constellation = '處女座';
-        		} else if (index == 7) {
-        			constellation = '天秤座';
-        		} else if (index == 8) {
-        			constellation = '天蠍座';
-        		} else if (index == 9) {
-        			constellation = '射手座';
-        		} else if (index == 10) {
-        			constellation = '魔羯座';
-        		} else if (index == 11) {
-        			constellation = '水瓶座';
-        		} else if (index == 12) {
-        			constellation = '雙魚座';
-        		}
-				if ([0,3,6,9].indexOf(seq) > -1) {
-					$scope.data2List.push({'constellation':constellation + " " + getDegree(vo),
-            			'planet':planet,'sortNo':sortNo});
-				}
-			})
+			});
+			angular.forEach(data.cusps, function(cusp, index) {
+				angular.forEach($scope.dataList, function(planetVO) {
+					if (!planetVO.house) {
+						var target = planetVO.position;
+						if (index == max_index && max > target && target <= data.cusps[index + 1]) {
+							planetVO.house = (index + 1);
+						} else if (index == max_index && max < target && target > data.cusps[index + 1]) {
+							planetVO.house = (index + 1);
+						} else if ((index + 1) == data.cusps.length  && data.cusps[index] < target && target <= data.cusps[0]) {
+							planetVO.house = (index + 1);
+						} else if ((index + 1) < data.cusps.length && data.cusps[index] < target && target <= data.cusps[index + 1]) {
+							planetVO.house = (index + 1);
+						}
+					}
+				});
+			});
 		}
 		
 		function translateChinese(origin) {
@@ -369,10 +350,48 @@
     			name = '水瓶座';
     		} else if (origin == 'Pisces') {
     			name = '雙魚座';
+    		} else if (origin == 'Asc') {
+    			name = '上升星座 (Asc)';
+    		} else if (origin == 'Des') {
+    			name = '下降星座 (Des)';
+    		} else if (origin == 'Mc') {
+    			name = '天頂星座 (Mc)';
+    		} else if (origin == 'Ic') {
+    			name = '天底星座 (Ic)';
     		} else if (origin == 'NNode') {
     			name = '北交點';
     		}
 			return name;
+		}
+		
+		function getFourQuadrant() {
+			var fire = 0;
+			var land = 0;
+			var wind = 0;
+			var water = 0;
+			var fireArr = ['牧羊','獅子','射手'];
+			var landArr = ['金牛','處女','魔羯'];
+			var windArr = ['雙子','天秤','水瓶'];
+			var waterArr = ['巨蟹','天蠍','雙魚'];
+			var planetArr = ['太陽','月亮','水星','金星','火星','木星','土星','天王星','海王星','冥王星'];
+			angular.forEach($scope.dataList, function(vo, key){
+				if (_.find(planetArr, function(planet) { return vo.planet == planet; })) {
+					var constellation = vo.constellation.substring(0,2);
+					if (_.find(fireArr, function(str) { return str == constellation; })) {
+						fire++;
+					} else if (_.find(landArr, function(str) { return str == constellation; })) {
+						land++;
+					} else if (_.find(windArr, function(str) { return str == constellation; })) {
+						wind++;
+					} else if (_.find(waterArr, function(str) { return str == constellation; })) {
+						water++;
+					}
+				}
+			});
+			$scope.data1List.push({'planet':'火象星座','rate':(fire/10)*100,'sortNo':0,'style':'table-danger'});
+			$scope.data1List.push({'planet':'土象星座','rate':(land/10)*100,'sortNo':1,'style':'table-warning'});
+			$scope.data1List.push({'planet':'風象星座','rate':(wind/10)*100,'sortNo':2,'style':'table-primary'});
+			$scope.data1List.push({'planet':'水象星座','rate':(water/10)*100,'sortNo':3,'style':'table-info'});
 		}
 		
  	});
