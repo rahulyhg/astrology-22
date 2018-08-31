@@ -13,7 +13,7 @@
 	<script src="js/move-top.js"></script>
 	<script src="js/owl.carousel.js"></script>
 	<script src="js/SmoothScroll.min.js"></script>
-	<script>
+	<script type="text/javascript">
 		var app = angular.module("myApp", ['angular.filter']);
 		app.directive('validNumber', function() {
 		    return {
@@ -131,8 +131,8 @@
 		    
 		});
 	</script>
-	<script>
-		$(document).ready(function () {
+	<script type="text/javascript">
+		app.controller('mainController', function ($scope, $http) {
 			$(".scroll").click(function(event){		
 				event.preventDefault();
 				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
@@ -149,8 +149,36 @@
 					$("#home").addClass('active');
 				}
 			});
+			
+			$scope.viewer = 1;
+			$http.get("/getWebsiteViwerCount")
+		    .then(function(response) {
+		    	$scope.viewer = response.data;
+		    }, function(response) {
+		    	swal({
+					  type: 'error',
+					  title: '錯誤',
+					  text: '系統發生錯誤!'
+					});
+		    });
+			
+			$scope.reserve = function() {
+				if (!$scope.email) {
+					return swal({
+						  type: 'error',
+						  title: '錯誤',
+						  text: '請輸入您的email!'
+						});
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		});
-	</script>
-	<script>
-		
 	</script>

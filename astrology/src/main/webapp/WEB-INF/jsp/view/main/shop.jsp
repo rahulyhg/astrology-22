@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<main class="gallery agile">
+<main class="gallery agile" ng-controller="controller as ctrl">
 	<div class="container-fluid">
 		<div class="agile_gallery_grids row w3-agile">
 			<div class="col-lg-4 col-md-12 mb-lg-0 mb-sm-5 mb-3 team_grid1">

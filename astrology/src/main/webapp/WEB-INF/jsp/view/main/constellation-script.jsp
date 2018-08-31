@@ -52,7 +52,8 @@
 		
 		//chart init
 		var settings = {
-				SYMBOL_SCALE : $window.innerWidth < 400 ? 0.9 : 1,
+				SYMBOL_SCALE : $window.innerWidth < 400 ? 0.9 : $window.innerWidth < 500 ? 1 : 1.1,
+				SYMBOL_SCALE1 : $window.innerWidth < 500 ? 0.8 : 1,
 				DIGNITIES_RULERSHIP : "",
 				DIGNITIES_DETRIMENT : "",
 				DIGNITIES_EXALTATION : "",
@@ -173,17 +174,15 @@
 		
 		$scope.hover = function(isHover, e, vo, type, index) {
 			if (isHover) {
-				angular.element(e.target).parent().css({'color':'red','font-weight':'bold'});
+				angular.element(e.target).closest("tr").css({'color':'red','font-weight':'bold'});
 				angular.element("#astrology-radix-planets-" + vo.planetEname).children().css({'stroke':'red'});
 				angular.element("#astrology-radix-cusps-" + vo.house).children().css({'stroke':'red'});
-				
-				var message = "待開發";
-				angular.element("#" + type + index).attr("title",message).tooltip('show');
+				angular.element("#" + type + index + " > div > .tooltiptext").css({'visibility':'visible'});
 			} else {
-				angular.element(e.target).parent().css({'color':'black','font-weight':'normal'});
+				angular.element(e.target).closest("tr").css({'color':'black','font-weight':'normal'});
 				angular.element("#astrology-radix-planets-" + vo.planetEname).children().css({'stroke':'#000'});
 				angular.element("#astrology-radix-cusps-" + vo.house).children().css({'stroke':'#000'});
-				angular.element("#" + type + index).removeAttr("title").tooltip('hide');
+				angular.element("#" + type + index + " > div > .tooltiptext").css({'visibility':'hidden'});
 			}
 		}
 		
@@ -290,14 +289,22 @@
 				angular.forEach($scope.dataList, function(planetVO) {
 					if (!planetVO.house) {
 						var target = planetVO.position;
-						if (index == max_index && max > target && target <= data.cusps[index + 1]) {
-							planetVO.house = (index + 1);
-						} else if (index == max_index && max < target && target > data.cusps[index + 1]) {
-							planetVO.house = (index + 1);
-						} else if ((index + 1) == data.cusps.length  && data.cusps[index] < target && target <= data.cusps[0]) {
-							planetVO.house = (index + 1);
-						} else if ((index + 1) < data.cusps.length && data.cusps[index] < target && target <= data.cusps[index + 1]) {
-							planetVO.house = (index + 1);
+						if ((index + 1) == data.cusps.length) {
+							if (data.cusps[index] > target) {
+								planetVO.house = index;
+							} else {
+								planetVO.house = (index + 1);
+							}
+						} else {
+							if (data.cusps[index + 1] - data.cusps[index] < 0) {
+								if (target > data.cusps[index]) {
+									planetVO.house = (index + 1);
+								} else if (target <= data.cusps[index + 1]) {
+									planetVO.house = (index + 1);
+								}
+							} else if (data.cusps[index] < target && target <= data.cusps[index + 1]) {
+								planetVO.house = (index + 1);
+							}
 						}
 					}
 				});

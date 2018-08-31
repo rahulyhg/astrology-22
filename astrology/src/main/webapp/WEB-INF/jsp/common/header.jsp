@@ -22,9 +22,6 @@
 						<a class="nav-link" href="/constellation">星座命盤</a>
 					</li>
 					<li class="nav-item  mr-lg-3" id="mentalTest">
-						<a class="nav-link" href="/mentalTest">心理測驗</a>
-					</li>
-					<li class="nav-item  mr-lg-3" id="mentalTest">
 						<a class="nav-link" href="/article">時上專欄</a>
 					</li>
 					<li class="nav-item  mr-lg-3" id="shop">

@@ -9,7 +9,7 @@
 		<title>李探長塔羅占星事務所</title>
 		<tiles:insertAttribute name="script-common" />
 	</head>
-	<body ng-app="myApp" ng-controller="controller as ctrl">
+	<body ng-app="myApp" ng-controller="mainController as mainctrl" class="custom_cursor">
 		<tiles:insertAttribute name="header" />
 		<tiles:insertAttribute name="body" />
 		<tiles:insertAttribute name="footer" />

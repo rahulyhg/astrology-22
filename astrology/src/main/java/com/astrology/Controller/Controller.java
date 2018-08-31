@@ -16,12 +16,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.JSONObject;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.astrology.DAO.MongoDBDao;
 import com.astrology.VO.MessageVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -32,17 +33,17 @@ import cz.kibo.api.astrology.domain.Cusp;
 import cz.kibo.api.astrology.domain.Planet;
 
 @RestController
-@CrossOrigin
 public class Controller {
 	private static final Logger log = Logger.getLogger(Controller.class.getName());
 
-//	@Autowired
-//	private ApplicationContext context;
+	@Autowired
+	MongoDBDao mongoDBDao;
 
 	private static Gson gson = new GsonBuilder().create();
 	private static MessageVO messageVO = new MessageVO();
 	private DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
+	private static int currentViwer = 1;
+	
 	@GetMapping(value = "/getChartData/{inputTime}/{timezone}/{addr}/{savelight}", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getChartData(@PathVariable("inputTime") String inputTime, @PathVariable("timezone") int timezone
@@ -104,5 +105,16 @@ public class Controller {
 			return gson.toJson(messageVO);
 		}
 		return gson.toJson(resultMap);
+	}
+	
+	@GetMapping(value = "/getWebsiteViwerCount", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getWebsiteViwerCount() {
+		return gson.toJson(currentViwer++);
+	}
+	
+	@GetMapping(value = "/updateWebsiteViwerCountTask")
+	public void updateWebsiteViwerCountTask() {
+		currentViwer = mongoDBDao.updateByCountType("websiteView", currentViwer);
 	}
 }
