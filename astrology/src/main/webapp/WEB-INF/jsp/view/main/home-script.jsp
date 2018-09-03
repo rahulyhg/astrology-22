@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	app.controller('controller', function ($scope,$http) {
 		$('#JiSlider').JiSlider({
-			color: '#fff',
+			color: 'yellow',
 			start: 1,
 			reverse: false
 		}).addClass('ff')

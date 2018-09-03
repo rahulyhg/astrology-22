@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +21,16 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.astrology.DAO.MongoDBDao;
+import com.astrology.VO.ChatVO;
 import com.astrology.VO.MessageVO;
+import com.astrology.VO.QuestionVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -116,5 +123,69 @@ public class Controller {
 	@GetMapping(value = "/updateWebsiteViwerCountTask")
 	public void updateWebsiteViwerCountTask() {
 		currentViwer = mongoDBDao.updateByCountType("websiteView", currentViwer);
+	}
+	
+	@GetMapping(value = "/getQuestionList")
+	public String getQuestionList() {
+		List<QuestionVO> questionList = mongoDBDao.getQuestionList();
+		return gson.toJson(questionList);
+	}
+	
+	@PostMapping(value = "/addQuestion", produces = "application/json;charset=UTF-8")
+	public String addQuestion(@RequestBody QuestionVO questionVO) {
+		List<QuestionVO> questionList = null;
+		try {
+			Date date = new Date();
+			List<ChatVO> chatList = new ArrayList<>();
+			ChatVO chatVO = new ChatVO();
+			chatVO.setChatAuthor(questionVO.getQuestionAuthor());
+			chatVO.setChatMessage(questionVO.getQuestionContent());
+			chatVO.setChatMessageTime(date);
+			chatVO.setChatResponse(false);
+			chatList.add(chatVO);
+			
+			questionVO.setChatList(chatList);
+			questionVO.setQuestionTime(date);
+			questionVO.setQuestionId(String.valueOf(date.getTime()));
+			mongoDBDao.insertQuestion(questionVO);
+			questionList = mongoDBDao.getQuestionList();
+		} catch (Exception e) {
+			messageVO.setResMessage("發生錯誤:" + e.getMessage());
+			log.info(e.getMessage());
+			return gson.toJson(messageVO);
+		}
+		return gson.toJson(questionList);
+	}
+	
+	@PostMapping(value = "/confirmPassword", produces = "application/json;charset=UTF-8")
+	public String confirmPassword(@RequestBody QuestionVO sourceVO) {
+		try {
+			QuestionVO questionVO = mongoDBDao.getQuestionVOById(sourceVO.getQuestionId());
+			if (questionVO == null) {
+				messageVO.setResMessage("查詢失敗，此問題不存在");
+				return gson.toJson(messageVO);
+			} else if (StringUtils.equals(questionVO.getPrivatePwd(), sourceVO.getPrivatePwd())) {
+				return gson.toJson(questionVO);
+			} else {
+				messageVO.setResMessage("密碼錯誤，請重新輸入");
+				return gson.toJson(messageVO);
+			}
+		} catch (Exception e) {
+			messageVO.setResMessage("發生錯誤:" + e.getMessage());
+			log.info(e.getMessage());
+			return gson.toJson(messageVO);
+		}
+	}
+	
+	@PostMapping(value = "/getChatList", produces = "application/json;charset=UTF-8")
+	public String getChatList(@RequestBody QuestionVO sourceVO) {
+		try {
+			QuestionVO questionVO = mongoDBDao.getQuestionVOById(sourceVO.getQuestionId());
+			return gson.toJson(questionVO);
+		} catch (Exception e) {
+			messageVO.setResMessage("發生錯誤:" + e.getMessage());
+			log.info(e.getMessage());
+			return gson.toJson(messageVO);
+		}
 	}
 }

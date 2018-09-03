@@ -26,6 +26,6 @@ validation.translation-tei-class-not-instantiated=2
 validation.translation-tei-class-runtime-exception=2
 validation.translation-tei-message=1
 validation.translation-usebean-ambiguous-type-info=2
-validation.translation-usebean-invalid-id=1
+validation.translation-usebean-invalid-id=-1
 validation.translation-usebean-missing-type-info=1
 validation.use-project-settings=true

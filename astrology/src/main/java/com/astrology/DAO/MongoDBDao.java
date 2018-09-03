@@ -1,18 +1,23 @@
 package com.astrology.DAO;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Field;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import com.astrology.Util.DateUtil;
+import com.astrology.VO.QuestionVO;
 import com.astrology.VO.StatisticalViwerVO;
 
 
@@ -36,8 +41,6 @@ public class MongoDBDao {
 	}
 	
 	public int updateByCountType(String countType, int currentViwer) {
-		mongoTemplate.remove(new Query(Criteria.where("countNumber").exists(true)), "StatisticalViwer");
-		
 		Criteria criteria = new Criteria().andOperator(
 				Criteria.where("countType").is(countType), 
 				Criteria.where("countDate").is(DateUtil.getTwToday(false)));
@@ -51,5 +54,25 @@ public class MongoDBDao {
 			mongoTemplate.insert(vo, "StatisticalViwer");
 		}
 		return this.getSumByCountType("websiteView");
+	}
+	
+	public void insertQuestion(QuestionVO questionVO) {
+		mongoTemplate.insert(questionVO, "QuestionContent");
+	}
+	
+	public List<QuestionVO> getQuestionList() {
+		Query query = new Query(Criteria.where("questionId").exists(true));
+		Field field = query.fields();
+		field.include("questionId");
+		field.include("questionTitle");
+		field.include("questionAuthor");
+		field.include("privateQA");
+		field.include("questionTime");
+		return mongoTemplate.find(query, QuestionVO.class, "QuestionContent");
+	}
+	
+	public QuestionVO getQuestionVOById(String questionId) {
+		QuestionVO questionVO = mongoTemplate.findById(questionId, QuestionVO.class, "QuestionContent");
+		return questionVO;
 	}
 }

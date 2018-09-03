@@ -1,9 +1,9 @@
 package com.astrology.VO;
 
 public class StatisticalViwerVO {
-	String countType;
-	String countDate;
-	int countNumber;
+	private String countType;
+	private String countDate;
+	private int countNumber;
 	
 	public String getCountType() {
 		return countType;

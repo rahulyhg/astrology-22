@@ -145,4 +145,6 @@
 			</section>
 		</div>
 	</section>
+	
+	<jsp:include page="../branch/discuss.jsp" flush="true"/>
 </main>
