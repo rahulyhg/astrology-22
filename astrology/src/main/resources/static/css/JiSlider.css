@@ -1,8 +1,8 @@
 /****** JiSlider css ******/
 #JiSlider {
-	width: 80%;
+	width: 64%;
 	height: 100%;
-	margin-left: 10%;
+	margin-left: 18%;
 }
 .jislider ul {
 	height: 100%;
@@ -137,12 +137,24 @@
     width: 200px!important;
 }
 /*--start-responsive-design--*/
+@media (max-width:1440px){
+	#JiSlider {
+		width: 74%;
+		height: 100%;
+		margin-left: 13%;
+	}
+}
 @media (max-width:800px){
 	.jislider__left-arrow {
 		left: 9px;
 	}
 	.jislider__right-arrow {
 		right: 9px;
+	}
+	#JiSlider {
+		width: 96%;
+		height: 100%;
+		margin-left: 2%;
 	}
 }
 @media (max-width:600px){

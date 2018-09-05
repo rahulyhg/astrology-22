@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
-	app.controller('controller', function ($scope,$http) {
-		$('#JiSlider').JiSlider({
-			color: 'yellow',
-			start: 1,
-			reverse: false
-		}).addClass('ff')
+	app.controller('controller', function ($scope,$http,$window) {
+		if ($window.innerWidth >= 768) {
+			$('#JiSlider').JiSlider({
+				color: 'black',
+				start: 1,
+				reverse: false
+			}).addClass('ff');
+		} else {
+			$('#banner').hide();
+		}
 		
 		$('#horizontalTab').easyResponsiveTabs({
 			type: 'default', //Types: default, vertical, accordion           

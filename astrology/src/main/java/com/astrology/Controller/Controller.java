@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +32,7 @@ import com.astrology.VO.MessageVO;
 import com.astrology.VO.QuestionVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import cz.kibo.api.astrology.builder.CuspBuilder;
 import cz.kibo.api.astrology.builder.PlanetBuilder;
@@ -117,7 +117,12 @@ public class Controller {
 	@GetMapping(value = "/getWebsiteViwerCount", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getWebsiteViwerCount() {
-		return gson.toJson(currentViwer++);
+		if (currentViwer == 1) {
+			currentViwer = mongoDBDao.getSumByCountType("websiteView");
+		} else {
+			currentViwer += 1;
+		}
+		return gson.toJson(currentViwer);
 	}
 	
 	@GetMapping(value = "/updateWebsiteViwerCountTask")
@@ -181,6 +186,27 @@ public class Controller {
 	public String getChatList(@RequestBody QuestionVO sourceVO) {
 		try {
 			QuestionVO questionVO = mongoDBDao.getQuestionVOById(sourceVO.getQuestionId());
+			return gson.toJson(questionVO);
+		} catch (Exception e) {
+			messageVO.setResMessage("發生錯誤:" + e.getMessage());
+			log.info(e.getMessage());
+			return gson.toJson(messageVO);
+		}
+	}
+	
+	@PostMapping(value = "/sendMessage", produces = "application/json;charset=UTF-8")
+	public String sendMessage(@RequestBody String postPayload) {
+		try {
+			Map<String, String> payload = gson.fromJson(postPayload, new TypeToken<Map<String, String>>(){}.getType());
+			String chatAuthor = payload.get("chatAuthor");
+			boolean chatResponse = Boolean.valueOf(payload.get("chatResponse"));
+			Date chatMessageTime = new Date();
+			chatMessageTime.setTime(Long.valueOf(payload.get("chatMessageTime")));
+			String chatMessage = payload.get("chatMessage");
+			String questionId = payload.get("questionId");
+			mongoDBDao.updateChartById(chatAuthor, chatResponse, chatMessageTime, chatMessage, questionId);
+			
+			QuestionVO questionVO = mongoDBDao.getQuestionVOById(questionId);
 			return gson.toJson(questionVO);
 		} catch (Exception e) {
 			messageVO.setResMessage("發生錯誤:" + e.getMessage());

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<figure class="banner-silder" ng-controller="controller as ctrl">
+<main ng-controller="controller as ctrl">
+<figure id="banner">
 	<div id="JiSlider" class="jislider">
 		<ul>
 			<li>
@@ -21,7 +22,7 @@
 <!-- //banner slider -->
 
 <!-- About -->
-<section class="about py-5">
+<section>
 	<div class="container-fluid py-lg-5 py-3">
 		<div class="row about_grids">
 			<div class="col-lg-4 col-md-6 team_grid1">
@@ -100,3 +101,4 @@
 	</div>
 	</div>
 </section>
+</main>

@@ -7,6 +7,9 @@
 		$http.get("/getQuestionList")
 	    .then(function(response) {
 	    	$scope.questionList = response.data;
+	    	angular.forEach($scope.questionList,function(vo) {
+				vo.questionTime = new Date(vo.questionTime);
+			});
 	    }, function(response) {
 	    	swal({
 				  type: 'error',
@@ -26,9 +29,6 @@
 					if (result) {
 						$scope.$apply(function() {
 							$scope.chatList = result.chatList;
-							angular.forEach($scope.chatList,function(vo) {
-								vo.chatMessageTime = new Date(vo.chatMessageTime);
-							});
 							$('#collapse' + questionVO.questionId).collapse('show');
 							$scope.collapseIdTemp = questionVO.questionId;
 						});
@@ -65,9 +65,6 @@
 				}).then(function(data) {
 					$scope.$apply(function() {
 						$scope.chatList = data.chatList;
-						angular.forEach($scope.chatList,function(vo) {
-							vo.chatMessageTime = new Date(vo.chatMessageTime);
-						});
 						$('#collapse' + questionVO.questionId).collapse('show');
 						$scope.collapseIdTemp = questionVO.questionId;
 					});
@@ -78,10 +75,12 @@
 		}
 		
 		function getChatData(questionVO,method) {
-			questionVO.questionTime = new Date(questionVO.questionTime);
 			var promise = new Promise(function(resolve, reject) {
 				$http.post("/" + method,questionVO)
 				  .then(function(response) {
+					  angular.forEach(response.data.chatList,function(vo) {
+						  vo.chatMessageTime = new Date(vo.chatMessageTime);
+					  });
 				      resolve(response.data);
 				  }, function(response) {
 					  reject();
@@ -123,6 +122,9 @@
 							});
 			        } else {
 			        	$scope.questionList = response.data;
+			        	angular.forEach($scope.questionList,function(vo) {
+							vo.questionTime = new Date(vo.questionTime);
+						});
 			        	$scope.modal = {};
 						angular.element('#questionModal').modal('hide');
 			        }
@@ -136,24 +138,39 @@
 			}
 		}
 		
-		$scope.chgBox = function(event) {
-			if ((event.keyCode === 10 || event.keyCode === 13) && event.ctrlKey) {
-				$scope.sendMessage();
-            }
-		}
-		
-		$scope.sendMessage = function() {
-			var message = $scope.message;
+		$scope.sendMessage = function(questionVO) {
+			var message = questionVO.message;
 			if (message && message.length > 0) {
 				message = message.trim();
 				message = message.replace('\r\n', '<br>');
 	            message = message.replace('\n', '<br>');
 	            message = message.replace('\r', '<br>');
-				$scope.msgList.push({'author':$scope.author,'isResponse':false,'msgTime':new Date(),'msg':message});
-				$scope.message = null;
-				$timeout(function() {
-					angular.element("#msg-group").scrollTop(angular.element("#msg-group")[0].scrollHeight);
-	        	}, 100);
+	            
+				$http.post("/sendMessage",{'chatAuthor':questionVO.questionAuthor,'chatResponse':false,'chatMessageTime':Date.now(),'chatMessage':message,'questionId':questionVO.questionId})
+			    .then(function(response) {
+			        if (response.data.resMessage) {
+			        	swal({
+							  type: 'error',
+							  title: '錯誤',
+							  text: response.data.resMessage
+							});
+			        } else {
+			        	$scope.chatList = response.data.chatList;
+			        	angular.forEach($scope.chatList,function(vo) {
+							  vo.chatMessageTime = new Date(vo.chatMessageTime);
+						});
+			        	questionVO.message = null;
+			        	$timeout(function() {
+							angular.element("#msg-group").scrollTop(angular.element("#msg-group")[0].scrollHeight);
+			        	}, 100);
+			        }
+			    }, function(response) {
+			    	swal({
+						  type: 'error',
+						  title: '錯誤',
+						  text: '系統發生錯誤!'
+						});
+			    });
             }
 		}
 	});

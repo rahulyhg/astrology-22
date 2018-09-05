@@ -128,7 +128,7 @@ header h1 a span {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	-moz-background-size: cover;
-	min-height: 700px;
+	min-height: 850px;
 }
 .bs-slider-overlay {
 	position: absolute;
@@ -856,7 +856,7 @@ ul.footer-social-icons li {
 		width: 215px;
 	}
 	.w3layouts-banner-top {
-		min-height: 650px;
+		min-height: 730px;
 	}
 }
 

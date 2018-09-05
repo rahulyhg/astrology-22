@@ -35,9 +35,9 @@
         				</div>
         				
 						<div class="input-group">
-							<textarea ng-model="message" class="form-control" rows="1" placeholder="請輸入文字" ng-keyup="chgBox($event)"></textarea>
+							<textarea ng-model="questionVO.message" class="form-control" rows="1" placeholder="請輸入文字"></textarea>
 								<span class="input-group-btn">
-          							<button class="btn btn-secondary" type="button" ng-click="sendMessage()">送出</button>
+          							<button class="btn btn-secondary" type="button" ng-click="sendMessage(questionVO)">送出</button>
         						</span>
 						</div>
       				</div>
