@@ -172,11 +172,11 @@
 		};	
 	
 	// Dignities
-	astrology.DIGNITIES_RULERSHIP = "r";			
-	astrology.DIGNITIES_DETRIMENT = "d";			
-	astrology.DIGNITIES_EXALTATION = "e";			
-	astrology.DIGNITIES_EXACT_EXALTATION = "E";		
-	astrology.DIGNITIES_FALL = "f";	
+	astrology.DIGNITIES_RULERSHIP = "";			
+	astrology.DIGNITIES_DETRIMENT = "";			
+	astrology.DIGNITIES_EXALTATION = "";			
+	astrology.DIGNITIES_EXACT_EXALTATION = "";		
+	astrology.DIGNITIES_FALL = "";	
 	
 	// Source: Aleister Crowley
 	astrology.DIGNITIES_EXACT_EXALTATION_DEFAULT = [

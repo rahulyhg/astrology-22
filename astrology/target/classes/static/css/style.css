@@ -28,17 +28,43 @@
 .tooltip_table .tooltiptext {
     visibility: hidden;
     width: 300px;
-    height: 50px;
+    height: 45px;
     background-color: #73AD21;
     color: #fff;
     border-radius: 6px;
-    padding: 3px 8px;
+    padding: 2px 8px;
     position: absolute;
     z-index: 1;
     top:36px;
-    left:100px;
+    left:140px;
     text-align: left!important;
+    font-size:.9rem;
+}
+@media ( max-width : 700px) {
+	.tooltip_table .tooltiptext {
+    	width: 270px;
+    	height: 45px;
+    	padding: 2px 8px;
+    	top:36px;
+    	left:70px;
+}
 }
 .custom_cursor {
   cursor: url(../images/magnifier.png), auto;
+}
+.card-discuss {
+	cursor: pointer;
+	height: 50px;
+	padding: 0 0 !important;
+	background-color: white;
+}
+#footer_submit {
+	background:#F08080 !important;
+}
+#footer_submit:hover {
+	background: #fff !important;
+	color: #F08080 !important;
+}
+.fb-like > span{
+	padding-left:initial !important;
 }

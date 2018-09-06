@@ -3,6 +3,7 @@ package com.astrology.Controller;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,17 +49,16 @@ public class Controller {
 
 	private static Gson gson = new GsonBuilder().create();
 	private static MessageVO messageVO = new MessageVO();
-	private DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 	private static int currentViwer = 1;
 	
 	@GetMapping(value = "/getChartData/{inputTime}/{timezone}/{addr}/{savelight}", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String getChartData(@PathVariable("inputTime") String inputTime, @PathVariable("timezone") int timezone
+	public String getChartData(@PathVariable("inputTime") Date inputTime, @PathVariable("timezone") int timezone
 			, @PathVariable("addr") String addr, @PathVariable("savelight") boolean savelight) {
 		Map<String, Object> resultMap = new HashMap<>();
 		try {
-			double latitude = 25.03;
-			double longitude = 121.3;
+			double latitude = 25.05;
+			double longitude = 121.5;
 			if (StringUtils.isNotBlank(addr)) {
 				if (StringUtils.startsWith(addr, "!")) {
 					addr = addr.substring(1, addr.length());
@@ -86,7 +86,7 @@ public class Controller {
 				}
 			}
 			
-			LocalDateTime time = LocalDateTime.parse(inputTime, format).minusHours(timezone);
+			LocalDateTime time = LocalDateTime.ofInstant(inputTime.toInstant(), ZoneId.systemDefault()).minusHours(timezone);
 			if (savelight) {
 				time = time.plusHours(1);
 			}

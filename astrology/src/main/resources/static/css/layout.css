@@ -725,6 +725,7 @@ ul.footer-social-icons li {
 	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 	box-sizing: border-box;
+	cursor:pointer;
 }
 
 .footer-top input[type="submit"]:hover {

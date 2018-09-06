@@ -4,22 +4,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
-				<input type="email" placeholder="請輸入您的email..." email ng-model="email">
-				<input type="submit" value="我要預約諮詢" style="cursor:pointer" ng-click="reserve()">
+				<input type="email" placeholder="請輸入您的email..." email ng-model="email_reserve">
+				<input type="submit" value="我要預約諮詢" ng-click="feedback('reserve')">
 			</div>
-			<div class="col-lg-6 social-icon mt-lg-0 mt-3 footer">
-				<div class="icon-social">
-					<h3>社群聯絡</h3>
-					<a href="#" class="button-footr">
-						<i class="fab fa-facebook-f"></i>
-					</a>
-					<a href="#" class="button-footr">
-						<i class="fab fa-line"></i>
-					</a>
-					<a href="#" class="button-footr">
-						<i class="fab fa-instagram"></i>
-					</a>
-				</div>
+			<div class="col-lg-6">
+				<input type="email" placeholder="請輸入您的email..." email ng-model="email_system">
+				<input type="submit" value="系統問題反應" id="footer_submit" ng-click="feedback('system')">
 			</div>
 		</div>
 	</div>
@@ -41,16 +31,26 @@
 					<div class="col-lg-10 col-sm-10  mb-sm-0 mb-4 inner-li">
 						<h5 class="mb-3">聯絡方式</h5>
 						<ul class="w3ls-footer-bottom-list">
-							<li> <span class="fas fa-envelope"></span> <a href="mailto:nanwork0914@gmail.com"> nanwork0914@gmail.com</a></li>
-							<li> <span class="fas fa-phone"></span> 0980129134 </li>
-							<li> <span class="fas fa-clock"></span> 營業時間 : 10:00 a.m - 12:00 p.m</li>
+							<li> <span class="fab fa-line"></span> Line：
+								<span style="padding-left:initial;color:#e2b13c;cursor:text">cynthianini</span> 
+								<div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@cynthianini" style="display: none;"></div>
+							</li>
+							<li> <span class="fab fa-line"></span> AI占星機器人：
+								<span style="padding-left:initial;color:#e2b13c;cursor:text">@eau2284w</span> 
+								<div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@eau2284w" style="display: none;"></div>
+							</li>
+							<li> <span class="fab fa-weixin"></span> WeChat：
+								<span style="padding-left:initial;color:#e2b13c;cursor:text">ninicynthia</span> 
+							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-lg-5 col-sm-3 mb-sm-0 mb-4 px-sm-0 px-4 w3_agile-footer1">	
 					<h5 class="mb-3">來訪次數</h5>
 					<ul class="w3ls-footer-bottom-list">
-						<li>您是第{{viewer}}位訪客。</li>
+						<li>您是第<span style="padding-left:initial;color:#e2b13c;margin:.5rem">{{viewer}}</span>位訪客。</li>
+						<li><div class="line-it-button" data-lang="zh_Hant" data-type="like" data-url="{{lineUrl}}" data-share="true" style="display: none;"></div></li>
+						<li><div class="fb-like" data-href="{{lineUrl}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div></li>
 					</ul>
 				</div>
 			</div>

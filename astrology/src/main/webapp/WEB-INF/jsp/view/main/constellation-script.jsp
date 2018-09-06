@@ -4,7 +4,7 @@
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="js/d3-tip-v4.js"></script>
 <script type="text/javascript">
-	app.controller('controller', function ($scope, $http, anchorSmoothScroll, $timeout, $window) {
+	app.controller('controller', function ($scope, $http, anchorSmoothScroll, $timeout, $window, constellationService) {
 		$scope.result = false;
 		$scope.inputSite = false;
 		$scope.timezoneList = [];
@@ -47,18 +47,13 @@
 		var tip_chart = d3.tip().attr('class', 'd3-tip')
 						.offset(function() {return [-5, 5];})
 						.html(function(data) {
-							return translateChinese(data);
+							return constellationService.translateChinese(data);
 						});
 		
 		//chart init
 		var settings = {
 				SYMBOL_SCALE : $window.innerWidth < 400 ? 0.9 : $window.innerWidth < 500 ? 1 : 1.1,
 				SYMBOL_SCALE1 : $window.innerWidth < 500 ? 0.8 : 1,
-				DIGNITIES_RULERSHIP : "",
-				DIGNITIES_DETRIMENT : "",
-				DIGNITIES_EXALTATION : "",
-				DIGNITIES_EXACT_EXALTATION : "",
-				DIGNITIES_FALL : "",
 				TIP : tip_chart
 				};
 		var chart;
@@ -72,7 +67,7 @@
 		
 		
 		$scope.submit = function() {
-			var inputTime;
+			var inputTime = new Date();
 			if (!$scope.year) {
 				$scope.result = false;
 				return swal({
@@ -87,31 +82,11 @@
 					  text: '請輸入地點!'
 					});
 			} else {
-				var month;
-				var date;
-				var hour;
-				var min;
-				if ($scope.month < 10) {
-					month = "0" + $scope.month;
-				} else {
-					month = $scope.month;
-				}
-				if ($scope.date < 10) {
-					date = "0" + $scope.date;
-				} else {
-					date = $scope.date;
-				}
-				if ($scope.hour < 10) {
-					hour = "0" + $scope.hour;
-				} else {
-					hour = $scope.hour;
-				}
-				if ($scope.min < 10) {
-					min = "0" + $scope.min;
-				} else {
-					min = $scope.min;
-				}
-				inputTime = $scope.year + "-" +month + "-" + date + " " +hour + ":" + min;
+				inputTime.setFullYear($scope.year);
+				inputTime.setMonth($scope.month - 1);
+				inputTime.setDate($scope.date);
+				inputTime.setHours($scope.hour);
+				inputTime.setMinutes($scope.min);
 			}
 			var addr = "";
 			if ($scope.inputSite) {
@@ -174,15 +149,36 @@
 		
 		$scope.hover = function(isHover, e, vo, type, index) {
 			if (isHover) {
+				var textArr = constellationService.analyzeInterplay(vo.planetEname,vo.constellation.substring(0,2));
+				var text;
+				if (type == 'planet') {
+					text = textArr[0] + '<br>' + textArr[1];
+				} else {
+					text = textArr[2] + '<br>' + textArr[3];
+				}
+				var hoverCss = (type == 'planet') ? '140px' : '-260px';
+				if ($window.innerWidth < 768 && (type == 'planet')) {
+					hoverCss = '70px';
+				} else if ($window.innerWidth < 768 && (type == 'house')) {
+					hoverCss = '-230px';
+				} else if (type == 'planet') {
+					hoverCss = '140px';
+				} else {
+					hoverCss = '-260px';
+				}
 				angular.element(e.target).closest("tr").css({'color':'red','font-weight':'bold'});
 				angular.element("#astrology-radix-planets-" + vo.planetEname).children().css({'stroke':'red'});
 				angular.element("#astrology-radix-cusps-" + vo.house).children().css({'stroke':'red'});
-				angular.element("#" + type + index + " > div > .tooltiptext").css({'visibility':'visible'});
+				angular.element("#" + type + index + " > div > .tooltiptext")
+					.html(text)
+					.css({'visibility':'visible','left':hoverCss});
 			} else {
 				angular.element(e.target).closest("tr").css({'color':'black','font-weight':'normal'});
 				angular.element("#astrology-radix-planets-" + vo.planetEname).children().css({'stroke':'#000'});
 				angular.element("#astrology-radix-cusps-" + vo.house).children().css({'stroke':'#000'});
-				angular.element("#" + type + index + " > div > .tooltiptext").css({'visibility':'hidden'});
+				angular.element("#" + type + index + " > div > .tooltiptext")
+					.html('')
+					.css({'visibility':'hidden'});
 			}
 		}
 		
@@ -192,25 +188,6 @@
 			});
 			angular.element(e.target).addClass("active");
 			$scope.showTab = tag;
-		}
-		
-		function getDegree(position) {
-			var lon = position % 30;
-    		var lon2 = lon % 1;
-    	    var lon1 = lon - lon2;
-    	    lon2 *= 60;
-    	    var lon3 = lon2 % 1;
-    	    lon2 = lon2 - lon3;
-    	    lon3 *= 60;
-    	    lon3 = lon3.toString().split(".")[0];
-    	    
-    	    if (lon2.toString().length == 1) {
-    	    	lon2 = " " + lon2;
-    	    }
-    	    if (lon3.length == 1) {
-    	    	lon3 = " " + lon3;
-    	    }
-    	    return lon1 + "°" + lon2 + "'" + lon3 + "\"";
 		}
 		
 		function getPlanetPosition(data) {
@@ -274,8 +251,8 @@
         		} else if (index == 12) {
         			constellation = '雙魚座';
         		}
-        		$scope.dataList.push({'constellation':constellation + " " + getDegree(vo[0]),
-        			'planet':translateChinese(key),'planetEname':key,'sortNo':sortNo,'position':vo[0],'house':null});
+        		$scope.dataList.push({'constellation':constellation + " " + constellationService.getDegree(vo[0]),
+        			'planet':constellationService.translateChinese(key),'planetEname':key,'sortNo':sortNo,'position':vo[0],'house':null});
         	});
 			
 			var max = _.max(data.cusps);
@@ -309,66 +286,6 @@
 					}
 				});
 			});
-		}
-		
-		function translateChinese(origin) {
-			var name = '';
-			if (origin == 'Saturn') {
-				name = '土星';
-    		} else if (origin == 'Moon') {
-    			name = '月亮';
-    		} else if (origin == 'Uranus') {
-    			name = '天王星';
-    		} else if (origin == 'Sun') {
-    			name = '太陽';
-    		} else if (origin == 'Pluto') {
-    			name = '冥王星';
-    		} else if (origin == 'Mars') {
-    			name = '火星';
-    		} else if (origin == 'Neptune') {
-    			name = '海王星';
-    		} else if (origin == 'Jupiter') {
-    			name = '木星';
-    		} else if (origin == 'Venus') {
-    			name = '金星';
-    		} else if (origin == 'Mercury') {
-    			name = '水星';
-    		} else if (origin == 'Aries') {
-    			name = '牧羊座';
-    		} else if (origin == 'Taurus') {
-    			name = '金牛座';
-    		} else if (origin == 'Gemini') {
-    			name = '雙子座';
-    		} else if (origin == 'Cancer') {
-    			name = '巨蟹座';
-    		} else if (origin == 'Leo') {
-    			name = '獅子座';
-    		} else if (origin == 'Virgo') {
-    			name = '處女座';
-    		} else if (origin == 'Libra') {
-    			name = '天秤座';
-    		} else if (origin == 'Scorpio') {
-    			name = '天蠍座';
-    		} else if (origin == 'Sagittarius') {
-    			name = '射手座';
-    		} else if (origin == 'Capricorn') {
-    			name = '摩羯座';
-    		} else if (origin == 'Aquarius') {
-    			name = '水瓶座';
-    		} else if (origin == 'Pisces') {
-    			name = '雙魚座';
-    		} else if (origin == 'Asc') {
-    			name = '上升星座 (Asc)';
-    		} else if (origin == 'Des') {
-    			name = '下降星座 (Des)';
-    		} else if (origin == 'Mc') {
-    			name = '天頂星座 (Mc)';
-    		} else if (origin == 'Ic') {
-    			name = '天底星座 (Ic)';
-    		} else if (origin == 'NNode') {
-    			name = '北交點';
-    		}
-			return name;
 		}
 		
 		function getFourQuadrant() {

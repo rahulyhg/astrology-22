@@ -6,6 +6,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
+	<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 	<script src="js/easing.js"></script>
 	<script src="js/easy-responsive-tabs.js"></script>
 	<script src="js/JiSlider.js"></script>
@@ -13,126 +14,22 @@
 	<script src="js/move-top.js"></script>
 	<script src="js/owl.carousel.js"></script>
 	<script src="js/SmoothScroll.min.js"></script>
-	<script type="text/javascript">
-		var app = angular.module("myApp", ['angular.filter']);
-		app.directive('validNumber', function() {
-		    return {
-		        require: '?ngModel',
-		        link: function(scope, element, attrs, ngModelCtrl) {
-		          if (!ngModelCtrl) return; 
-
-		          ngModelCtrl.$parsers.push(function(val) {
-		            if (angular.isUndefined(val))
-		                val = '';
-		            
-		            var clean = val.replace(/[^-0-9\.]/g, '');
-		            var negativeCheck = clean.split('-');
-		            var decimalCheck = clean.split('.');
-		            if(!angular.isUndefined(negativeCheck[1])) {
-		                negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
-		                clean =negativeCheck[0] + '-' + negativeCheck[1];
-		                if(negativeCheck[0].length > 0) {
-		                	clean =negativeCheck[0];
-		                }
-		                
-		            }
-		              
-		            if(!angular.isUndefined(decimalCheck[1])) {
-		                decimalCheck[1] = decimalCheck[1].slice(0,2);
-		                clean =decimalCheck[0] + '.' + decimalCheck[1];
-		            }
-
-		            if (val !== clean) {
-		              ngModelCtrl.$setViewValue(clean);
-		              ngModelCtrl.$render();
-		            }
-		            return clean;
-		          });
-
-		          element.bind('keypress', function(event) {
-		            if(event.keyCode === 32) {
-		              event.preventDefault();
-		            }
-		          });
-		        }
-		      };
-		  });
-		app.directive('email', function() {
-			var INTEGER_REGEXP = new RegExp('^\\w+((-\\w+)|(\\.\\w+))*\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$');
-			return {
-		        require: 'ngModel',
-		        link: function (scope, elm, attrs, ctrl) {
-		        	elm.on('blur', function() {
-		        		if(!!ctrl.$viewValue){
-		        			if (INTEGER_REGEXP.test(ctrl.$viewValue)) {
-		        				return ctrl.$viewValue;
-		        			} else {
-		        				alert('Email格式錯誤!');
-		        				ctrl.$setViewValue('');
-		        				ctrl.$render();
-		        				return '';
-		        			}
-		        		}
-		        	});
-		        }
-		    };
-		});
-		app.service('anchorSmoothScroll', function(){
-		    
-		    this.scrollTo = function(eID) {
-
-		        // This scrolling function 
-		        // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript
-		        
-		        var startY = currentYPosition();
-		        var stopY = elmYPosition(eID);
-		        var distance = stopY > startY ? stopY - startY : startY - stopY;
-		        if (distance < 100) {
-		            scrollTo(0, stopY); return;
-		        }
-		        var speed = Math.round(distance / 100);
-		        if (speed >= 20) speed = 20;
-		        var step = Math.round(distance / 25);
-		        var leapY = stopY > startY ? startY + step : startY - step;
-		        var timer = 0;
-		        if (stopY > startY) {
-		            for ( var i=startY; i<stopY; i+=step ) {
-		                setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
-		                leapY += step; if (leapY > stopY) leapY = stopY; timer++;
-		            } return;
-		        }
-		        for ( var i=startY; i>stopY; i-=step ) {
-		            setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
-		            leapY -= step; if (leapY < stopY) leapY = stopY; timer++;
-		        }
-		        
-		        function currentYPosition() {
-		            // Firefox, Chrome, Opera, Safari
-		            if (self.pageYOffset) return self.pageYOffset;
-		            // Internet Explorer 6 - standards mode
-		            if (document.documentElement && document.documentElement.scrollTop)
-		                return document.documentElement.scrollTop;
-		            // Internet Explorer 6, 7 and 8
-		            if (document.body.scrollTop) return document.body.scrollTop;
-		            return 0;
-		        }
-		        
-		        function elmYPosition(eID) {
-		            var elm = document.getElementById(eID);
-		            var y = elm.offsetTop;
-		            var node = elm;
-		            while (node.offsetParent && node.offsetParent != document.body) {
-		                node = node.offsetParent;
-		                y += node.offsetTop;
-		            } return y;
-		        }
-
-		    };
-		    
-		});
+	<script src="js/angularConfig.js"></script>
+	<div id="fb-root"></div>
+	<script>
+		(function(d, s, id) {
+  			var js, fjs = d.getElementsByTagName(s)[0];
+  			if (d.getElementById(id)) return;
+  			js = d.createElement(s); js.id = id;
+  			js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.1';
+  			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
 	</script>
+
 	<script type="text/javascript">
 		app.controller('mainController', function ($scope, $http) {
+			$scope.lineUrl = location.href;
+			
 			$(".scroll").click(function(event){		
 				event.preventDefault();
 				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
@@ -140,15 +37,17 @@
 			
 			$().UItoTop({ easingType: 'easeOutQuart' });
 			
-			$(".navbar-nav li").each(function() {
-				$(this).removeClass('active');
-				var id = $(this)[0].id;
-				if (location.pathname.replace('/astrology/', '') == id) {
-					$(this).addClass('active');
-				} else if (!location.pathname.replace('/astrology/', '')) {
-					$("#home").addClass('active');
-				}
-			});
+			if (!location.pathname.replace('/','')) {
+				$("#home").addClass('active');
+			} else {
+				$(".navbar-nav li").each(function() {
+					$(this).removeClass('active');
+					var id = $(this)[0].id;
+					if (location.pathname.replace('/','') == id) {
+						$(this).addClass('active');
+					}
+				});
+			}
 			
 			$scope.viewer = 1;
 			$http.get("/getWebsiteViwerCount")
@@ -162,13 +61,23 @@
 					});
 		    });
 			
-			$scope.reserve = function() {
-				if (!$scope.email) {
-					return swal({
-						  type: 'error',
-						  title: '錯誤',
-						  text: '請輸入您的email!'
-						});
+			$scope.feedback = function(type) {
+				if (type == 'reserve' ) {
+					if (!$scope.email_reserve) {
+						return swal({
+							  type: 'error',
+							  title: '錯誤',
+							  text: '請輸入您的email!'
+							});
+					}
+				} else {
+					if (!$scope.email_system) {
+						return swal({
+							  type: 'error',
+							  title: '錯誤',
+							  text: '請輸入您的email!'
+							});
+					}
 				}
 			}
 			

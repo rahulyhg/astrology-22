@@ -17,7 +17,7 @@
 		</div>
 		<table class="d-block d-sm-none">
 			<tr>
-				<td style="width:50%">
+				<td>
 					西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year" valid-number/>年&nbsp;
 				</td>
 				<td>
@@ -65,9 +65,10 @@
 	</div>
 	
 	<section ng-show="result" style="margin-top:20px;margin-bottom:20px">
-		<h4 id="resultAnchor" class="alert alert-success">
-			星座命盤查詢結果<a style="font-size:0.8rem;margin-left:10px" href="javascript:location.href = '/constellation'">重新查詢<i class="fas fa-redo" style="margin-left:2px"></i></a>
-		</h4>
+		<h3 id="resultAnchor" class="alert alert-success text-center">
+			<span style="font-weight:900">星座命盤查詢結果</span>
+			<a style="font-size:0.8rem;margin-left:10px" href="javascript:location.href = '/constellation'">重新查詢<i class="fas fa-redo" style="margin-left:2px"></i></a>
+		</h3>
 		<div class="row">
 			<section class="col-lg-6 col-md-12">
 				<div class="col-lg-10 offset-lg-1 col-md-10 offset-md-2 col-12" style="font-size:14px;color:blue">
@@ -97,7 +98,7 @@
       						<td ng-mousemove="hover(true,$event,vo,'planet',$index)"
       							ng-mouseleave="hover(false,$event,vo,'planet',$index)"
       							ng-class="$index % 2 == 0 ? 'table-danger' : 'table-info'" id="{{'planet' + $index}}">
-      							<div class="tooltip_table">{{vo.planet}}<div class="tooltiptext">{{vo.planet}}</div></div>
+      							<div class="tooltip_table">{{vo.planet}}<div class="tooltiptext"></div></div>
       						</td>
       						<td ng-mousemove="hover(true,$event,vo,'planet',$index)"
       							ng-mouseleave="hover(false,$event,vo,'planet',$index)"

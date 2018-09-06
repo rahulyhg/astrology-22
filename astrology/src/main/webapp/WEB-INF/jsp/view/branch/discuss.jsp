@@ -7,16 +7,16 @@
 		<button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#questionModal">我要發問</button><p style="clear:right;margin-bottom:5px">
 		<div id="accordion">
 			<div class="card">
-    			<div class="card-header" id="{{'heading' + questionVO.questionId}}" ng-repeat-start="questionVO in questionList | orderBy: 'questionId'">
-      				<h5 class="mb-0">
-        				<button class="btn btn-link float-left" data-toggle="toggle" data-target="{{'#collapse' + questionVO.questionId}}" aria-expanded="true" aria-controls="{{'collapse' + questionVO.questionId}}"
-        						ng-click="clickList(questionVO)">
-          					{{questionVO.questionTitle}}
-        				</button>
-        				<button class="btn btn-link float-right" style="font-size:.7rem;color:deeppink">
-        					{{questionVO.questionAuthor}}於{{questionVO.questionTime | date : "MM/dd HH:mm"}}發問
-        				</button>
-      				</h5>
+    			<div class="card-header card-discuss" id="{{'heading' + questionVO.questionId}}"
+    				 ng-repeat-start="questionVO in questionList | orderBy: 'questionId'"
+    				 ng-click="clickList(questionVO)">
+      				<div class="float-left" style="margin:.9rem .9rem;font-weight:bold"
+      					 data-toggle="toggle" data-target="{{'#collapse' + questionVO.questionId}}" aria-expanded="true" aria-controls="{{'collapse' + questionVO.questionId}}">
+          				{{questionVO.questionTitle}}
+        			</div>
+        			<div class="float-right" style="font-size:.7rem;margin-top:2rem;color:#666">
+        				{{questionVO.questionAuthor}} 於 {{questionVO.questionTime | date : "MM/dd HH:mm"}} 發問
+        			</div>
     			</div>
 
     			<div id="{{'collapse' + questionVO.questionId}}" class="collapse" aria-labelledby="{{'heading' + questionVO.questionId}}" data-parent="#accordion" ng-repeat-end>
