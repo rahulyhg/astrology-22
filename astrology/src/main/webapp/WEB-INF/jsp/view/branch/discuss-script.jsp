@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
-	app.controller('discussController', function ($scope, $http, $timeout) {
+	app.controller('discussController', function ($scope, $http, $timeout, $window) {
 		$scope.modal = {};
 			
 		$http.get("/getQuestionList")
@@ -35,42 +35,56 @@
 					}
 				});
 			} else {
-				swal({
-					  title: '請輸入隱藏密碼',
-					  input: 'password',
-					  inputPlaceholder: '請輸入隱藏密碼',
-					  showCancelButton: true,
-					  confirmButtonText: '送出',
-					  showLoaderOnConfirm: true,
-					  allowOutsideClick: function() {
-						  swal.isLoading();
-					  },
-					  preConfirm: function(parameter) {
-						  return new Promise(function(resolve, reject) {
-							  questionVO.privatePwd = parameter;
-							  var promise = getChatData(questionVO,'confirmPassword');
-							  promise.then(function(result) {
-									if (result.resMessage) {
-										$('#collapse' + questionVO.questionId).collapse('hide');
-										  reject(result.resMessage);
-									} else if (result) {
-										resolve(result);
-									} else {
-										 $('#collapse' + questionVO.questionId).collapse('hide');
-										  reject('系統發生錯誤!');
-									}
-								});
-					      });
-					  }
-				}).then(function(data) {
-					$scope.$apply(function() {
-						$scope.chatList = data.chatList;
-						$('#collapse' + questionVO.questionId).collapse('show');
-						$scope.collapseIdTemp = questionVO.questionId;
+				if ($window.sessionStorage.getItem("privatePassword")) {
+					var promise = getChatData(questionVO,'getChatList');
+					promise.then(function(result) {
+						if (result) {
+							$scope.$apply(function() {
+								$scope.chatList = result.chatList;
+								$('#collapse' + questionVO.questionId).collapse('show');
+								$scope.collapseIdTemp = questionVO.questionId;
+							});
+						}
 					});
-				}).catch(function() {
-					$('#collapse' + questionVO.questionId).collapse('hide');
-				});
+				} else {
+					swal({
+						  title: '請輸入隱藏密碼',
+						  input: 'password',
+						  inputPlaceholder: '請輸入隱藏密碼',
+						  showCancelButton: true,
+						  confirmButtonText: '送出',
+						  showLoaderOnConfirm: true,
+						  allowOutsideClick: function() {
+							  swal.isLoading();
+						  },
+						  preConfirm: function(parameter) {
+							  return new Promise(function(resolve, reject) {
+								  questionVO.privatePwd = parameter;
+								  var promise = getChatData(questionVO,'confirmPassword');
+								  promise.then(function(result) {
+										if (result.resMessage) {
+											$('#collapse' + questionVO.questionId).collapse('hide');
+											  reject(result.resMessage);
+										} else if (result) {
+											$window.sessionStorage.setItem("privatePassword", parameter);
+											resolve(result);
+										} else {
+											 $('#collapse' + questionVO.questionId).collapse('hide');
+											  reject('系統發生錯誤!');
+										}
+									});
+						      });
+						  }
+					}).then(function(data) {
+						$scope.$apply(function() {
+							$scope.chatList = data.chatList;
+							$('#collapse' + questionVO.questionId).collapse('show');
+							$scope.collapseIdTemp = questionVO.questionId;
+						});
+					}).catch(function() {
+						$('#collapse' + questionVO.questionId).collapse('hide');
+					});
+				}
 			}
 		}
 		

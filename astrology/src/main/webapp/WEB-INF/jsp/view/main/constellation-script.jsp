@@ -151,10 +151,24 @@
 			if (isHover) {
 				var textArr = constellationService.analyzeInterplay(vo.planetEname,vo.constellation.substring(0,2));
 				var text;
+				var row = 0;
+				var textLengthByPixel = $window.innerWidth < 700 ? 17 : $window.innerWidth < 1024 ? 18 : 19
 				if (type == 'planet') {
 					text = textArr[0] + '<br>' + textArr[1];
+					if (textArr[0].length > textLengthByPixel) {
+						++row;
+					}
+					if (textArr[1].length > textLengthByPixel) {
+						++row;
+					}
 				} else {
 					text = textArr[2] + '<br>' + textArr[3];
+					if (textArr[2].length > textLengthByPixel) {
+						++row;
+					}
+					if (textArr[3].length > textLengthByPixel) {
+						++row;
+					}
 				}
 				var hoverCss = (type == 'planet') ? '140px' : '-260px';
 				if ($window.innerWidth < 768 && (type == 'planet')) {
@@ -171,7 +185,7 @@
 				angular.element("#astrology-radix-cusps-" + vo.house).children().css({'stroke':'red'});
 				angular.element("#" + type + index + " > div > .tooltiptext")
 					.html(text)
-					.css({'visibility':'visible','left':hoverCss});
+					.css({'visibility':'visible','left':hoverCss,'height':(45 + (row * 22.5)) + "px"});
 			} else {
 				angular.element(e.target).closest("tr").css({'color':'black','font-weight':'normal'});
 				angular.element("#astrology-radix-planets-" + vo.planetEname).children().css({'stroke':'#000'});

@@ -208,7 +208,7 @@ app.service('constellationService', function() {
 		} else if (planetEname == 'Uranus') {
 			
 		} else if (planetEname == 'Sun') {
-			if (constellation == '牡羊') {
+			if (constellation == '牧羊') {
 				answer[0] = '率真、單純丶勇敢丶有效率';
 				answer[1] = '衝動、虎頭蛇尾、自私、沒有耐心';
 				answer[2] = '';

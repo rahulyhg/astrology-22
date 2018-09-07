@@ -37,4 +37,9 @@ public class UIController {
 		return new ModelAndView("/main/contact");
 	}
 	
+	@RequestMapping("/administer")
+	public ModelAndView administer() {
+		return new ModelAndView("/main/administer");
+	}
+	
 }

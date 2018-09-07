@@ -2,9 +2,9 @@
 
 <main class="container" style="margin-bottom:50px" ng-controller="controller as ctrl">
 	<h3 class="alert alert-primary heading text-center" style="font-size:30px;padding:.25rem 1rem">星座命盤分析</h3>
-	<div class="form-group col-lg-5 offset-lg-4 col-md-10 offset-md-1">
+	<div class="form-group col-lg-8 offset-lg-4 col-md-10 offset-md-1">
 		<label><span class="badge badge-pill badge-primary">第一步：</span>請輸入陽曆(國曆)西元出生時間</label>
-		<div class="d-none d-sm-block">
+		<div class="d-none d-sm-block d-sm-12">
 		 	西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year" valid-number/>年&nbsp;
       	 	<select ng-model="month" ng-options="m for m in monthList">
 	 		</select>月&nbsp;
@@ -67,7 +67,7 @@
 	<section ng-show="result" style="margin-top:20px;margin-bottom:20px">
 		<h3 id="resultAnchor" class="alert alert-success text-center">
 			<span style="font-weight:900">星座命盤查詢結果</span>
-			<a style="font-size:0.8rem;margin-left:10px" href="javascript:location.href = '/constellation'">重新查詢<i class="fas fa-redo" style="margin-left:2px"></i></a>
+			<a style="font-size:0.8rem" href="javascript:location.href = '/constellation'">重新查詢<i class="fas fa-redo" style="margin-left:2px"></i></a>
 		</h3>
 		<div class="row">
 			<section class="col-lg-6 col-md-12">
@@ -88,9 +88,9 @@
 				<table ng-show="showTab == 1" class="table text-center">
   					<thead>
     					<tr>
-      						<th style="width:30%">行星</th>
-      						<th style="width:35%">星座</th>
-      						<th style="width:35%">宮位</th>
+      						<th style="width:28%">行星</th>
+      						<th style="width:44%">星座</th>
+      						<th style="width:28%">宮位</th>
     					</tr>
   					</thead>
   					<tbody>
