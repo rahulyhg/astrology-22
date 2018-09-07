@@ -10,7 +10,7 @@
     				 ng-click="clickList(questionVO)">
       				<div class="float-left" style="margin:.9rem .9rem;font-weight:bold"
       					 data-toggle="toggle" data-target="{{'#collapse' + questionVO.questionId}}" aria-expanded="true" aria-controls="{{'collapse' + questionVO.questionId}}">
-          				{{questionVO.questionTitle}}<span ng-if="questionVO.privateQA" style="font-size:.8rem;color:red;margin-left:.5rem">原作者不公開顯示</span>
+          				{{questionVO.questionTitle}}<i ng-if="questionVO.privateQA" class="fas fa-exclamation-circle" style="color:red"></i>
         			</div>
         			<div class="float-right" style="font-size:.7rem;margin-top:2rem;color:#666">
         				{{questionVO.questionAuthor}} 於 {{questionVO.questionTime | date : "MM/dd HH:mm"}} 發問
