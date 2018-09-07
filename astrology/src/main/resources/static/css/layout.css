@@ -100,7 +100,7 @@ header h1 a span {
 	.navbar-light .navbar-nav .show>.nav-link, .navbar-light .navbar-nav .active>.nav-link,
 	.navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active,
 	.dropdown-item:hover {
-	color: #e2b13c;
+	color: blueviolet;
 	background: #fff;
 	border-radius: 5px;
 }
@@ -651,7 +651,7 @@ ul.w3ls-footer-bottom-list li span {
 ul.w3ls-footer-bottom-list li span.fas, ul.w3ls-footer-bottom-list li span.fab,
 	ul.tweet-agile span.fab {
 	width: 25px;
-	color: #e2b13c;
+	color: #00b833;
 	padding-left: 0;
 }
 
@@ -663,7 +663,7 @@ ul.w3ls-footer-bottom-list li a, ul.footer-social-icons li a {
 
 ul.w3ls-footer-bottom-list li a:hover, ul.footer-social-icons li a:hover,
 	p.tweet-p1 a:hover {
-	color: #e2b13c;
+	color: blueviolet;
 }
 
 ul.footer-social-icons li {
@@ -717,7 +717,7 @@ ul.footer-social-icons li {
 	text-transform: uppercase;
 	font-weight: 600;
 	letter-spacing: 1px;
-	background: #e2b13c;
+	background: #00BFFF;
 	color: #fff;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -730,7 +730,7 @@ ul.footer-social-icons li {
 
 .footer-top input[type="submit"]:hover {
 	background: #fff;
-	color: #e2b13c;
+	color: #00BFFF;
 }
 /*--social-icons--*/
 
@@ -969,8 +969,8 @@ ul.footer-social-icons li {
 @media ( max-width : 991px) {
 	.navbar-light .navbar-toggler {
 		color: rgba(0, 0, 0, 0.5);
-		border-color: #e2b13c;
-		background: #e2b13c;
+		border-color: #DDA0DD;
+		background: #DDA0DD;
 	}
 	.navbar-toggler {
 		font-size: 1rem;

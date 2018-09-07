@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.astrology.DAO.MongoDBDao;
 import com.astrology.VO.ChatVO;
+import com.astrology.VO.FeedbackVO;
 import com.astrology.VO.MessageVO;
 import com.astrology.VO.QuestionVO;
 import com.google.gson.Gson;
@@ -213,5 +214,17 @@ public class Controller {
 			log.info(e.getMessage());
 			return gson.toJson(messageVO);
 		}
+	}
+	
+	@PostMapping(value = "/feedback", produces = "application/json;charset=UTF-8")
+	public String feedback(@RequestBody FeedbackVO feedbackVO) {
+		try {
+			mongoDBDao.insertFeedback(feedbackVO);
+		} catch (Exception e) {
+			messageVO.setResMessage("發生錯誤:" + e.getMessage());
+			log.info(e.getMessage());
+			return gson.toJson(messageVO);
+		}
+		return "";
 	}
 }

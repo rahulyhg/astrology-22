@@ -51,7 +51,11 @@ app.directive('email', function() {
         			if (INTEGER_REGEXP.test(ctrl.$viewValue)) {
         				return ctrl.$viewValue;
         			} else {
-        				alert('Email格式錯誤!');
+        				swal({
+  						  type: 'error',
+  						  title: '錯誤',
+  						  text: 'Email格式錯誤!'
+  						});
         				ctrl.$setViewValue('');
         				ctrl.$render();
         				return '';

@@ -18,6 +18,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.astrology.Util.DateUtil;
 import com.astrology.VO.ChatVO;
+import com.astrology.VO.FeedbackVO;
 import com.astrology.VO.QuestionVO;
 import com.astrology.VO.StatisticalViwerVO;
 
@@ -29,7 +30,7 @@ public class MongoDBDao {
     private MongoTemplate mongoTemplate;
 	
 	public int getSumByCountType(String countType) {
-        AggregationOperation group = Aggregation.group("countType").sum("countNumber").as("countNumber");
+        AggregationOperation group = Aggregation.group("countType").sum("countNumber").as("totalNumber");
         AggregationOperation match = Aggregation.match(Criteria.where("countType").is(countType));
         Aggregation aggregation = Aggregation.newAggregation(match,group);
         AggregationResults<StatisticalViwerVO> results =  mongoTemplate.aggregate(aggregation, "StatisticalViwer", StatisticalViwerVO.class);
@@ -37,7 +38,7 @@ public class MongoDBDao {
         if (CollectionUtils.isEmpty(results.getMappedResults())) {
         	return 1;
         } else {
-        	return results.getMappedResults().get(0).getCountNumber();
+        	return results.getMappedResults().get(0).getTotalNumber();
         }
 	}
 	
@@ -45,11 +46,11 @@ public class MongoDBDao {
 		Criteria criteriaByPrevious = new Criteria().andOperator(
 				Criteria.where("countType").is(countType), 
 				Criteria.where("countDate").ne(DateUtil.getTwToday(false)));
-		AggregationOperation group = Aggregation.group("countType").sum("countNumber").as("countNumber");
+		AggregationOperation group = Aggregation.group("countType").sum("countNumber").as("totalNumber");
         AggregationOperation match = Aggregation.match(criteriaByPrevious);
         Aggregation aggregation = Aggregation.newAggregation(match,group);
         AggregationResults<StatisticalViwerVO> results =  mongoTemplate.aggregate(aggregation, "StatisticalViwer", StatisticalViwerVO.class);
-		int sumOfPrevious = results.getMappedResults().get(0).getCountNumber();
+		int sumOfPrevious = results.getMappedResults().get(0).getTotalNumber();
 		
 		
 		
@@ -57,7 +58,8 @@ public class MongoDBDao {
 				Criteria.where("countType").is(countType), 
 				Criteria.where("countDate").is(DateUtil.getTwToday(false)));
 		if (mongoTemplate.exists(new Query(criteriaByPresent), "StatisticalViwer")) {
-			mongoTemplate.updateFirst(new Query(criteriaByPresent), new Update().set("countNumber", currentViwer - sumOfPrevious), "StatisticalViwer");
+			mongoTemplate.updateFirst(new Query(criteriaByPresent), 
+					new Update().set("countNumber", (currentViwer - sumOfPrevious) < 0 ? 0 : currentViwer - sumOfPrevious), "StatisticalViwer");
 		} else {
 			StatisticalViwerVO vo = new StatisticalViwerVO();
 			vo.setCountType(countType);
@@ -102,7 +104,9 @@ public class MongoDBDao {
 				new Update().set("chatList", chatList), QuestionVO.class, "QuestionContent");
 	}
 	
-	
+	public void insertFeedback(FeedbackVO feedbackVO) {
+		mongoTemplate.insert(feedbackVO, "FeedbackContent");
+	}
 	
 	
 	

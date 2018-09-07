@@ -4,7 +4,7 @@
 	<h3 class="alert alert-info heading text-center" style="font-size:30px;padding:.25rem 1rem">問答專區</h3>
 <!-- 	清單明細區 -->
 	<div>
-		<button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#questionModal">我要發問</button><p style="clear:right;margin-bottom:5px">
+		<button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#questionModal" data-backdrop="static">我要發問</button><p style="clear:right;margin-bottom:5px">
 		<div id="accordion">
 			<div class="card">
     			<div class="card-header card-discuss" id="{{'heading' + questionVO.questionId}}"

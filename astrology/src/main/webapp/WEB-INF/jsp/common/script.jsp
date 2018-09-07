@@ -25,7 +25,6 @@
   			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
-
 	<script type="text/javascript">
 		app.controller('mainController', function ($scope, $http) {
 			$scope.lineUrl = location.href;
@@ -62,26 +61,39 @@
 		    });
 			
 			$scope.feedback = function(type) {
-				if (type == 'reserve' ) {
+				var obj = {};
+				obj.feedbackType = type;
+				var error = false;
+				if (type == 'reserve') {
 					if (!$scope.email_reserve) {
-						return swal({
-							  type: 'error',
-							  title: '錯誤',
-							  text: '請輸入您的email!'
-							});
+						error = true;
+					} else {
+						obj.feedbackEmail = $scope.email_reserve;
 					}
-				} else {
+				} else if (type == 'system') {
 					if (!$scope.email_system) {
-						return swal({
-							  type: 'error',
-							  title: '錯誤',
-							  text: '請輸入您的email!'
-							});
+						error = true;
+					} else {
+						obj.feedbackEmail = $scope.email_system;
 					}
+				}
+				if (error) {
+					return swal({
+						  type: 'error',
+						  title: '錯誤',
+						  text: '請輸入您的email!'
+						});
+				} else {
+					$scope.$root.$broadcast("goFeedback",obj);
+					angular.element('#feedbackModal').modal({backdrop:'static'});
+					angular.element('#feedbackModal').modal('show');
 				}
 			}
 			
-			
+			$scope.$on("afterSubmit", function(event, args){ 
+				$scope.email_reserve = null;
+				$scope.email_system = null;
+		    });
 			
 			
 			

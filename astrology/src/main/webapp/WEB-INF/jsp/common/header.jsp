@@ -3,14 +3,14 @@
 <header>
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light">
-			<a class="navbar-brand" href="/">
-				<span class="d-none d-lg-block"><img src="../images/logo.png" style="width:auto"/>李探長塔羅占星事務所</span>
-				<img class="d-block d-lg-none" src="../images/header.jpg" />
+			<a class="navbar-brand col-12 col-lg-5" href="/" >
+				<img src="../images/header.jpg" />
 			</a>
-			<button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+			<div class="d-block d-lg-none">您是第<span style="color:blue;margin:.5rem;font-weight:bold">{{viewer}}</span>位訪客。</div>
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mx-auto text-center">
@@ -32,8 +32,9 @@
 						<a class="nav-link" href="/contact">聯絡我們</a>
 					</li>
 				</ul>
-				
+				<div class="d-none d-xl-block">您是第<span style="color:blue;margin:.5rem;font-weight:bold">{{viewer}}</span>位訪客。</div>
 			</div>
 		</nav>
+		<div class="d-none d-lg-block d-xl-none text-right">您是第<span style="color:blue;margin:.5rem;font-weight:bold">{{viewer}}</span>位訪客。</div>
 	</div>
 </header>

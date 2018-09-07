@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	app.controller('discussController', function ($scope, $http, $timeout) {
 		$scope.modal = {};
-		
+			
 		$http.get("/getQuestionList")
 	    .then(function(response) {
 	    	$scope.questionList = response.data;
