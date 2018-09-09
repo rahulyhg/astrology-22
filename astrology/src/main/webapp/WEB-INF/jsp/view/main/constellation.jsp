@@ -1,42 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<main class="container" style="margin-bottom:50px" ng-controller="controller as ctrl">
+<main class="container" ng-controller="controller as ctrl">
 	<h3 class="alert alert-primary heading text-center" style="font-size:30px;padding:.25rem 1rem">星座命盤分析</h3>
-	<div class="form-group col-lg-8 offset-lg-4 col-md-10 offset-md-1">
-		<label><span class="badge badge-pill badge-primary">第一步：</span>請輸入陽曆(國曆)西元出生時間</label>
-		<div class="d-none d-sm-block d-sm-12">
-		 	西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year" valid-number/>年&nbsp;
-      	 	<select ng-model="month" ng-options="m for m in monthList">
-	 		</select>月&nbsp;
-	 		<select ng-model="date" ng-options="m for m in dateList">
-	 		</select>日&nbsp;
-	 		<select ng-model="hour" ng-options="m for m in hourList">
-	 		</select>時&nbsp;
-	 		<select ng-model="min" ng-options="m for m in minList">
-	 		</select>分
-		</div>
-		<table class="d-block d-sm-none">
-			<tr>
-				<td>
-					西元&nbsp;&nbsp;<input type="text" size="4" ng-model="year" valid-number/>年&nbsp;
-				</td>
-				<td>
-					<select ng-model="month" ng-options="m for m in monthList">
- 					</select>月&nbsp;
- 					<select ng-model="date" ng-options="m for m in dateList">
- 					</select>日&nbsp;
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<select ng-model="hour" ng-options="m for m in hourList">
- 					</select>時&nbsp;
- 					<select ng-model="min" ng-options="m for m in minList">
- 					</select>分
-				</td>
-			</tr>
-		</table>
+	<div class="form-group col-lg-5 offset-lg-4 col-md-10 offset-md-1">
+		<label><span class="badge badge-pill badge-primary">第一步：</span>請選擇國歷西元出生日期與時間</label>
+		<input type="text" class="form-control" id="datepicker" placeholder="請選擇出生日期" />
+		<input type="text" class="form-control" id="timepicker" placeholder="請選擇出生時間" />
     </div>
     <div class="form-group col-lg-5 offset-lg-4 col-md-10 offset-md-1">
 		<label><span class="badge badge-pill badge-primary">第二步：</span>請設定出生地點</label>

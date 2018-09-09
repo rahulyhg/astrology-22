@@ -65,6 +65,43 @@
 	background: #fff !important;
 	color: #F08080 !important;
 }
-.fb-like > span{
+.fb-like > span {
 	padding-left:initial !important;
+}
+.marginLeftRight125 {
+	margin-left: 12.5%;
+	margin-right: 12.5%
+}
+.carousel-control-next-icon {
+	width: 30px;
+	height: 30px;
+	background-image: url(../images/right-arr.png);
+}
+.carousel-control-prev-icon {
+	width: 30px;
+	height: 30px;
+	background-image: url(../images/left-arr.png);
+}
+.blog-post {
+  	margin-bottom: 4rem;
+}
+.blog-post-title {
+  	margin-bottom: .25rem;
+  	font-size: 2.5rem;
+  	font-weight: bold;
+}
+.blog-post-meta {
+  	margin-bottom: 1.25rem;
+  	color: #999;
+}
+.blog-post-data {
+  	height: 600px;
+  	overflow-y: scroll;
+}
+.blog-post ul {
+	margin-left: 40px
+}
+.list-unstyled {
+	padding-left: 0;
+	list-style: none;
 }

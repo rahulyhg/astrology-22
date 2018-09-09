@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<main class="container" style="margin-bottom:50px" ng-controller="administerController as ctrl">
+<main class="container" ng-controller="administerController as ctrl">
 	<h3 class="alert alert-info heading text-center" style="font-size:30px;padding:.25rem 1rem">管理員專區</h3>
 	<div>
 		<div id="accordion">

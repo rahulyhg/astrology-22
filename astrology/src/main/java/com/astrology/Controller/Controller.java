@@ -54,7 +54,7 @@ public class Controller {
 	
 	@GetMapping(value = "/getChartData/{inputTime}/{timezone}/{addr}/{savelight}", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String getChartData(@PathVariable("inputTime") Date inputTime, @PathVariable("timezone") int timezone
+	public String getChartData(@PathVariable("inputTime") String inputTime, @PathVariable("timezone") int timezone
 			, @PathVariable("addr") String addr, @PathVariable("savelight") boolean savelight) {
 		Map<String, Object> resultMap = new HashMap<>();
 		try {
@@ -87,7 +87,8 @@ public class Controller {
 				}
 			}
 			
-			LocalDateTime time = LocalDateTime.ofInstant(inputTime.toInstant(), ZoneId.systemDefault()).minusHours(timezone);
+			LocalDateTime time = LocalDateTime.parse(inputTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+								.minusHours(timezone);;
 			if (savelight) {
 				time = time.plusHours(1);
 			}

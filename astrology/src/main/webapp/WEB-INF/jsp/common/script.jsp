@@ -9,10 +9,8 @@
 	<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 	<script src="js/easing.js"></script>
 	<script src="js/easy-responsive-tabs.js"></script>
-	<script src="js/JiSlider.js"></script>
 	<script src="js/jquery.picEyes.js"></script>
 	<script src="js/move-top.js"></script>
-	<script src="js/owl.carousel.js"></script>
 	<script src="js/SmoothScroll.min.js"></script>
 	<script src="js/angularConfig.js"></script>
 	<div id="fb-root"></div>
@@ -27,7 +25,7 @@
 	</script>
 	<script type="text/javascript">
 		app.controller('mainController', function ($scope, $http) {
-			$scope.lineUrl = location.href;
+			$scope.lineUrl = "https://astrology-213903.appspot.com";
 			
 			$(".scroll").click(function(event){		
 				event.preventDefault();

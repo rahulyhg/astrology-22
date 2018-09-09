@@ -3,8 +3,23 @@
 <script src="js/astrochart.js"></script>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="js/d3-tip-v4.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/moment-zh-tw.js"></script>
 <script type="text/javascript">
 	app.controller('controller', function ($scope, $http, anchorSmoothScroll, $timeout, $window, constellationService) {
+		$('#datepicker').datetimepicker({
+            format: 'LD',
+            locale: 'zh-tw',
+            format: 'YYYY/MM/DD',
+            defaultDate:new Date()
+        });
+		$('#timepicker').datetimepicker({
+            format: 'LT',
+            locale: 'zh-tw',
+            showClose: true,
+            defaultDate:new Date()
+        });
 		$scope.result = false;
 		$scope.inputSite = false;
 		$scope.timezoneList = [];
@@ -20,28 +35,6 @@
 			{'lnglat':[120.533, 23.7], 'city':'雲林'}, {'lnglat':[120.45, 23.483], 'city':'嘉義'}, {'lnglat':[120.2, 23], 'city':'台南'}, {'lnglat':[120.283, 22.633], 'city':'高雄'},
 			{'lnglat':[120.483, 22.066], 'city':'屏東'}, {'lnglat':[121.15, 22.75], 'city':'台東'}, {'lnglat':[121.6, 23.983], 'city':'花蓮'}, {'lnglat':[121.75, 24.766], 'city':'宜蘭'},
 			{'lnglat':[119.55, 23.566], 'city':'澎湖'}, {'lnglat':[118.416, 24.05], 'city':'金門'}];
-		$scope.monthList = [];
-		for (var i = 1; i < 13; i++) {
-			$scope.monthList.push(i);
-		}
-		$scope.dateList = [];
-		for (var i = 1; i < 32; i++) {
-			$scope.dateList.push(i);
-		}
-		$scope.hourList = [];
-		for (var i = 0; i < 24; i++) {
-			$scope.hourList.push(i);
-		}
-		$scope.minList = [];
-		for (var i = 0; i < 60; i++) {
-			$scope.minList.push(i);
-		}
-		var date = new Date();
-		$scope.year = date.getFullYear();
-		$scope.month = date.getMonth() + 1;
-		$scope.date = date.getDate();
-		$scope.hour = date.getHours();
-		$scope.min = date.getMinutes();
 		
 		//tip init 
 		var tip_chart = d3.tip().attr('class', 'd3-tip')
@@ -67,13 +60,16 @@
 		
 		
 		$scope.submit = function() {
-			var inputTime = new Date();
-			if (!$scope.year) {
+			var date = $("#datepicker").data("DateTimePicker").date();
+			var time = $("#timepicker").data("DateTimePicker").date();
+			
+			var inputTime;
+			if (!date || !time) {
 				$scope.result = false;
 				return swal({
 					  type: 'error',
 					  title: '錯誤',
-					  text: '請選擇日期!'
+					  text: '請選擇出生日期與出生時間!'
 					});
 			} else if ($scope.inputSite && !$scope.addr) {
 				return swal({
@@ -82,11 +78,20 @@
 					  text: '請輸入地點!'
 					});
 			} else {
-				inputTime.setFullYear($scope.year);
-				inputTime.setMonth($scope.month - 1);
-				inputTime.setDate($scope.date);
-				inputTime.setHours($scope.hour);
-				inputTime.setMinutes($scope.min);
+				var dateTemp = new Date(date._d);
+				var timeTemp = new Date(time._d);
+				var dateTemp_month = dateTemp.getMonth() + 1;
+				dateTemp_month = dateTemp_month < 10 ? "0" + dateTemp_month : dateTemp_month;
+				
+				var dateTemp_date = dateTemp.getDate();
+				dateTemp_date = dateTemp_date < 10 ? "0" + dateTemp_date : dateTemp_date;
+				
+				var timeTemp_hour = timeTemp.getHours();
+				timeTemp_hour = timeTemp_hour < 10 ? "0" + timeTemp_hour : timeTemp_hour;
+				
+				var timeTemp_min = timeTemp.getMinutes();
+				timeTemp_min = timeTemp_min < 10 ? "0" + timeTemp_min : timeTemp_min;
+				inputTime = dateTemp.getFullYear() + "-" + dateTemp_month + "-" + dateTemp_date + " " + timeTemp_hour + ":" + timeTemp_min;
 			}
 			var addr = "";
 			if ($scope.inputSite) {

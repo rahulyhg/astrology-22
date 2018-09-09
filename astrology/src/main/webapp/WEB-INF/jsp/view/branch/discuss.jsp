@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<main class="container" style="margin-top:50px" ng-controller="discussController as ctrl">
+<main class="container" style="margin-top:50px;margin-bottom:20px" ng-controller="discussController as ctrl">
 	<h3 class="alert alert-info heading text-center" style="font-size:30px;padding:.25rem 1rem">問答專區</h3>
 <!-- 	清單明細區 -->
 	<div>

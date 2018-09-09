@@ -28,7 +28,6 @@
 					<ul class="w3ls-footer-bottom-list">
 						<li><a href="/constellation">星座命盤</a></li>
 						<li><a href="/article">時上專欄</a></li>
-						<li><a href="/shop">商城小物</a></li>
 						<li><a href="/contact">聯絡我們</a></li>
 					</ul>
 				</div>

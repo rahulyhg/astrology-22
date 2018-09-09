@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<header>
+<header style="margin-bottom:20px">
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<a class="navbar-brand col-12 col-lg-5" href="/" >
-				<img src="../images/header.jpg" />
+				<img src="../images/header.jpg" style="width:100%"/>
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -24,9 +24,6 @@
 					</li>
 					<li class="nav-item  mr-lg-3" id="article">
 						<a class="nav-link" href="/article">時上專欄</a>
-					</li>
-					<li class="nav-item  mr-lg-3" id="shop">
-						<a class="nav-link" href="/shop">商城小物</a>
 					</li>
 					<li class="nav-item" id="contact">
 						<a class="nav-link" href="/contact">聯絡我們</a>

@@ -2,15 +2,9 @@
 
 <script type="text/javascript">
 	app.controller('controller', function ($scope,$http,$window) {
-		if ($window.innerWidth >= 768) {
-			$('#JiSlider').JiSlider({
-				color: 'black',
-				start: 1,
-				reverse: false
-			}).addClass('ff');
-		} else {
-			$('#banner').hide();
-		}
+		$('#carouselBanner').carousel({
+			 interval: 5000
+		});
 		
 		$('#horizontalTab').easyResponsiveTabs({
 			type: 'default', //Types: default, vertical, accordion           
@@ -25,5 +19,6 @@
 				$info.show();
 			}
 		});
+		
 	});
 </script>
