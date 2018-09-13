@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ['angular.filter']);
+var app = angular.module("myApp", ['angular.filter', 'ngSanitize']);
 app.directive('validNumber', function() {
     return {
         require: '?ngModel',

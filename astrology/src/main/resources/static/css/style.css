@@ -83,20 +83,21 @@
 	background-image: url(../images/left-arr.png);
 }
 .blog-post {
-  	margin-bottom: 4rem;
+  	margin-bottom: 2rem;
+  	font-size: 1rem;
 }
 .blog-post-title {
   	margin-bottom: .25rem;
-  	font-size: 2.5rem;
+  	font-size: 1.5rem;
   	font-weight: bold;
 }
 .blog-post-meta {
-  	margin-bottom: 1.25rem;
   	color: #999;
 }
-.blog-post-data {
-  	height: 600px;
-  	overflow-y: scroll;
+.blog-post-outline {
+  	height: 100px;
+  	overflow-y: hidden;
+  	margin-top: 10px;
 }
 .blog-post ul {
 	margin-left: 40px

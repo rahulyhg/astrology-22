@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import com.astrology.Util.DateUtil;
+import com.astrology.VO.ArticleVO;
 import com.astrology.VO.ChatVO;
 import com.astrology.VO.FeedbackVO;
 import com.astrology.VO.QuestionVO;
@@ -90,7 +91,7 @@ public class MongoDBDao {
 		return questionVO;
 	}
 	
-	public void updateChartById(String chatAuthor, boolean chatResponse, Date chatMessageTime, String chatMessage, String questionId) {
+	public void updateChatById(String chatAuthor, boolean chatResponse, Date chatMessageTime, String chatMessage, String questionId) {
 		QuestionVO questionVO = this.getQuestionVOById(questionId);
 		List<ChatVO> chatList = questionVO.getChatList();
 		ChatVO chatVO = new ChatVO();
@@ -108,9 +109,25 @@ public class MongoDBDao {
 		mongoTemplate.insert(feedbackVO, "FeedbackContent");
 	}
 	
+	public List<ArticleVO> getArticleList() {
+		Query query = new Query(Criteria.where("articleId").exists(true));
+		return mongoTemplate.find(query, ArticleVO.class, "ArticleContent");
+	}
 	
+	public void insertArticle(ArticleVO articleVO) {
+		mongoTemplate.insert(articleVO, "ArticleContent");
+	}
 	
+	public ArticleVO getArticleVOById(String articleId) {
+		ArticleVO articleVO = mongoTemplate.findById(articleId, ArticleVO.class, "ArticleContent");
+		return articleVO;
+	}
 	
+	public void updateArticleReviewsById(String articleId) {
+		ArticleVO articleVO = this.getArticleVOById(articleId);
+		mongoTemplate.updateFirst(new Query(Criteria.where("articleId").is(articleId)), 
+				new Update().set("articleReviews", articleVO.getArticleReviews() + 1), ArticleVO.class, "ArticleContent");
+	}
 	
 	
 }

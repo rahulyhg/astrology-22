@@ -2,6 +2,8 @@
 
 <script type="text/javascript">
 	app.controller('administerController', function ($scope, $http, $timeout) {
+		$scope.event = 'responseQuestion';
+		
 		$http.get("/getQuestionList")
 	    .then(function(response) {
 	    	$scope.questionList = response.data;
@@ -84,6 +86,40 @@
 						});
 			    });
             }
+		}
+		
+		$scope.addArticle = function() {
+			if (!$scope.articleTitle || !$scope.articleContent) {
+				return swal({
+					  type: 'error',
+					  title: '錯誤',
+					  text: '請輸入文章標題與文章內容'
+					});
+			}
+			$http.post("/addArticle", {'articleTitle':$scope.articleTitle, 'articleContent':$scope.articleContent.trim()})
+			  .then(function(response) {
+				  if (response.data.resMessage) {
+			          swal({
+						  type: 'error',
+						  title: '錯誤',
+						  text: response.data.resMessage
+						});
+			      } else {
+			    	  swal({
+						  type: 'success',
+						  title: '成功',
+						  text: '文章新增成功'
+						});
+			    	  $scope.articleTitle = null;
+			    	  $scope.articleContent = null;
+			      }
+			  }, function(response) {
+				  swal({
+					  type: 'error',
+					  title: '錯誤',
+					  text: '系統發生錯誤!'
+					});
+			  });
 		}
 	});
 </script>

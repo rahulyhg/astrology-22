@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.astrology.DAO.MongoDBDao;
+import com.astrology.VO.ArticleVO;
 import com.astrology.VO.ChatVO;
 import com.astrology.VO.FeedbackVO;
 import com.astrology.VO.MessageVO;
@@ -206,7 +207,7 @@ public class Controller {
 			chatMessageTime.setTime(Long.valueOf(payload.get("chatMessageTime")));
 			String chatMessage = payload.get("chatMessage");
 			String questionId = payload.get("questionId");
-			mongoDBDao.updateChartById(chatAuthor, chatResponse, chatMessageTime, chatMessage, questionId);
+			mongoDBDao.updateChatById(chatAuthor, chatResponse, chatMessageTime, chatMessage, questionId);
 			
 			QuestionVO questionVO = mongoDBDao.getQuestionVOById(questionId);
 			return gson.toJson(questionVO);
@@ -227,5 +228,44 @@ public class Controller {
 			return gson.toJson(messageVO);
 		}
 		return "";
+	}
+	
+	@GetMapping(value = "/getArticleList")
+	public String getArticleList() {
+		List<ArticleVO> articleList = mongoDBDao.getArticleList();
+		return gson.toJson(articleList);
+	}
+	
+	@PostMapping(value = "/addArticle", produces = "application/json;charset=UTF-8")
+	public String addArticle(@RequestBody ArticleVO articleVO) {
+		try {
+			String articleContent = articleVO.getArticleContent();
+			articleContent = articleContent.replaceAll("\r\n", "<br>");
+			articleContent = articleContent.replaceAll("\r", "<br>");
+			articleContent = articleContent.replaceAll("\n", "<br>");
+			articleContent = articleContent.replaceAll("\\s", "&nbsp;");
+			Date date = new Date();
+			articleVO.setArticleId(String.valueOf(date.getTime()));
+			articleVO.setArticleTime(date);
+			articleVO.setArticleReviews(1);
+			articleVO.setArticleTitle(articleVO.getArticleTitle());
+			articleVO.setArticleContent(articleContent);
+			mongoDBDao.insertArticle(articleVO);
+		} catch (Exception e) {
+			messageVO.setResMessage("發生錯誤:" + e.getMessage());
+			log.info(e.getMessage());
+			return gson.toJson(messageVO);
+		}
+		return "";
+	}
+	
+	@GetMapping(value = "/updateArticleReviews/{articleId}", produces = "application/json;charset=UTF-8")
+	public void updateArticleReviews(@PathVariable("articleId") String articleId) {
+		try {
+			mongoDBDao.updateArticleReviewsById(articleId);
+		} catch (Exception e) {
+			messageVO.setResMessage("發生錯誤:" + e.getMessage());
+			log.info(e.getMessage());
+		}
 	}
 }
