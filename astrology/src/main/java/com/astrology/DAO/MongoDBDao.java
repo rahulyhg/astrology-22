@@ -58,9 +58,12 @@ public class MongoDBDao {
 		Criteria criteriaByPresent = new Criteria().andOperator(
 				Criteria.where("countType").is(countType), 
 				Criteria.where("countDate").is(DateUtil.getTwToday(false)));
-		if (mongoTemplate.exists(new Query(criteriaByPresent), "StatisticalViwer") && (currentViwer - sumOfPrevious) > 0) {
-			mongoTemplate.updateFirst(new Query(criteriaByPresent), 
-					new Update().set("countNumber", currentViwer - sumOfPrevious), "StatisticalViwer");
+		if (mongoTemplate.exists(new Query(criteriaByPresent), "StatisticalViwer")) {
+			int count = (currentViwer - sumOfPrevious);
+			if (count > 0) {
+				mongoTemplate.updateFirst(new Query(criteriaByPresent), 
+						new Update().set("countNumber", count), "StatisticalViwer");
+			}
 		} else {
 			StatisticalViwerVO vo = new StatisticalViwerVO();
 			vo.setCountType(countType);
