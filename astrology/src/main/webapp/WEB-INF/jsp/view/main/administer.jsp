@@ -3,8 +3,9 @@
 <main class="container" ng-controller="administerController as ctrl" style="margin-bottom:50px">
 	<h3 class="alert alert-info heading text-center" style="font-size:30px;padding:.25rem 1rem">管理員專區</h3>
 	<nav class="nav nav-pills nav-fill">
-  		<a class="nav-item nav-link" href="#" ng-class="event == 'responseQuestion' ? 'active' : ''" ng-click="event = 'responseQuestion'">回覆問題</a>
-  		<a class="nav-item nav-link" href="#" ng-class="event == 'addArticle' ? 'active' : ''" ng-click="event = 'addArticle'">新增文章</a>
+  		<a class="nav-item nav-link" href="#" ng-class="event == 'responseQuestion' ? 'active' : ''" ng-click="chgNavEvent('responseQuestion')">回覆問題</a>
+  		<a class="nav-item nav-link" href="#" ng-class="event == 'addArticle' ? 'active' : ''" ng-click="chgNavEvent('addArticle')">新增文章</a>
+  		<a class="nav-item nav-link" href="#" ng-class="event == 'updateArticle' ? 'active' : ''" ng-click="chgNavEvent('updateArticle')">修改文章</a>
 	</nav>
 	
 	<div id="accordion" ng-show="event == 'responseQuestion'">
@@ -49,6 +50,12 @@
 	</div>
 	
 	<div ng-show="event != 'responseQuestion'">
+		<div class="list-group" ng-if="articleList.length > 0 && event == 'updateArticle'" style="margin:20px;">
+  			<a href="#" class="list-group-item list-group-item-action"
+  			   ng-repeat="articleModel in articleList | orderBy: '-articleTime'"
+  			   ng-click="clickArticleList(articleModel,$event)">{{articleModel.articleTitle}}
+  			</a>
+		</div>
 		<div class="form-group">
     		<label>文章標題</label>
     		<input type="text" class="form-control" placeholder="請輸入文章標題"
@@ -56,10 +63,13 @@
   		</div>
   		<div class="form-group">
     		<label>文章內容</label>
-    		<textarea ng-model="articleContent" class="form-control" rows="5" placeholder="請輸入文章內容"></textarea>
+    		<textarea name="articleContent" class="form-control" rows="5" placeholder="請輸入文章內容"></textarea>
   		</div>
   		<div style="text-align:center">
-  			<button class="btn btn-info" type="button" ng-click="addArticle()">新增文章</button>
+  			<button class="btn btn-info" type="button" 
+  				    ng-if="event == 'addArticle'" ng-click="submitArticle('addArticle')">新增文章</button>
+  			<button class="btn btn-info" type="button" 
+  				    ng-if="event == 'updateArticle'" ng-click="submitArticle('updateArticle')">修改文章</button>
   		</div>
 	</div>
 </main>

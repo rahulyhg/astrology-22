@@ -14,7 +14,7 @@
       					 data-toggle="toggle" data-target="{{'#collapse' + questionVO.questionId}}" aria-expanded="true" aria-controls="{{'collapse' + questionVO.questionId}}">
           				{{questionVO.questionTitle}}
         			</div>
-        			<div class="float-right" style="font-size:.7rem;margin-top:2rem;color:#666">
+        			<div class="float-right d-none d-sm-block" style="font-size:.7rem;margin-top:2rem;color:#666">
         				{{questionVO.questionAuthor}} 於 {{questionVO.questionTime | date : "MM/dd HH:mm"}} 發問
         			</div>
     			</div>

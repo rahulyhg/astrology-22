@@ -130,7 +130,7 @@ public class Controller {
 	
 	@GetMapping(value = "/updateWebsiteViwerCountTask")
 	public void updateWebsiteViwerCountTask() {
-		currentViwer = mongoDBDao.updateByCountType("websiteView", currentViwer);
+		mongoDBDao.updateByCountType("websiteView", currentViwer);
 	}
 	
 	@GetMapping(value = "/getQuestionList")
@@ -239,18 +239,25 @@ public class Controller {
 	@PostMapping(value = "/addArticle", produces = "application/json;charset=UTF-8")
 	public String addArticle(@RequestBody ArticleVO articleVO) {
 		try {
-			String articleContent = articleVO.getArticleContent();
-			articleContent = articleContent.replaceAll("\r\n", "<br>");
-			articleContent = articleContent.replaceAll("\r", "<br>");
-			articleContent = articleContent.replaceAll("\n", "<br>");
-			articleContent = articleContent.replaceAll("\\s", "&nbsp;");
 			Date date = new Date();
 			articleVO.setArticleId(String.valueOf(date.getTime()));
 			articleVO.setArticleTime(date);
 			articleVO.setArticleReviews(1);
 			articleVO.setArticleTitle(articleVO.getArticleTitle());
-			articleVO.setArticleContent(articleContent);
+			articleVO.setArticleContent(articleVO.getArticleContent());
 			mongoDBDao.insertArticle(articleVO);
+		} catch (Exception e) {
+			messageVO.setResMessage("發生錯誤:" + e.getMessage());
+			log.info(e.getMessage());
+			return gson.toJson(messageVO);
+		}
+		return "";
+	}
+	
+	@PostMapping(value = "/updateArticle", produces = "application/json;charset=UTF-8")
+	public String updateArticle(@RequestBody ArticleVO articleVO) {
+		try {
+			mongoDBDao.updateArticle(articleVO);
 		} catch (Exception e) {
 			messageVO.setResMessage("發生錯誤:" + e.getMessage());
 			log.info(e.getMessage());

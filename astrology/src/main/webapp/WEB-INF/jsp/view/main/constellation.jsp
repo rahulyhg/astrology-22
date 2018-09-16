@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <main class="container" ng-controller="controller as ctrl">
-	<h3 class="alert alert-primary heading text-center" style="font-size:30px;padding:.25rem 1rem">星座命盤分析</h3>
+	<h3 class="alert alert-primary heading text-center" style="font-size:2rem;padding:.25rem 1rem">星座命盤分析</h3>
 	<div class="form-group col-lg-5 offset-lg-4 col-md-10 offset-md-1">
 		<label><span class="badge badge-pill badge-primary">第一步：</span>請選擇國歷西元出生日期與時間</label>
 		<input type="text" class="form-control" id="datepicker" placeholder="請選擇出生日期" />

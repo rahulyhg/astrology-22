@@ -3,7 +3,7 @@
 	<cron>
 		<url>/updateWebsiteViwerCountTask</url>
 		<description>websiteViwer task</description>
-		<schedule>every 1 mins</schedule>
+		<schedule>every 20 mins</schedule>
 		<timezone>Asia/Taipei</timezone>
 		<retry-parameters>
 			<min-backoff-seconds>2.5</min-backoff-seconds>
