@@ -154,12 +154,12 @@
 		
 		$scope.hover = function(isHover, e, vo, type, index) {
 			if (isHover) {
-				var textArr = constellationService.analyzeInterplay(vo.planetEname,vo.constellation.substring(0,2));
+				var textArr = constellationService.analyzeInterplay(vo.planetEname,vo.constellation.substring(0,2),vo.house);
 				var text;
 				var row = 0;
-				var textLengthByPixel = $window.innerWidth < 700 ? 17 : $window.innerWidth < 1024 ? 18 : 19
 				if (type == 'planet') {
 					text = textArr[0] + '<br>' + textArr[1];
+					var textLengthByPixel = $window.innerWidth < 700 ? 17 : $window.innerWidth < 1024 ? 18 : 19
 					if (textArr[0].length > textLengthByPixel) {
 						++row;
 					}
@@ -167,13 +167,12 @@
 						++row;
 					}
 				} else {
-					text = textArr[2] + '<br>' + textArr[3];
+					text = textArr[2];
+					var textLengthByPixel = $window.innerWidth < 700 ? 38 : $window.innerWidth < 1024 ? 39 : 40
 					if (textArr[2].length > textLengthByPixel) {
 						++row;
 					}
-					if (textArr[3].length > textLengthByPixel) {
-						++row;
-					}
+					text = '<span style="color:#00FFFF">' + text.split("～")[0] + '：</span>' + text.split("～")[1];
 				}
 				var hoverCss = (type == 'planet') ? '140px' : '-260px';
 				if ($window.innerWidth < 768 && (type == 'planet')) {

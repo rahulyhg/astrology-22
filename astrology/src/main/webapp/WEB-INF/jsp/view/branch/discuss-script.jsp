@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
-	app.controller('discussController', function ($scope, $http, $timeout, $window) {
+	app.controller('discussController', function ($scope, $http, $timeout, $window, $q) {
 		$scope.modal = {};
 			
 		$http.get("/getQuestionList")
@@ -27,11 +27,9 @@
 				var promise = getChatData(questionVO,'getChatList');
 				promise.then(function(result) {
 					if (result) {
-						$scope.$apply(function() {
-							$scope.chatList = result.chatList;
-							$('#collapse' + questionVO.questionId).collapse('show');
-							$scope.collapseIdTemp = questionVO.questionId;
-						});
+						$scope.chatList = result.chatList;
+						$('#collapse' + questionVO.questionId).collapse('show');
+						$scope.collapseIdTemp = questionVO.questionId;
 					}
 				});
 			} else {
@@ -39,11 +37,9 @@
 					var promise = getChatData(questionVO,'getChatList');
 					promise.then(function(result) {
 						if (result) {
-							$scope.$apply(function() {
-								$scope.chatList = result.chatList;
-								$('#collapse' + questionVO.questionId).collapse('show');
-								$scope.collapseIdTemp = questionVO.questionId;
-							});
+							$scope.chatList = result.chatList;
+							$('#collapse' + questionVO.questionId).collapse('show');
+							$scope.collapseIdTemp = questionVO.questionId;
 						}
 					});
 				} else {
@@ -58,7 +54,7 @@
 							  swal.isLoading();
 						  },
 						  preConfirm: function(parameter) {
-							  return new Promise(function(resolve, reject) {
+							  return $q(function(resolve, reject) {
 								  questionVO.privatePwd = parameter;
 								  var promise = getChatData(questionVO,'confirmPassword');
 								  promise.then(function(result) {
@@ -76,11 +72,9 @@
 						      });
 						  }
 					}).then(function(data) {
-						$scope.$apply(function() {
-							$scope.chatList = data.chatList;
-							$('#collapse' + questionVO.questionId).collapse('show');
-							$scope.collapseIdTemp = questionVO.questionId;
-						});
+						$scope.chatList = data.chatList;
+						$('#collapse' + questionVO.questionId).collapse('show');
+						$scope.collapseIdTemp = questionVO.questionId;
 					}).catch(function() {
 						$('#collapse' + questionVO.questionId).collapse('hide');
 					});
@@ -89,7 +83,7 @@
 		}
 		
 		function getChatData(questionVO,method) {
-			var promise = new Promise(function(resolve, reject) {
+			var promise = $q(function(resolve, reject) {
 				$http.post("/" + method,questionVO)
 				  .then(function(response) {
 					  angular.forEach(response.data.chatList,function(vo) {

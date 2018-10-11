@@ -199,34 +199,6 @@ a.button-style:hover {
 }
 
 /*-- about section --*/
-.about_image {
-	position: relative;
-	padding: 0;
-}
-
-.about_image:after {
-	border-top: 3px solid #444;
-	border-left: 3px solid #444;
-	content: "";
-	display: inline-block;
-	left: -15px;
-	position: absolute;
-	right: 15px;
-	top: -15px;
-	bottom: 15px;
-}
-
-.about_image:before {
-	border-bottom: 3px solid #444;
-	border-right: 3px solid #444;
-	content: "";
-	display: inline-block;
-	left: 15px;
-	position: absolute;
-	right: -15px;
-	top: 15px;
-	bottom: -15px;
-}
 
 .resp-tabs-list li h3 {
 	font-size: 18px;
@@ -385,7 +357,7 @@ h1.heading, h2.heading, h3.heading {
 	letter-spacing: 1px;
 	line-height: 28px;
 	margin: 1em 0 0;
-	color: #888;
+	color: #666;
 }
 
 .team_grid1 p.second_para {

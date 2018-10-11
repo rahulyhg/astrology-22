@@ -5,10 +5,10 @@
 	<div id="carouselBanner" class="carousel slide carousel-fade" data-ride="carousel">
   		<div class="carousel-inner">
     		<div class="carousel-item active">
-     			 <img class="d-block w-75 marginLeftRight125" src="../images/banner.jpg">
+     			 <img class="d-block w-75 marginLeftRight125" src="../images/calendar10.jpg">
     		</div>
     		<div class="carousel-item">
-     			 <img class="d-block w-75 marginLeftRight125" src="../images/banner.jpg">
+     			 <img class="d-block w-75 marginLeftRight125" src="../images/calendar9.jpg">
     		</div>
  		</div>
   		<a class="carousel-control-prev" href="#carouselBanner" role="button" data-slide="prev">
@@ -22,54 +22,42 @@
   	</div>
 </figure>
 
-<!-- About -->
-<!-- <section> -->
-<!-- 	<div class="container-fluid py-lg-5 py-3"> -->
-<!-- 		<div class="row about_grids"> -->
-<!-- 			<div class="col-lg-4 col-md-6 team_grid1"> -->
-<!-- 				<h3 class="heading text-uppercase">今日運勢</h3> -->
-<!-- 				<p>vel tincidunt justo leo eget ex Nam vel feugiat aliquam, vel tincidunt justo facilisis. Nunc Nam vel feugiat</p> -->
-<!-- 				<p class="second_para"> Vestibulum venenatis leo eget ex aliquam, vel tincidunt justo facilisis. Nunc -->
-<!-- 				egestas lacus in velit aliquam, sed rutrum ex tempor. Nam vel feugiat odio. Pellentesque efficitur dapibus augue.</p> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-3 col-md-6 about_img mt-md-0 mt-5 "> -->
-<!-- 				<div class="about_image"> -->
-<!-- 					<img src="images/about.jpg" alt="" class="img-fluid"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-5 col-md-12 about-right mt-lg-0 mt-5 pl-lg-5"> -->
-<!-- 				<div id="horizontalTab"> -->
-<!-- 					<ul class="resp-tabs-list"> -->
-<!-- 						<li><h3>愛情運勢</h3></li> -->
-<!-- 						<li><h3>事業運勢</h3></li> -->
-<!-- 						<li><h3>健康運勢</h3></li> -->
-<!-- 					</ul> -->
-<!-- 					<div class="resp-tabs-container"> -->
-<!-- 						<div class="tab1"> -->
-<!-- 							<h4 class="">Phasellus congue erat sem, ut tempor mauris tincidunt non. Nulla in erat -->
-<!-- 							nec orci semper ultrices et sed libero.</h4> -->
-<!-- 							<p class="">Phasellus congue erat sem, ut tempor mauris tincidunt non. Nulla in erat nec orci semper ultrices Nam vel feugiat odio. Pellentesque efficitur dapibus augue. ut temporma uris tincidunt non Pellentesque efficitur dapibus augue .vel tincidunt justoin facilisis. Nunc egestas lacus in velit aliquam, sed rutrum ex tempor.</p> -->
-<!-- 						</div> -->
-<!-- 						<div class="tab2"> -->
-<!-- 							<h4 class="">Vestibulum venenatis leo eget ex aliquam, veli tincidunt justo facilisis. Nunc -->
-<!-- 							egestas lacus in velitare aliquam.</h4> -->
-<!-- 							<p class="">At tempor mauris tincidunt non Phasellus congue erat sem, uttempor mauris tinci dunt non. Nulla in erat nec orci semper ultrices Nam vel feugiat odio. Pellentesque efficitur dapibus augue. Pellentesque efficitur dapibus augue. vel tincidunt justo facilisis. Nunc egestas lacus in velit aliquam, sed rutrum ex tempor</p> -->
-<!-- 						</div> -->
-<!-- 						<div class="tab3"> -->
-<!-- 							<h4 class="">Ut tempor mauris tincidunt non. Nulla in erat Phasellus congue erat sem, -->
-<!-- 							nec orci semper ultrices et sed libero.</h4> -->
-<!-- 							<p class="">Phasellus congue erat sem, ut tempor mauris tincidunt non. Nulla in erat nec orci semper ultrices Nam vel feugiat odio. Pellentesque efficitur dapibus augue. ut temporma uris tincidunt non Pellentesque efficitur dapibus augue. vel tincidunt justoin facilisis. Nunc egestas lacus in velit aliquam, sed rutrum ex tempor</p> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </section> -->
-<!-- //About -->
+<section>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="offset-lg-2 col-lg-8 offset-md-1 col-md-10 team_grid1">
+				<h3 class="heading text-center">探長簡介～</h3>
+				<div class="alert alert-warning">
+					<div class="col-lg-5">
+      					<p>「為什麼我這麼喜歡她/他，就是沒辦法擄獲她/他的心？」</p>
+    				</div>
+    				<div class="col-lg-4 offset-lg-2">
+      					<p>「為什麼我們這麼好，卻都沒有來電的感覺？」</p>
+    				</div>
+    				<div class="col-lg-4 offset-lg-5">
+      					<p>「為什麼我總是跟同事處不好？主管也不喜歡我」</p>
+    				</div>
+    				<div class="col-lg-4 offset-lg-8">
+      					<p>「為什麼我對朋友那麼好、總是容易遭到背叛？」</p>
+    				</div>
+				</div>
+				<div class="alert alert-success" role="alert">
+  					<h4 class="alert-heading">佛洛依德說：</h4>
+  					<p class="second_para">
+						個性決定命運，但各位知道從占星術裡可以幫助自己更了解自己的個性與命運嗎？<br>
+						太陽星座只是占星學的一部份，而真正的占星術是由10大行星落入的星座及12宮位讓各位能更準確的了解自己的個性，突破心靈上的盲點，幫助各位針對問題對症下藥！<br>
+						且結合了即時天體的走向看出各位的流年流月！
+					</p>
+  					<hr>
+  					<p class="second_para">真正細膩透徹的占星術其準確率高達了90%以上，現在開始就先了解自己的命盤吧！<br>
+  						如果有任何關於占星流年運勢、星座合盤、塔羅占卜的相關問題都歡迎預約與探長討論唷～
+  					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 		
-<!-- services -->
 <section class="services">
 	<div class="py-5">
 	<div class="container-fluid py-lg-5 py-3">

@@ -2,7 +2,7 @@
 <script src="//cdn.ckeditor.com/4.10.1/full/ckeditor.js"></script>
 
 <script type="text/javascript">
-	app.controller('administerController', function ($scope, $http, $timeout) {
+	app.controller('administerController', function ($scope, $http, $timeout, $q) {
 		CKEDITOR.replace('articleContent', {
 			height: 400,
 		});
@@ -34,18 +34,16 @@
 				var promise = getChatData(questionVO,'getChatList');
 				promise.then(function(result) {
 					if (result) {
-						$scope.$apply(function() {
-							$scope.chatList = result.chatList;
-							$('#collapse' + questionVO.questionId).collapse('show');
-							$scope.collapseIdTemp = questionVO.questionId;
-						});
+						$scope.chatList = result.chatList;
+						$('#collapse' + questionVO.questionId).collapse('show');
+						$scope.collapseIdTemp = questionVO.questionId;
 					}
 				});
 			}
 		}
 		
 		function getChatData(questionVO,method) {
-			var promise = new Promise(function(resolve, reject) {
+			var promise = $q(function(resolve, reject) {
 				$http.post("/" + method,questionVO)
 				  .then(function(response) {
 					  angular.forEach(response.data.chatList,function(vo) {
