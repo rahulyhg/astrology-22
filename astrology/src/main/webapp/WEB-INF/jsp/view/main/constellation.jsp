@@ -41,14 +41,20 @@
 		<div class="row">
 			<section class="col-lg-6 col-md-12">
 				<div class="col-lg-10 offset-lg-1 col-md-10 offset-md-2 col-12" style="font-size:14px;color:blue">
-					＊移動鼠標至<span style="color:red">星座圖之行星、星座符號</span>，可以顯示該中文標示。
+					<img src="../images/blub.png" style="vertical-align:bottom">移動鼠標至<span style="color:red">星座圖之行星、星座符號</span>，可以顯示該中文標示。
 				</div>
 				<div class="col-lg-10 offset-lg-1 col-md-10 offset-md-2 col-12" style="font-size:14px;color:blue">
-					＊移動鼠標至<span style="color:red">表格之行星細項</span>，可以顯示星座圖該行星對應之位置。
+					<img src="../images/blub.png" style="vertical-align:bottom">移動鼠標至<span style="color:red">表格之行星細項</span>，可以顯示星座圖該行星對應位置。
 				</div>
 				<div id="chart"></div>
 			</section>
 			<section class="col-lg-6 col-md-12">
+				<div class="col-12" style="font-size:14px;color:blue">
+					<img src="../images/blub.png" style="vertical-align:bottom">標註<span style="color:red">太陽丶月亮丶水星丶金星丶火星</span>為個人行星，影響個人最為明顯。
+				</div>
+				<div class="col-12" style="font-size:14px;color:blue">
+					<img src="../images/blub.png" style="vertical-align:bottom">標註<span style="color:red">木星丶土星丶天王星丶海王星丶冥王星</span>為外行星，對集體世代的普遍影響較為明顯，所以僅列出個人行星供參考。
+				</div>
 				<nav class="nav nav-pills nav-justified" id="planetAnalyze">
   					<a class="nav-item nav-link active" href="javascript:void(0)" ng-click="chgNav($event,1)">行星位置</a>
   					<a class="nav-item nav-link" href="javascript:void(0)" ng-click="chgNav($event,2)">上升星座</a>

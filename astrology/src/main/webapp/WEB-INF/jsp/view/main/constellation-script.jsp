@@ -158,21 +158,36 @@
 				var text;
 				var row = 0;
 				if (type == 'planet') {
-					text = textArr[0] + '<br>' + textArr[1];
-					var textLengthByPixel = $window.innerWidth < 700 ? 17 : $window.innerWidth < 1024 ? 18 : 19
-					if (textArr[0].length > textLengthByPixel) {
-						++row;
-					}
-					if (textArr[1].length > textLengthByPixel) {
-						++row;
+					if (textArr[1]) {
+						if ($window.innerWidth < 700) {
+							row = Math.ceil(textArr[0].length / 17);
+							row += Math.ceil(textArr[1].length / 17);
+						} else {
+							row = Math.ceil(textArr[0].length / 19);
+							row += Math.ceil(textArr[1].length / 19);
+						}
+						textArr[0] = '<span style="color:#00FFFF">' + textArr[0].split("＊")[0] + '：</span>' + textArr[0].split("＊")[1];
+						textArr[1] = '<span style="color:#00FFFF">' + textArr[1].split("＊")[0] + '：</span>' + textArr[1].split("＊")[1];
+						text = textArr[0] + '<br>' + textArr[1];
+					} else {
+						text = textArr[0];
+						if ($window.innerWidth < 700) {
+							row = Math.ceil(text.length / 17);
+						} else {
+							row = Math.ceil(text.length / 19);
+						}
+						if (text.indexOf("＊") > -1) {
+							text = '<span style="color:#00FFFF">' + text.split("＊")[0] + '：</span>' + text.split("＊")[1];
+						}
 					}
 				} else {
 					text = textArr[2];
-					var textLengthByPixel = $window.innerWidth < 700 ? 38 : $window.innerWidth < 1024 ? 39 : 40
-					if (textArr[2].length > textLengthByPixel) {
-						++row;
+					if ($window.innerWidth < 700) {
+						row = Math.ceil(text.length / 17);
+					} else {
+						row = Math.ceil(text.length / 19);
 					}
-					text = '<span style="color:#00FFFF">' + text.split("～")[0] + '：</span>' + text.split("～")[1];
+					text = '<span style="color:#00FFFF">' + text.split("＊")[0] + '：</span>' + text.split("＊")[1];
 				}
 				var hoverCss = (type == 'planet') ? '140px' : '-260px';
 				if ($window.innerWidth < 768 && (type == 'planet')) {
@@ -189,7 +204,7 @@
 				angular.element("#astrology-radix-cusps-" + vo.house).children().css({'stroke':'red'});
 				angular.element("#" + type + index + " > div > .tooltiptext")
 					.html(text)
-					.css({'visibility':'visible','left':hoverCss,'height':(45 + (row * 22.5)) + "px"});
+					.css({'visibility':'visible','left':hoverCss,'height':(row * 22.5) + "px"});
 			} else {
 				angular.element(e.target).closest("tr").css({'color':'black','font-weight':'normal'});
 				angular.element("#astrology-radix-planets-" + vo.planetEname).children().css({'stroke':'#000'});
