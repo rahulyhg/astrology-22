@@ -201,9 +201,7 @@ app.service('constellationService', function() {
 	
     this.analyzeInterplay = function (planetEname,constellation,house) {
 		var answer = []; //[0][1] for planet , [2] for house
-		if (planetEname == 'Saturn') {
-			
-		} else if (planetEname == 'Moon') {
+		if (planetEname == 'Moon') {
 			if (constellation == '牧羊') {
 				answer[0] = '反應迅速，急於維護他人，對危險有種直覺，對和自己有親密關係的人有強烈的領域觀';
 				answer[1] = '可能喜歡插嘴，情緒容易不耐煩，有時候喜歡用操控的方式主導一切';
@@ -241,8 +239,6 @@ app.service('constellationService', function() {
 				answer[0] = '豐富的想像力，浪漫，具有慈悲心、同理心，甚至可能有通靈的能力';
 				answer[1] = '優柔寡斷，逃避行為，糊塗，缺乏自信，可能會沈溺於酒精或藥物';
 			}
-		} else if (planetEname == 'Uranus') {
-			
 		} else if (planetEname == 'Sun') {
 			if (constellation == '牧羊') {
 				answer[0] = '率真、單純丶勇敢丶有效率';
@@ -281,8 +277,6 @@ app.service('constellationService', function() {
 				answer[0] = '善解人意丶無私大愛丶浪漫有想像力丶同理心強';
 				answer[1] = '意志薄弱丶不切實際丶迷糊丶容易鬆懈';
 			}
-		} else if (planetEname == 'Pluto') {
-			
 		} else if (planetEname == 'Mars') {
 			if (constellation == '牧羊') {
 				answer[0] = '有勇氣、力量、膽識、果敢、行動判斷快速、獨立';
@@ -321,10 +315,6 @@ app.service('constellationService', function() {
 				answer[0] = '以逃避幻想的方式來自我保護，有可能對酒精藥物上癮';
 				answer[1] = '';
 			}
-		} else if (planetEname == 'Neptune') {
-			
-		} else if (planetEname == 'Jupiter') {
-			
 		} else if (planetEname == 'Venus') {
 			if (constellation == '牧羊') {
 				answer[0] = '在情感跟金錢上的態度過於衝動，在協調仲介方面過於自我。不願妥協，自我中心';

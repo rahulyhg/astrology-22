@@ -50,10 +50,10 @@
 			</section>
 			<section class="col-lg-6 col-md-12">
 				<div class="col-12" style="font-size:14px;color:blue">
-					<img src="../images/blub.png" style="vertical-align:bottom">標註<span style="color:red">太陽丶月亮丶水星丶金星丶火星</span>為個人行星，影響個人最為明顯。
+					<img src="../images/blub.png" style="vertical-align:bottom"><span style="color:red">太陽丶月亮丶水星丶金星丶火星</span>為個人行星，影響個人最為明顯。
 				</div>
 				<div class="col-12" style="font-size:14px;color:blue">
-					<img src="../images/blub.png" style="vertical-align:bottom">標註<span style="color:red">木星丶土星丶天王星丶海王星丶冥王星</span>為外行星，對集體世代的普遍影響較為明顯，所以僅列出個人行星供參考。
+					<img src="../images/blub.png" style="vertical-align:bottom"><span style="color:red">木星丶土星丶天王星丶海王星丶冥王星</span>為外行星，對集體世代的普遍影響較為明顯，所以僅列出個人行星供參考。
 				</div>
 				<nav class="nav nav-pills nav-justified" id="planetAnalyze">
   					<a class="nav-item nav-link active" href="javascript:void(0)" ng-click="chgNav($event,1)">行星位置</a>
@@ -69,7 +69,7 @@
     					</tr>
   					</thead>
   					<tbody>
-    					<tr ng-repeat="vo in dataList | orderBy : 'sortNo' | before:12">
+    					<tr ng-repeat="vo in dataList | orderBy : 'sortNo' | before:11">
       						<td ng-mousemove="hover(true,$event,vo,'planet',$index)"
       							ng-mouseleave="hover(false,$event,vo,'planet',$index)"
       							ng-class="$index % 2 == 0 ? 'table-danger' : 'table-info'" id="{{'planet' + $index}}">
@@ -96,7 +96,7 @@
     					</tr>
   					</thead>
   					<tbody>
-    					<tr ng-repeat="vo in dataList | orderBy : 'sortNo' | after:11"
+    					<tr ng-repeat="vo in dataList | orderBy : 'sortNo' | after:10"
     						ng-class="$index % 2 == 0 ? 'table-success' : 'table-warning'">
       						<td ng-bind="vo.planet"></td>
       						<td ng-bind="vo.constellation"></td>

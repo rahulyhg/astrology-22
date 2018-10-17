@@ -3,7 +3,6 @@ package com.astrology.Controller;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -105,6 +104,7 @@ public class Controller {
 			Map<String, List<Double>> planetMap = planetEphemeris.getPlanets();
 			planetMap.remove("Chiron");
 			planetMap.remove("Lilith");
+			planetMap.remove("NNode");
 			planetMap.values().forEach(planetList -> {
 				planetList.remove(1);
 			});

@@ -9,8 +9,6 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.1/angular-sanitize.min.js"></script>
 	<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 	<script src="js/easing.js"></script>
-	<script src="js/easy-responsive-tabs.js"></script>
-	<script src="js/jquery.picEyes.js"></script>
 	<script src="js/move-top.js"></script>
 	<script src="js/SmoothScroll.min.js"></script>
 	<script src="js/angularConfig.js"></script>

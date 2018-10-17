@@ -25,7 +25,7 @@
 <section>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="offset-lg-2 col-lg-8 offset-md-1 col-md-10 team_grid1">
+			<div class="offset-lg-2 col-lg-8 offset-md-1 col-md-10 introduce">
 				<h3 class="heading text-center">探長簡介～</h3>
 				<div class="alert alert-warning">
 					<div class="col-lg-5">
@@ -43,13 +43,13 @@
 				</div>
 				<div class="alert alert-success" role="alert">
   					<h4 class="alert-heading">佛洛依德說：</h4>
-  					<p class="second_para">
+  					<p>
 						個性決定命運，但各位知道從占星術裡可以幫助自己更了解自己的個性與命運嗎？<br>
 						太陽星座只是占星學的一部份，而真正的占星術是由10大行星落入的星座及12宮位讓各位能更準確的了解自己的個性，突破心靈上的盲點，幫助各位針對問題對症下藥！<br>
 						且結合了即時天體的走向看出各位的流年流月！
 					</p>
   					<hr>
-  					<p class="second_para">真正細膩透徹的占星術其準確率高達了90%以上，現在開始就先了解自己的命盤吧！<br>
+  					<p>真正細膩透徹的占星術其準確率高達了90%以上，現在開始就先了解自己的命盤吧！<br>
   						如果有任何關於占星流年運勢、星座合盤、塔羅占卜的相關問題都歡迎預約與探長討論唷～
   					</p>
 				</div>
@@ -58,8 +58,7 @@
 	</div>
 </section>
 		
-<section class="services">
-	<div class="py-5">
+<section class="services py-5">
 	<div class="container-fluid py-lg-5 py-3">
 		<div class="row service_grids">
 			<div class="col-lg-3 col-md-3 mb-lg-0 mb-5 ser_grid1 icon1">
@@ -83,7 +82,6 @@
 				<p>運用多年經驗與數據分析，歸納出占星專業知識</p>
 			</div>
 		</div>
-	</div>
 	</div>
 </section>
 </main>
