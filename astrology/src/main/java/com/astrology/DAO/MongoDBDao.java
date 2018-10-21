@@ -126,6 +126,7 @@ public class MongoDBDao {
 				new Update()
 				.set("articleTitle", articleVO.getArticleTitle())
 				.set("articleContent", articleVO.getArticleContent())
+				.set("articleAuthor", articleVO.getArticleAuthor())
 				, ArticleVO.class, "ArticleContent");
 	}
 	

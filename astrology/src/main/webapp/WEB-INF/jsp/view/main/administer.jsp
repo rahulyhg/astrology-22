@@ -52,7 +52,7 @@
 	<div ng-show="event != 'responseQuestion'">
 		<div class="list-group" ng-if="articleList.length > 0 && event == 'updateArticle'" style="margin:20px;">
   			<a href="#" class="list-group-item list-group-item-action"
-  			   ng-repeat="articleModel in articleList | orderBy: '-articleTime'"
+  			   ng-repeat="articleModel in articleList | orderBy: '-articleId'"
   			   ng-click="clickArticleList(articleModel,$event)">{{articleModel.articleTitle}}
   			</a>
 		</div>
@@ -60,6 +60,11 @@
     		<label>文章標題</label>
     		<input type="text" class="form-control" placeholder="請輸入文章標題"
     			   ng-model="articleTitle">
+  		</div>
+  		<div class="form-group">
+    		<label>文章作者</label>
+    		<input type="text" class="form-control" placeholder="請輸入文章作者"
+    			   ng-model="articleAuthor">
   		</div>
   		<div class="form-group">
     		<label>文章內容</label>

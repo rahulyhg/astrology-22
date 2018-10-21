@@ -6,7 +6,7 @@
 			<div class="modal-header">
 				<div class="modal-title">
 					<div class="blog-post-title">{{articleDetailModel.articleTitle}}</div>
-					<div class="blog-post-meta">{{articleDetailModel.articleTime | date : "y/MM/dd"}}&nbsp;&nbsp;by 李探長</div>
+					<div class="blog-post-meta">{{articleDetailModel.articleTime | date : "y/MM/dd"}}&nbsp;&nbsp;by {{articleDetailModel.articleAuthor}}</div>
 				</div>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>

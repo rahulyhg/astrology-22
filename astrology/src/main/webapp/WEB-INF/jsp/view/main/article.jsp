@@ -7,10 +7,10 @@
 		<div class="blog-post" id={{articleModel.articleId}} ng-repeat="articleModel in articleList | orderBy: '-articleTime'">
 			<h2 class="blog-post-title">{{articleModel.articleTitle}}</h2>
 			<div class="row">
-				<div class="col-7">
-					<div class="blog-post-meta">{{articleModel.articleTime | date : "y/MM/dd"}}&nbsp;&nbsp;by 李探長</div>
+				<div class="col-md-7 col-12">
+					<div class="blog-post-meta">{{articleModel.articleTime | date : "y/MM/dd"}}&nbsp;&nbsp;by {{articleModel.articleAuthor}}</div>
 				</div>
-				<div class="col-5">
+				<div class="col-md-5 col-12">
 					<div class="blog-post-meta text-right">瀏覽次數：{{articleModel.articleReviews}}</div>
 				</div>
 				<div class="col-12 blog-post-outline" ng-bind-html="articleModel.articleContent">

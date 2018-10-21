@@ -52,7 +52,7 @@
 				<h5 class="mb-3">社群分享</h5>
 				<ul class="footer-bottom-list">
 					<li><div class="line-it-button" data-lang="zh_Hant" data-type="like" data-url="{{lineUrl}}" data-share="true" style="display: none;"></div></li>
-					<li><div class="fb-like" data-href="{{lineUrl}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div></li>
+					<li><div class="fb-like" data-href="{{lineUrl}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div></li>
 					<li>
 						<iframe src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url=https://astrology-213903.appspot.com/&related=twitterapi%2Ctwitter&text=李探長塔羅占星事務所&hashtags=astrology%2C占星"
  									scrolling="no" frameborder="0" allowtransparency="true" title="Twitter Tweet Button">

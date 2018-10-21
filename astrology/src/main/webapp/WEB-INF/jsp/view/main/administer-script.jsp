@@ -95,11 +95,11 @@
 		
 		$scope.submitArticle = function(method) {
 			var articleContent = CKEDITOR.instances.articleContent.getData();
-			if (!$scope.articleTitle || !articleContent) {
+			if (!$scope.articleTitle || !articleContent || !$scope.articleAuthor) {
 				return swal({
 					  type: 'error',
 					  title: '錯誤',
-					  text: '請輸入文章標題與文章內容'
+					  text: '請輸入文章標題、作者、內容'
 					});
 			} else if ($scope.articleTitle && $scope.articleTitle.length > 17) {
 				return swal({
@@ -108,7 +108,7 @@
 					  text: '文章標題字數不可超過17個字'
 					});
 			}
-			$http.post("/" + method, {'articleTitle':$scope.articleTitle, 'articleContent':articleContent, 'articleId':$scope.articleId})
+			$http.post("/" + method, {'articleTitle':$scope.articleTitle, 'articleAuthor':$scope.articleAuthor, 'articleContent':articleContent, 'articleId':$scope.articleId})
 			  .then(function(response) {
 				  if (response.data.resMessage) {
 			          swal({
@@ -146,6 +146,7 @@
 			} else if ($scope.event == 'addArticle') {
 				$scope.articleTitle = null;
 				$scope.articleId = null;
+				$scope.articleAuthor = null;
 				CKEDITOR.instances['articleContent'].setData('');
 				CKEDITOR.instances['articleContent'].updateElement();
 			}
@@ -158,6 +159,7 @@
 			angular.element(event.target).addClass('active');
 			$scope.articleTitle = articleModel.articleTitle;
 			$scope.articleId = articleModel.articleId;
+			$scope.articleAuthor = articleModel.articleAuthor;
 			CKEDITOR.instances['articleContent'].setData(articleModel.articleContent);
 			CKEDITOR.instances['articleContent'].updateElement();
 		}

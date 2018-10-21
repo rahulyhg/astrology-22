@@ -26,7 +26,21 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="offset-lg-2 col-lg-8 offset-md-1 col-md-10 introduce">
-				<h3 class="heading text-center">探長簡介～</h3>
+				<div class="alert alert-info">
+  					<p>
+  						是夜，窗外雨水滴答滴答落下，彷彿她的心跳聲噗通噗通急促的跳躍著，今夜又得不到他的消息了，訊息不回、電話不接，現在他倆唯一的聯繫-透過空氣傳遞的電子消息，
+  						也得不到任何回應！到底事情怎麼會變成這樣，她想不明白，不知道究竟是哪個環節出了錯，眼淚也隨著窗外雨滴滾滾落下.......
+  					</p>
+  					<p>
+  						於是，她上網爬文想了解星座個性試著找出答案！
+  					</p>
+  					<hr>
+  					<p>
+  						這時，李探長塔羅占星事務所擅長找尋出問題的蛛絲馬跡功能來了，透過專業的塔羅占卜、占星分析，可幫助每個人了解自己的時運，跟另一半的關係問題出在哪裡，
+  						就像下雨牆壁漏水需要抓漏般，李探長樂於協助各位的情感問題，歡迎有類似情感問題的男男女女來信諮詢！<br>
+  						<span class="social-contact" style="color:#062c33;">Line: @cze5294</span>
+  					</p>
+				</div>
 				<div class="alert alert-warning">
 					<div class="col-lg-5">
       					<p>「為什麼我這麼喜歡她/他，就是沒辦法擄獲她/他的心？」</p>
@@ -41,7 +55,7 @@
       					<p>「為什麼我對朋友那麼好、總是容易遭到背叛？」</p>
     				</div>
 				</div>
-				<div class="alert alert-success" role="alert">
+				<div class="alert alert-success">
   					<h4 class="alert-heading">佛洛依德說：</h4>
   					<p>
 						個性決定命運，但各位知道從占星術裡可以幫助自己更了解自己的個性與命運嗎？<br>
@@ -57,14 +71,13 @@
 		</div>
 	</div>
 </section>
-		
-<section class="services py-5">
-	<div class="container-fluid py-lg-5 py-3">
-		<div class="row service_grids">
+<section>
+	<div class="container-fluid py-lg-5 py-3 alert alert-success" style="background-color:#e0d6f5;border-color:#e0d6f5">
+		<div class="row" style="padding:0 2em">
 			<div class="col-lg-3 col-md-3 mb-lg-0 mb-5 ser_grid1 icon1">
 				<span class="fab fa-forumbee"></span>
 				<h3>專業占星講解</h3>
-				<p>知名占星師親自諮詢</p>
+				<p>專業占星師親自諮詢</p>
 			</div>
 			<div class="col-lg-3 col-md-3 mb-lg-0 mb-5 ser_grid1 icon2">
 				<span class="fab fa-foursquare"></span>

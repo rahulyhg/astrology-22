@@ -95,17 +95,6 @@ header h1 a span {
 /*-- //header --*/
 
 /*-- services section --*/
-.service_grids {
-	padding: 0 2em;
-}
-
-.services {
-	background: white;
-	background-image: linear-gradient(to bottom, rgba(192,192,192,0.2), rgba(192,192,192,0.2)),url(../images/service.jpg);
-	background-size: cover;
-	background-attachment: fixed;
-}
-
 .ser_grid1 span.fab {
 	font-size: 40px;
 	margin-bottom: 0.5em;
@@ -129,9 +118,8 @@ header h1 a span {
 
 .ser_grid1 h3 {
 	font-size: 24px;
-	color: aliceblue;
+	color: #8A2BE2;
 	letter-spacing: 1px;
-	text-transform: capitalize;
 	margin: .5em 0;
 	font-weight: bold;
 }
@@ -140,9 +128,8 @@ header h1 a span {
 	font-size: 15.5px;
 	letter-spacing: 0.5px;
 	line-height: 28px;
-	color: yellow;
+	color: #696969;
 	margin: 1em 0;
-	font-weight: bold;
 }
 /*-- // services section --*/
 

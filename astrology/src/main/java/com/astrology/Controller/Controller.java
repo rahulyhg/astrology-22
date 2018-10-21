@@ -243,8 +243,6 @@ public class Controller {
 			articleVO.setArticleId(String.valueOf(date.getTime()));
 			articleVO.setArticleTime(date);
 			articleVO.setArticleReviews(1);
-			articleVO.setArticleTitle(articleVO.getArticleTitle());
-			articleVO.setArticleContent(articleVO.getArticleContent());
 			mongoDBDao.insertArticle(articleVO);
 		} catch (Exception e) {
 			messageVO.setResMessage("發生錯誤:" + e.getMessage());

@@ -11,6 +11,7 @@ public class ArticleVO {
 	private Date articleTime;
 	private int articleReviews;
 	private String articleContent;
+	private String articleAuthor;
 	
 	public String getArticleId() {
 		return articleId;
@@ -41,6 +42,12 @@ public class ArticleVO {
 	}
 	public void setArticleContent(String articleContent) {
 		this.articleContent = articleContent;
+	}
+	public String getArticleAuthor() {
+		return articleAuthor;
+	}
+	public void setArticleAuthor(String articleAuthor) {
+		this.articleAuthor = articleAuthor;
 	}
 	
 	
