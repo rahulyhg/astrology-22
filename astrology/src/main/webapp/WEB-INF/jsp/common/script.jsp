@@ -62,23 +62,23 @@
 				obj.feedbackType = type;
 				var error = false;
 				if (type == 'reserve') {
-					if (!$scope.email_reserve) {
+					if (!$scope.contact_reserve) {
 						error = true;
 					} else {
-						obj.feedbackEmail = $scope.email_reserve;
+						obj.feedbackContact = $scope.contact_reserve;
 					}
 				} else if (type == 'system') {
-					if (!$scope.email_system) {
+					if (!$scope.contact_system) {
 						error = true;
 					} else {
-						obj.feedbackEmail = $scope.email_system;
+						obj.feedbackContact = $scope.contact_system;
 					}
 				}
 				if (error) {
 					return swal({
 						  type: 'error',
 						  title: '錯誤',
-						  text: '請輸入您的email!'
+						  text: '請輸入您的聯絡方式!'
 						});
 				} else {
 					$scope.$root.$broadcast("goFeedback",obj);

@@ -4,21 +4,22 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
-				<input type="email" placeholder="請輸入您的email..." email 
-					   ng-model="email_reserve">
+				<input type="text" placeholder="請輸入可以聯絡的方式" 
+					   ng-model="contact_reserve">
 				<input type="submit" value="我要預約諮詢"  data-toggle="false" data-target="#feedbackModal"
 					   ng-click="feedback('reserve')">
 			</div>
 			<div class="col-lg-6">
-				<input type="email" placeholder="請輸入您的email..." email 
-					   ng-model="email_system">
+				<input type="text" placeholder="請輸入可以聯絡的方式" 
+					   ng-model="contact_system">
 				<input type="submit" value="系統問題反應" data-toggle="false" data-target="#feedbackModal" id="footer_submit"
 					   ng-click="feedback('system')">
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../view/branch/feedback.jsp" flush="true"/>
 </section>
+<jsp:include page="../view/branch/feedback.jsp" flush="true"/>
+
 <section class="agile-footer" style="cursor:default">
 	<div class="container">
 		<div class="row py-5">

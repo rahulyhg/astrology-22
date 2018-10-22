@@ -2,9 +2,8 @@ package com.astrology.VO;
 
 public class FeedbackVO {
 	private String feedbackType;
-	private String feedbackEmail;
+	private String feedbackContact;
 	private String name;
-	private String phone;
 	private String contactDate;
 	private String contactTime;
 	private String suggestion;
@@ -15,23 +14,17 @@ public class FeedbackVO {
 	public void setFeedbackType(String feedbackType) {
 		this.feedbackType = feedbackType;
 	}
-	public String getFeedbackEmail() {
-		return feedbackEmail;
+	public String getFeedbackContact() {
+		return feedbackContact;
 	}
-	public void setFeedbackEmail(String feedbackEmail) {
-		this.feedbackEmail = feedbackEmail;
+	public void setFeedbackContact(String feedbackContact) {
+		this.feedbackContact = feedbackContact;
 	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 	public String getContactDate() {
 		return contactDate;
@@ -51,6 +44,8 @@ public class FeedbackVO {
 	public void setSuggestion(String suggestion) {
 		this.suggestion = suggestion;
 	}
+	
+	
 	
 	
 }

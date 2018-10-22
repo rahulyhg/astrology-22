@@ -6,7 +6,7 @@
 		
 		$scope.$on("goFeedback", function(event, obj){ 
 			$scope.feedbackType = obj.feedbackType;
-			$scope.feedbackEmail = obj.feedbackEmail;
+			$scope.feedbackContact = obj.feedbackContact;
 	    });
 		
 		$scope.submit = function() {
@@ -17,12 +17,6 @@
 							  title: '錯誤',
 							  text: '請輸入姓名'
 							});
-				} else if (!$scope.modal.phone) {
-					return swal({
-						  type: 'error',
-						  title: '錯誤',
-						  text: '請輸入電話'
-						});
 				}
 			} else {
 				if (!$scope.modal.suggestion) {
@@ -35,7 +29,7 @@
 			}
 			
 			$scope.modal.feedbackType = $scope.feedbackType;
-			$scope.modal.feedbackEmail = $scope.feedbackEmail;
+			$scope.modal.feedbackContact = $scope.feedbackContact;
 			$http.post("/feedback",$scope.modal)
 		    .then(function(response) {
 		        if (response.data.resMessage) {

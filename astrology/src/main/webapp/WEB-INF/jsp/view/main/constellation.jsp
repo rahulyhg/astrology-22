@@ -9,7 +9,10 @@
     </div>
     <div class="form-group col-lg-5 offset-lg-4 col-md-10 offset-md-1">
 		<label><span class="badge badge-pill badge-primary">第二步：</span>請設定出生地點</label>
-		<a href="javascript:void(0)" ng-click="chgInputSite()" style="margin-left:10px;font-size:0.8rem">{{!inputSite ? '輸入模式' : '清單模式'}}<i class="fas fa-exchange-alt" style="margin-left:2px"></i></a>
+		<a href="javascript:void(0)" ng-click="chgInputSite()" style="margin-left:10px;font-size:0.8rem">
+			{{!inputSite ? '輸入模式' : '清單模式'}}<i class="fas fa-exchange-alt" style="margin-left:2px"></i>
+		</a>
+		<div ng-if="!inputSite" style="font-size:0.8rem"><i class="fas fa-edit"></i>切換至輸入模式可以輸入出生地和選擇時區</div>
 		
 		<select ng-show="!inputSite"
 				ng-model="city" ng-options="m.lnglat as m.city for m in cityList" ng-init="city = cityList[1].lnglat"

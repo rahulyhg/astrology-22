@@ -13,16 +13,12 @@
       		</div>
       		<div class="modal-body" ng-if="feedbackType == 'reserve'">
       			<div class="form-group">
-    				<label>Email</label>
-    				<input type="text" class="form-control" ng-model="feedbackEmail" ng-readonly="true">
+    				<label>您留下的聯絡方式</label>
+    				<input type="text" class="form-control" ng-model="feedbackContact" ng-readonly="true">
   				</div>
       			<div class="form-group">
-    				<label>姓名</label>
+    				<label>暱稱</label>
     				<input type="text" class="form-control" ng-model="modal.name" placeholder="請輸入姓名">
-  				</div>
-  				<div class="form-group">
-    				<label>電話</label>
-    				<input type="text" class="form-control" ng-model="modal.phone" placeholder="請輸入電話">
   				</div>
   				<div class="form-group">
     				<label>預約日期</label>
@@ -49,8 +45,8 @@
       		</div>
       		<div class="modal-body" ng-if="feedbackType == 'system'">
       			<div class="form-group">
-    				<label>Email</label>
-    				<input type="text" class="form-control" ng-model="feedbackEmail" ng-readonly="true">
+    				<label>您留下的聯絡方式</label>
+    				<input type="text" class="form-control" ng-model="feedbackContact" ng-readonly="true">
   				</div>
       			<div class="form-group">
     				<label>問題內容</label>
