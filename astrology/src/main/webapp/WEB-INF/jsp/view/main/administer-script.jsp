@@ -65,7 +65,7 @@
 	            message = message.replace('\n', '<br>');
 	            message = message.replace('\r', '<br>');
 	            
-				$http.post("/sendMessage",{'chatAuthor':'Poa','chatResponse':true,'chatMessageTime':Date.now(),'chatMessage':message,'questionId':questionVO.questionId})
+				$http.post("/sendMessage",{'chatAuthor':'李探長','chatResponse':true,'chatMessageTime':Date.now(),'chatMessage':message,'questionId':questionVO.questionId})
 			    .then(function(response) {
 			        if (response.data.resMessage) {
 			        	swal({

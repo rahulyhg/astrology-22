@@ -186,13 +186,13 @@ app.service('constellationService', function() {
 		} else if (origin == 'Pisces') {
 			name = '雙魚座';
 		} else if (origin == 'Asc') {
-			name = '上升星座 (Asc)';
+			name = '上升點 (Asc)';
 		} else if (origin == 'Des') {
-			name = '下降星座 (Des)';
+			name = '下降點 (Des)';
 		} else if (origin == 'Mc') {
-			name = '天頂星座 (Mc)';
+			name = '天頂 (Mc)';
 		} else if (origin == 'Ic') {
-			name = '天底星座 (Ic)';
+			name = '天底 (Ic)';
 		} else if (origin == 'NNode') {
 			name = '北交點';
 		}
