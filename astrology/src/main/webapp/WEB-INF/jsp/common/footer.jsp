@@ -36,8 +36,8 @@
 					<h5 class="mb-3">聯絡方式</h5>
 					<ul class="footer-bottom-list">
 						<li> <span class="fab fa-line"></span> Line：
-							<span style="padding-left:initial;color:#00FFFF;cursor:text">@cze5294</span><br>
-							<div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@cze5294" style="display: none;"></div>
+							<span style="padding-left:initial;color:#00FFFF;cursor:text">@cze5294u</span><br>
+							<div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@cze5294u" style="display: none;"></div>
 						</li>
 						<li> <span class="fab fa-line"></span> AI占星機器人：
 							<span style="padding-left:initial;color:#00FFFF;cursor:text">@eau2284w</span><br>

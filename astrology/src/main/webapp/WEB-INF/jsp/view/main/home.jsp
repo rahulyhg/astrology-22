@@ -38,7 +38,7 @@
   					<p>
   						這時，李探長塔羅占星事務所擅長找尋出問題的蛛絲馬跡功能來了，透過專業的塔羅占卜、占星分析，可幫助每個人了解自己的時運，跟另一半的關係問題出在哪裡，
   						就像下雨牆壁漏水需要抓漏般，李探長樂於協助各位的情感問題，歡迎有類似情感問題的男男女女來信諮詢！<br>
-  						<span class="social-contact" style="color:#062c33;">Line: @cze5294</span>
+  						<span class="social-contact" style="color:#062c33;">Line: @cze5294u</span>
   					</p>
 				</div>
 				<div class="alert alert-warning">
@@ -72,7 +72,7 @@
 	</div>
 </section>
 <section>
-	<div class="container-fluid py-lg-5 py-3 alert alert-success" style="background-color:#e0d6f5;border-color:#e0d6f5">
+	<div class="container-fluid py-lg-5 py-3 alert alert-light">
 		<div class="row" style="padding:0 2em">
 			<div class="col-lg-3 col-md-3 mb-lg-0 mb-5 ser_grid1 icon1">
 				<span class="fab fa-forumbee"></span>
