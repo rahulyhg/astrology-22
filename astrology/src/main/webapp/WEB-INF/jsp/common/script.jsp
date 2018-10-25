@@ -25,6 +25,7 @@
 	<script type="text/javascript">
 		app.controller('mainController', function ($scope, $http) {
 			$scope.lineUrl = "https://astrology-213903.appspot.com";
+			LineIt.loadButton();
 			
 			$(".scroll").click(function(event){		
 				event.preventDefault();
@@ -92,7 +93,9 @@
 				$scope.email_system = null;
 		    });
 			
-			
+			$scope.lineShare = function(url) {
+				window.open(url + $scope.lineUrl);
+			}
 			
 			
 			

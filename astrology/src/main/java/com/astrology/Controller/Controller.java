@@ -1,6 +1,7 @@
 package com.astrology.Controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,10 +14,18 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -271,6 +280,24 @@ public class Controller {
 		} catch (Exception e) {
 			messageVO.setResMessage("發生錯誤:" + e.getMessage());
 			log.info(e.getMessage());
+		}
+	}
+	
+	@GetMapping(value = "/test/{port}")
+	public void test(@PathVariable("port") String port) {
+		try {
+			CloseableHttpClient httpclient = HttpClients.createDefault();
+			HttpPost httppost = new HttpPost("http://localhost:" + port + "/test");
+			
+			JSONObject json = new JSONObject();
+			json.put("message", "甜寶");
+			json.put("type", "問答區");
+			
+			StringEntity entity = new StringEntity(json.toString(), ContentType.create("text/plain", "UTF-8"));
+			httppost.setEntity(entity);
+			httpclient.execute(httppost);
+		} catch (Exception e) {
+			log.info("test occur error : " + e.toString());
 		}
 	}
 }
