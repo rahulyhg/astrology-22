@@ -1,7 +1,6 @@
 package com.astrology.Controller;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,13 +9,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -24,8 +21,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,10 +56,10 @@ public class Controller {
 	private static MessageVO messageVO = new MessageVO();
 	private static int currentViwer = 1;
 	
-	@GetMapping(value = "/getChartData/{inputTime}/{timezone}/{addr}/{savelight}", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/getChartData/{inputTime}/{timezone}/{addr}/{savelight}/{gender}", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getChartData(@PathVariable("inputTime") String inputTime, @PathVariable("timezone") int timezone
-			, @PathVariable("addr") String addr, @PathVariable("savelight") boolean savelight) {
+			, @PathVariable("addr") String addr, @PathVariable("savelight") boolean savelight, @PathVariable("gender") String gender) {
 		Map<String, Object> resultMap = new HashMap<>();
 		try {
 			double latitude = 25.05;
@@ -166,6 +161,12 @@ public class Controller {
 			questionVO.setQuestionId(String.valueOf(date.getTime()));
 			mongoDBDao.insertQuestion(questionVO);
 			questionList = mongoDBDao.getQuestionList();
+			
+			JSONObject json = new JSONObject();
+			json.put("notification", "question");
+			json.put("questionAuthor", questionVO.getQuestionAuthor());
+			json.put("questionTitle", questionVO.getQuestionTitle());
+			this.connectLineBot(json.toString());
 		} catch (Exception e) {
 			messageVO.setResMessage("發生錯誤:" + e.getMessage());
 			log.info(e.getMessage());
@@ -217,8 +218,15 @@ public class Controller {
 			String chatMessage = payload.get("chatMessage");
 			String questionId = payload.get("questionId");
 			mongoDBDao.updateChatById(chatAuthor, chatResponse, chatMessageTime, chatMessage, questionId);
-			
 			QuestionVO questionVO = mongoDBDao.getQuestionVOById(questionId);
+			
+			if(!chatResponse) {
+				JSONObject json = new JSONObject();
+				json.put("notification", "chat");
+				json.put("chatAuthor", chatAuthor);
+				json.put("questionTitle", questionVO.getQuestionTitle());
+				this.connectLineBot(json.toString());
+			}
 			return gson.toJson(questionVO);
 		} catch (Exception e) {
 			messageVO.setResMessage("發生錯誤:" + e.getMessage());
@@ -231,6 +239,18 @@ public class Controller {
 	public String feedback(@RequestBody FeedbackVO feedbackVO) {
 		try {
 			mongoDBDao.insertFeedback(feedbackVO);
+			JSONObject json = new JSONObject();
+			json.put("notification", "feedback");
+			json.put("feedbackType", feedbackVO.getFeedbackType());
+			if (Objects.equals(feedbackVO.getFeedbackType(), "reserve")) {
+				json.put("name", feedbackVO.getName());
+				json.put("contactDate", feedbackVO.getContactDate());
+				json.put("contactTime", feedbackVO.getContactTime());
+			} else {
+				json.put("suggestion", feedbackVO.getSuggestion());
+			}
+			json.put("feedbackContact", feedbackVO.getFeedbackContact());
+			this.connectLineBot(json.toString());
 		} catch (Exception e) {
 			messageVO.setResMessage("發生錯誤:" + e.getMessage());
 			log.info(e.getMessage());
@@ -283,21 +303,15 @@ public class Controller {
 		}
 	}
 	
-	@GetMapping(value = "/test/{port}")
-	public void test(@PathVariable("port") String port) {
+	private void connectLineBot(String pushJson) {
 		try {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
-			HttpPost httppost = new HttpPost("http://localhost:" + port + "/test");
-			
-			JSONObject json = new JSONObject();
-			json.put("message", "甜寶");
-			json.put("type", "問答區");
-			
-			StringEntity entity = new StringEntity(json.toString(), ContentType.create("text/plain", "UTF-8"));
+			HttpPost httppost = new HttpPost("https://stock-frontend-210707.appspot.com/pushNotification");
+			StringEntity entity = new StringEntity(pushJson, ContentType.create("text/plain", "UTF-8"));
 			httppost.setEntity(entity);
 			httpclient.execute(httppost);
 		} catch (Exception e) {
-			log.info("test occur error : " + e.toString());
+			log.info("connectLineBot occur error : " + e.toString());
 		}
 	}
 }

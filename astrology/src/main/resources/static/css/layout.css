@@ -362,6 +362,17 @@ ul.footer-bottom-list li a:hover {
 /*-- //to-top --*/
 
 /*-- Responsive Design --*/
+@media ( min-width : 1300px) {
+	header .container {
+		max-width: 1300px;
+	}
+	#taiwanMapContainer {
+		max-width: 1300px;
+	}
+	.demo>li img {
+		width: 215px;
+	}
+}
 @media ( max-width : 1440px) {
 	.demo>li img {
 		width: 215px;

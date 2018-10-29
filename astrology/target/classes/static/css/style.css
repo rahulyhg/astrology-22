@@ -110,3 +110,34 @@
 	font-weight:700;
 	cursor:auto
 }
+
+/**for taiwan css------------------------------------------------------------------------**/
+@keyframes pathChangeColor {
+  from {
+    stroke:blue;
+    fill:rgb(252, 208, 204);
+  }
+
+  to {
+    stroke:yellow;
+    fill:yellow;
+  }
+}
+#county-boundary {
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 5,0;
+  stroke-linejoin: round;
+}
+.mouse{
+	fill:yellow;
+	animation-duration: 1.5s;
+    animation-name: pathChangeColor;
+    animation-iteration-count: infinite;
+}
+.path {
+	stroke:blue;
+	stroke-width:1.5;
+	stroke-linecap:round;
+	stroke-linejoin:round;
+}

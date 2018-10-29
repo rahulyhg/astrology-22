@@ -7,7 +7,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.1/angular-sanitize.min.js"></script>
-	<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+	<script src="//d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 	<script src="js/easing.js"></script>
 	<script src="js/move-top.js"></script>
 	<script src="js/SmoothScroll.min.js"></script>
@@ -25,7 +25,6 @@
 	<script type="text/javascript">
 		app.controller('mainController', function ($scope, $http) {
 			$scope.lineUrl = "https://astrology-213903.appspot.com";
-			LineIt.loadButton();
 			
 			$(".scroll").click(function(event){		
 				event.preventDefault();

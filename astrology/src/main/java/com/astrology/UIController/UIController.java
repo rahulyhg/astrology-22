@@ -17,9 +17,9 @@ public class UIController {
 		return new ModelAndView("/main/constellation");
 	}
 	
-	@RequestMapping("/mentalTest")
-	public ModelAndView mentalTest() {
-		return new ModelAndView("/main/mentalTest");
+	@RequestMapping("/analyze")
+	public ModelAndView analyze() {
+		return new ModelAndView("/main/analyze");
 	}
 	
 	@RequestMapping("/article")

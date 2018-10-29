@@ -101,7 +101,7 @@
 				$scope.timezone = 8;
 				$scope.savelight = false;
 			}
-			$http.get("/getChartData/" + inputTime + "/" + $scope.timezone + "/" + addr + "/" + $scope.savelight)
+			$http.get("/getChartData/" + inputTime + "/" + $scope.timezone + "/" + addr + "/" + $scope.savelight + "/" + $scope.gender)
 		    .then(function(response) {
 		        if (response.data.resMessage) {
 		        	swal({

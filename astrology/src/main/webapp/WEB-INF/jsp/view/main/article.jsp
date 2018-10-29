@@ -2,6 +2,7 @@
 
 <main class="container" ng-controller="controller as ctrl">
 <h3 class="alert alert-primary heading text-center" style="font-size: 2rem; padding: .25rem 1rem">文章分享</h3>
+<jsp:include page="../branch/articleDetail.jsp" flush="true"/>
 <div class="row">
 	<article class="col-md-9 p-3">
 		<div class="blog-post" id={{articleModel.articleId}} ng-repeat="articleModel in articleList | orderBy: '-articleTime'">
@@ -34,10 +35,7 @@
   			   ng-click="goArticle(articleModel.articleId)">{{articleModel.articleTitle}}
   			</a>
 		</div>
-		
 	</aside>
 </div>
-<div class="row">
-	<jsp:include page="../branch/articleDetail.jsp" flush="true"/>
-</div>
+
 </main>

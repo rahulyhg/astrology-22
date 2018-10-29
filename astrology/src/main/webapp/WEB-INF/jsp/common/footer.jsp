@@ -28,6 +28,7 @@
 				<ul class="footer-bottom-list">
 					<li><a href="/constellation">星座命盤</a></li>
 					<li><a href="/article">時上專欄</a></li>
+					<li><a href="/analyze">數據分析</a></li>
 					<li><a href="/contact">聯絡我們</a></li>
 				</ul>
 			</div>
@@ -36,12 +37,10 @@
 					<h5 class="mb-3">聯絡方式</h5>
 					<ul class="footer-bottom-list">
 						<li> <span class="fab fa-line"></span> Line：
-							<span style="padding-left:initial;color:#00FFFF;cursor:text">@cze5294u</span><br>
-							<div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@cze5294u" style="display: none;"></div>
+							<span style="padding-left:initial;color:#00FFFF;cursor:text">@cze5294u</span>
 						</li>
 						<li> <span class="fab fa-line"></span> AI占星機器人：
-							<span style="padding-left:initial;color:#00FFFF;cursor:text">@eau2284w</span><br>
-							<div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@eau2284w" style="display: none;"></div>
+							<span style="padding-left:initial;color:#00FFFF;cursor:text">@eau2284w</span>
 						</li>
 						<li> <span class="fab fa-weixin"></span> WeChat：
 							<span style="padding-left:initial;color:#00FFFF;cursor:text">ninicynthia</span> 

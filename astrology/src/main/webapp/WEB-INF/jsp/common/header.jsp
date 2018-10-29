@@ -25,6 +25,9 @@
 					<li class="nav-item  mr-lg-3" id="article">
 						<a class="nav-link" href="/article">時上專欄</a>
 					</li>
+					<li class="nav-item  mr-lg-3" id="analyze">
+						<a class="nav-link" href="/analyze">數據分析</a>
+					</li>
 					<li class="nav-item" id="contact">
 						<a class="nav-link" href="/contact">聯絡我們</a>
 					</li>

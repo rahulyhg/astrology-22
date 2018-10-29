@@ -32,6 +32,26 @@
   			</div>
 		</div>
     </div>
+    <div class="form-group col-lg-5 offset-lg-4 col-md-10 offset-md-1">
+		<label><span class="badge badge-pill badge-primary">選填：</span>請選擇性別</label>
+		<div class="center-block">
+			<div class="custom-control custom-radio custom-control-inline">
+  				<input type="radio" id="customRadioInline1" name="customRadioInline" class="custom-control-input"
+  				   	   ng-model="gender" value="1">
+  				<label class="custom-control-label" for="customRadioInline1">男生</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+  				<input type="radio" id="customRadioInline2" name="customRadioInline" class="custom-control-input"
+  				      ng-model="gender" value="2">
+  				<label class="custom-control-label" for="customRadioInline2">女生</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+  				<input type="radio" id="customRadioInline3" name="customRadioInline" class="custom-control-input"
+  				      ng-model="gender" value="0">
+  				<label class="custom-control-label" for="customRadioInline3">多元</label>
+			</div>
+		</div>
+    </div>
     <div class="text-center">
 		<button type="button" class="btn btn-outline-primary" ng-click="submit()">送出</button>
 	</div>

@@ -12,11 +12,6 @@
 				</div>
 			</td>
 			<td style="color:#00b833;width:10%"><div class="mt-1">@cze5294u</div></td>
-			<td>
-				<div class="mt-1">
-					<div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@cze5294u" style="display: none;"></div>
-				</div>
-			</td>
 		</tr>
 		<tr class="social-contact">
 			<td style="width:10%">
@@ -26,7 +21,6 @@
 				</div>
 			</td>
 			<td style="color:#008000;width:10%"><div class="mt-1">ninicynthia</div></td>
-			<td></td>
 		</tr>
 	</table>
 	</div>
