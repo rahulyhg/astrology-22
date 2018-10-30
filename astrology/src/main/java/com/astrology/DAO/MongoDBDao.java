@@ -20,6 +20,7 @@ import com.astrology.Util.DateUtil;
 import com.astrology.VO.ArticleVO;
 import com.astrology.VO.ChatVO;
 import com.astrology.VO.FeedbackVO;
+import com.astrology.VO.QueryConditionVO;
 import com.astrology.VO.QuestionVO;
 import com.astrology.VO.StatisticalViwerVO;
 
@@ -139,6 +140,10 @@ public class MongoDBDao {
 		ArticleVO articleVO = this.getArticleVOById(articleId);
 		mongoTemplate.updateFirst(new Query(Criteria.where("articleId").is(articleId)), 
 				new Update().set("articleReviews", articleVO.getArticleReviews() + 1), ArticleVO.class, "ArticleContent");
+	}
+	
+	public void insertQueryCondition(QueryConditionVO queryConditionVO) {
+		mongoTemplate.insert(queryConditionVO, "QueryCondition");
 	}
 	
 	

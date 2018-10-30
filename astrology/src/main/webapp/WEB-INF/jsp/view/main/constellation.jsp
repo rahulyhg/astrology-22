@@ -48,7 +48,7 @@
 			<div class="custom-control custom-radio custom-control-inline">
   				<input type="radio" id="customRadioInline3" name="customRadioInline" class="custom-control-input"
   				      ng-model="gender" value="0">
-  				<label class="custom-control-label" for="customRadioInline3">多元</label>
+  				<label class="custom-control-label" for="customRadioInline3">多元性別</label>
 			</div>
 		</div>
     </div>

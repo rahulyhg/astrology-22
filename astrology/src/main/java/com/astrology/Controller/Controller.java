@@ -35,6 +35,7 @@ import com.astrology.VO.ArticleVO;
 import com.astrology.VO.ChatVO;
 import com.astrology.VO.FeedbackVO;
 import com.astrology.VO.MessageVO;
+import com.astrology.VO.QueryConditionVO;
 import com.astrology.VO.QuestionVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -64,11 +65,19 @@ public class Controller {
 		try {
 			double latitude = 25.05;
 			double longitude = 121.5;
+			String yyyymmddTime = inputTime.substring(0, 10).replaceAll("-", "");
 			if (StringUtils.isNotBlank(addr)) {
 				if (StringUtils.startsWith(addr, "!")) {
 					addr = addr.substring(1, addr.length());
 					longitude = Double.parseDouble(addr.split("-")[0]);
 					latitude = Double.parseDouble(addr.split("-")[1]);
+					if (yyyymmddTime.compareTo("20180101") < -1) {
+						QueryConditionVO queryConditionVO = new QueryConditionVO();
+						queryConditionVO.setQueryWestTime(yyyymmddTime);
+						queryConditionVO.setQueryCounty(addr.split("-")[2]);
+						queryConditionVO.setQueryGender(Objects.equals(gender, "undefined") ? null : gender);
+						mongoDBDao.insertQueryCondition(queryConditionVO);
+					}
 				} else {
 					CloseableHttpClient httpclient = HttpClients.createDefault();
 					HttpGet httpget = new HttpGet("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyC1iYs4jh9N5Mz6ZkFPHkVJbWjqQhW-fjg&address=" + addr);

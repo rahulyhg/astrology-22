@@ -12,6 +12,11 @@
 			<select class="form-control ng-pristine ng-untouched ng-valid" style="width:250px;margin:0 auto" ng-init="region = regionArr[2]"
 					ng-model="region" ng-change="changeRegion()" ng-options="vo for vo in regionArr">
 			</select>
+			<div class="col-12" style="font-size:14px;color:blue;margin-bottom:10px">
+				<img src="../images/blub.png" style="vertical-align:bottom">手機版請橫躺擺向，以獲得最佳圖表視野。<br>
+				<img src="../images/blub.png" style="vertical-align:bottom">電腦版可點擊左方台灣地圖，動態顯示該地區數據。<br>
+				<img src="../images/blub.png" style="vertical-align:bottom">可點擊該星座長條圖區塊，以得知各性別查詢次數。
+			</div>
 		</div>
 		<div style="width:100%">
 			<div id="mixChart" style="height: 600px;"></div>

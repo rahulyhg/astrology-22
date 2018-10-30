@@ -27,9 +27,9 @@ public class UIController {
 		return new ModelAndView("/main/article");
 	}
 	
-	@RequestMapping("/shop")
-	public ModelAndView shop() {
-		return new ModelAndView("/main/shop");
+	@RequestMapping("/introduce")
+	public ModelAndView introduce() {
+		return new ModelAndView("/main/introduce");
 	}
 	
 	@RequestMapping("/contact")

@@ -10,9 +10,11 @@
             				'嘉義市','臺南市','高雄市','屏東縣','宜蘭縣','花蓮縣','臺東縣','澎湖縣','金門縣','連江縣'];
 		$scope.boyList = [];
 		$scope.girlList = [];
+		$scope.rainbowList = [];
 		for (var i = 0; i < 12; i++) {
-			$scope.boyList.push(Math.floor((Math.random()) * 100));
-			$scope.girlList.push(Math.floor((Math.random()) * 100));
+			$scope.boyList.push(Math.floor((Math.random()) * 100) + 1);
+			$scope.girlList.push(Math.floor((Math.random()) * 100) + 1);
+			$scope.rainbowList.push(Math.floor((Math.random()) * 100) + 1);
 		}
 		var tip = d3.tip().attr('class', 'd3-tip')
 		  			.offset([-5, 8])
@@ -30,9 +32,11 @@
 		$scope.changeRegion = function() {
 			$scope.boyList = [];
 			$scope.girlList = [];
+			$scope.rainbowList = [];
 			for (var i = 0; i < 12; i++) {
-				$scope.boyList.push(Math.floor((Math.random()) * 100));
-				$scope.girlList.push(Math.floor((Math.random()) * 100));
+				$scope.boyList.push(Math.floor((Math.random()) * 100) + 1);
+				$scope.girlList.push(Math.floor((Math.random()) * 100) + 1);
+				$scope.rainbowList.push(Math.floor((Math.random()) * 100) + 1);
 			}
 			drawChart();
 		};
@@ -107,7 +111,7 @@
 				        right: '10%'
 				    },
 				    legend: {
-				        data: ['男性','女性']
+				        data: ['男性','女性','多元性別']
 				    },
 				    xAxis: [
 				        {
@@ -115,13 +119,16 @@
 				            axisTick: {
 				                alignWithLabel: true
 				            },
-				            data: ['牧羊座', '金牛座', '雙子座', '巨蟹座', '獅子座', '處女座', '天秤座', '天蠍座', '射手座', '摩羯座', '水瓶座', '雙魚座']
+				            axisLabel: {
+				            	rotate: 60
+				            },
+				            data: ['牡羊座', '金牛座', '雙子座', '巨蟹座', '獅子座', '處女座', '天秤座', '天蠍座', '射手座', '摩羯座', '水瓶座', '雙魚座']
 				        }
 				    ],
 				    yAxis: [
 				        {
 				            type: 'value',
-				            name: '查詢次數',
+				            name: '當月查詢次數',
 				            min: 0,
 				            max: 100,
 				            axisLine: {
@@ -154,12 +161,26 @@
 				            itemStyle: {
 				            	emphasis: barHoverStyle,
 				                normal: {
-			        			    color: "#FF1493",
+			        			    color: "red",
 			        			}
 				            },
 				            barGap: '10%',
 				            barCategoryGap: '25%',
 				            data: $scope.girlList
+				        },
+				        {
+				            name: '多元性別',
+				            type: 'bar',
+				            yAxisIndex: 0,
+				            itemStyle: {
+				            	emphasis: barHoverStyle,
+				                normal: {
+			        			    color: "#9370DB",
+			        			}
+				            },
+				            barGap: '10%',
+				            barCategoryGap: '25%',
+				            data: $scope.rainbowList
 				        }
 				    ]
 				};

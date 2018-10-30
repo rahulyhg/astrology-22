@@ -162,7 +162,7 @@ app.service('constellationService', function() {
 		} else if (origin == 'Mercury') {
 			name = '水星';
 		} else if (origin == 'Aries') {
-			name = '牧羊座';
+			name = '牡羊座';
 		} else if (origin == 'Taurus') {
 			name = '金牛座';
 		} else if (origin == 'Gemini') {
@@ -202,7 +202,7 @@ app.service('constellationService', function() {
     this.analyzeInterplay = function (planetEname,constellation,house) {
 		var answer = []; //[0][1] for planet , [2] for house
 		if (planetEname == 'Moon') {
-			if (constellation == '牧羊') {
+			if (constellation == '牡羊') {
 				answer[0] = '反應迅速，急於維護他人，對危險有種直覺，對和自己有親密關係的人有強烈的領域觀';
 				answer[1] = '可能喜歡插嘴，情緒容易不耐煩，有時候喜歡用操控的方式主導一切';
 			} else if (constellation == '金牛') {
@@ -240,7 +240,7 @@ app.service('constellationService', function() {
 				answer[1] = '優柔寡斷，逃避行為，糊塗，缺乏自信，可能會沈溺於酒精或藥物';
 			}
 		} else if (planetEname == 'Sun') {
-			if (constellation == '牧羊') {
+			if (constellation == '牡羊') {
 				answer[0] = '率真、單純丶勇敢丶有效率';
 				answer[1] = '衝動、虎頭蛇尾、自私、沒有耐心';
 			} else if (constellation == '金牛') {
@@ -278,7 +278,7 @@ app.service('constellationService', function() {
 				answer[1] = '意志薄弱丶不切實際丶迷糊丶容易鬆懈';
 			}
 		} else if (planetEname == 'Mars') {
-			if (constellation == '牧羊') {
+			if (constellation == '牡羊') {
 				answer[0] = '有勇氣、力量、膽識、果敢、行動判斷快速、獨立';
 				answer[1] = '衝動，易怒，缺乏毅力，三分鐘熱度';
 			} else if (constellation == '金牛') {
@@ -316,7 +316,7 @@ app.service('constellationService', function() {
 				answer[1] = '';
 			}
 		} else if (planetEname == 'Venus') {
-			if (constellation == '牧羊') {
+			if (constellation == '牡羊') {
 				answer[0] = '在情感跟金錢上的態度過於衝動，在協調仲介方面過於自我。不願妥協，自我中心';
 				answer[1] = '';
 			} else if (constellation == '金牛') {
@@ -354,7 +354,7 @@ app.service('constellationService', function() {
 				answer[1] = '容易在愛情裡迷失自己，立場不果決，很難在情感上付出承諾，愛亂花錢尤其是買鞋子';
 			}
 		} else if (planetEname == 'Mercury') {
-			if (constellation == '牧羊') {
+			if (constellation == '牡羊') {
 				answer[0] = '表達直接，直線思考，思想單純，直言敢言';
 				answer[1] = '說話太過衝動容易得罪人，講話急躁，想法自私，思想單蠢';
 			} else if (constellation == '金牛') {

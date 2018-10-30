@@ -97,7 +97,8 @@
 			if ($scope.inputSite) {
 				addr = $scope.addr;
 			} else {
-				addr = "!" + $scope.city[0] + "-" + $scope.city[1];
+				var cityVO = _.find($scope.cityList, function(o) { return o.lnglat[0] == $scope.city[0]; })
+				addr = "!" + $scope.city[0] + "-" + $scope.city[1] + "-" + cityVO.city;
 				$scope.timezone = 8;
 				$scope.savelight = false;
 			}
