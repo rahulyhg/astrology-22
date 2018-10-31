@@ -14,7 +14,7 @@
 			}
 		}
 		
-		$http.get("/getArticleList")
+		$http.get("/getArticleList/1/false")
 	    .then(function(response) {
 	    	$scope.articleList = response.data;
 	    	angular.forEach($scope.articleList, function(articleModel) {

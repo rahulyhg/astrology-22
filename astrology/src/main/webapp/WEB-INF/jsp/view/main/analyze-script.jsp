@@ -97,6 +97,11 @@
 				    shadowColor: "#000",
 				    shadowBlur: 10,
 				};
+			var lineHoverStyle = {
+				    color: "#00FF00",
+				    shadowColor: "#000",
+				    shadowBlur: 10,
+				};
 			var option = {
 					title: {
 						text: !$scope.region ? '' : $scope.region
@@ -128,7 +133,7 @@
 				    yAxis: [
 				        {
 				            type: 'value',
-				            name: '當月查詢次數',
+				            name: '男、女性查詢次數',
 				            min: 0,
 				            max: 100,
 				            axisLine: {
@@ -137,6 +142,18 @@
 				            	}
 				            },
 				            position: 'left'
+				        },
+				        {
+				            type: 'value',
+				            name: '多元性別查詢次數',
+				            min: 0,
+				            max: 100,
+				            axisLine: {
+				            	lineStyle: {
+				            		color: '#9370DB'
+				            	}
+				            },
+				            position: 'right'
 				        }
 				    ],
 				    series: [
@@ -147,7 +164,7 @@
 				            itemStyle: {
 				                emphasis: barHoverStyle,
 				                normal: {
-				        			    color: "#1E90FF",
+				        			    color: "#7DDEFF",
 				        		}
 				            },
 				            barGap: '10%',
@@ -161,7 +178,7 @@
 				            itemStyle: {
 				            	emphasis: barHoverStyle,
 				                normal: {
-			        			    color: "red",
+			        			    color: "#FF9FCF",
 			        			}
 				            },
 				            barGap: '10%',
@@ -170,16 +187,17 @@
 				        },
 				        {
 				            name: '多元性別',
-				            type: 'bar',
-				            yAxisIndex: 0,
+				            type: 'line',
+				            yAxisIndex: 1,
 				            itemStyle: {
-				            	emphasis: barHoverStyle,
+				            	emphasis: lineHoverStyle,
 				                normal: {
 			        			    color: "#9370DB",
 			        			}
 				            },
-				            barGap: '10%',
-				            barCategoryGap: '25%',
+				            lineStyle: {
+				            	width: 3
+				            },
 				            data: $scope.rainbowList
 				        }
 				    ]

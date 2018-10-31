@@ -11,19 +11,33 @@
 		$scope.articleList = [];
 		$scope.event = 'responseQuestion';
 		
-		$http.get("/getQuestionList")
-	    .then(function(response) {
-	    	$scope.questionList = response.data;
-	    	angular.forEach($scope.questionList,function(vo) {
-				vo.questionTime = new Date(vo.questionTime);
-			});
-	    }, function(response) {
-	    	swal({
-				  type: 'error',
-				  title: '錯誤',
-				  text: '系統發生錯誤!'
+		$q(function(resolve, reject) {
+			$http.get("/getQuestionList")
+		    .then(function(response) {
+		    	$scope.questionList = response.data;
+		    	angular.forEach($scope.questionList,function(vo) {
+					vo.questionTime = new Date(vo.questionTime);
 				});
-	    });
+		    	resolve();
+		    }, function(response) {
+		    	swal({
+					  type: 'error',
+					  title: '錯誤',
+					  text: '系統發生錯誤!'
+					});
+		    });
+		}).then(function() {
+			$http.get("/getArticleList/1/true")
+		    .then(function(response) {
+		    	$scope.articleTitleList = response.data;
+		    }, function(response) {
+		    	swal({
+					  type: 'error',
+					  title: '錯誤',
+					  text: '系統發生錯誤!'
+					});
+		    });
+		});
 		
 		// 事件處理------------------------------------------------
 		$scope.clickList = function(questionVO) {
@@ -132,18 +146,7 @@
 		
 		$scope.chgNavEvent = function(navEvent) {
 			$scope.event = navEvent;
-			if ($scope.articleList.length == 0 && $scope.event == 'updateArticle') {
-				$http.get("/getArticleList")
-			    .then(function(response) {
-			    	$scope.articleList = response.data;
-			    }, function(response) {
-			    	swal({
-						  type: 'error',
-						  title: '錯誤',
-						  text: '系統發生錯誤!'
-						});
-			    });
-			} else if ($scope.event == 'addArticle') {
+			if ($scope.event == 'addArticle') {
 				$scope.articleTitle = null;
 				$scope.articleId = null;
 				$scope.articleAuthor = null;
@@ -152,16 +155,26 @@
 			}
 		}
 		
-		$scope.clickArticleList = function(articleModel,event) {
-			angular.forEach(angular.element('.list-group-item'),function(vo) {
-				angular.element(vo).removeClass('active');
-			});
-			angular.element(event.target).addClass('active');
-			$scope.articleTitle = articleModel.articleTitle;
-			$scope.articleId = articleModel.articleId;
-			$scope.articleAuthor = articleModel.articleAuthor;
-			CKEDITOR.instances['articleContent'].setData(articleModel.articleContent);
-			CKEDITOR.instances['articleContent'].updateElement();
+		$scope.clickArticleTileList = function(articleId,event) {
+			$http.get("/getArticleDetail/" + articleId)
+		    .then(function(response) {
+		    	var articleModel = response.data;
+		    	angular.forEach(angular.element('.list-group-item'),function(vo) {
+					angular.element(vo).removeClass('active');
+				});
+				angular.element(event.target).addClass('active');
+				$scope.articleTitle = articleModel.articleTitle;
+				$scope.articleId = articleModel.articleId;
+				$scope.articleAuthor = articleModel.articleAuthor;
+				CKEDITOR.instances['articleContent'].setData(articleModel.articleContent);
+				CKEDITOR.instances['articleContent'].updateElement();
+		    }, function(response) {
+		    	swal({
+					  type: 'error',
+					  title: '錯誤',
+					  text: '系統發生錯誤!'
+					});
+		    });
 		}
 	});
 </script>

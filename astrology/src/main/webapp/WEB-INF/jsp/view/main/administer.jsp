@@ -50,10 +50,10 @@
 	</div>
 	
 	<div ng-show="event != 'responseQuestion'">
-		<div class="list-group" ng-if="articleList.length > 0 && event == 'updateArticle'" style="margin:20px;">
+		<div class="list-group" ng-if="event == 'updateArticle'" style="margin:20px;">
   			<a href="#" class="list-group-item list-group-item-action"
-  			   ng-repeat="articleModel in articleList | orderBy: '-articleId'"
-  			   ng-click="clickArticleList(articleModel,$event)">{{articleModel.articleTitle}}
+  			   ng-repeat="articleModel in articleTitleList"
+  			   ng-click="clickArticleTileList(articleModel.articleId,$event)">{{articleModel.articleTitle}}
   			</a>
 		</div>
 		<div class="form-group">

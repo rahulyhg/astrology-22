@@ -5,7 +5,7 @@
 <jsp:include page="../branch/articleDetail.jsp" flush="true"/>
 <div class="row">
 	<article class="col-md-9 p-3">
-		<div class="blog-post" id={{articleModel.articleId}} ng-repeat="articleModel in articleList | orderBy: '-articleTime'">
+		<div class="blog-post" id={{articleModel.articleId}} ng-repeat="articleModel in articleList">
 			<h2 class="blog-post-title">{{articleModel.articleTitle}}</h2>
 			<div class="row">
 				<div class="col-md-7 col-12">

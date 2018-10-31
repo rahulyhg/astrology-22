@@ -268,9 +268,9 @@ public class Controller {
 		return "";
 	}
 	
-	@GetMapping(value = "/getArticleList")
-	public String getArticleList() {
-		List<ArticleVO> articleList = mongoDBDao.getArticleList();
+	@GetMapping(value = "/getArticleList/{currentPage}/{onlyTitle}")
+	public String getArticleList(@PathVariable("currentPage") long currentPage, @PathVariable("onlyTitle") boolean onlyTitle) {
+		List<ArticleVO> articleList = mongoDBDao.getArticleList(currentPage, onlyTitle);
 		return gson.toJson(articleList);
 	}
 	
@@ -300,6 +300,12 @@ public class Controller {
 			return gson.toJson(messageVO);
 		}
 		return "";
+	}
+	
+	@GetMapping(value = "/getArticleDetail/{articleId}")
+	public String getArticleDetail(@PathVariable("articleId") String articleId) {
+		ArticleVO articleVO = mongoDBDao.getArticleVOById(articleId);
+		return gson.toJson(articleVO);
 	}
 	
 	@GetMapping(value = "/updateArticleReviews/{articleId}", produces = "application/json;charset=UTF-8")

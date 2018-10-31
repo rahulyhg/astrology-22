@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.LimitOperation;
+import org.springframework.data.mongodb.core.aggregation.SkipOperation;
+import org.springframework.data.mongodb.core.aggregation.SortOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Field;
 import org.springframework.data.mongodb.core.query.Query;
@@ -113,9 +117,20 @@ public class MongoDBDao {
 		mongoTemplate.insert(feedbackVO, "FeedbackContent");
 	}
 	
-	public List<ArticleVO> getArticleList() {
-		Query query = new Query(Criteria.where("articleId").exists(true));
-		return mongoTemplate.find(query, ArticleVO.class, "ArticleContent");
+	public List<ArticleVO> getArticleList(long pageNumber, boolean onlyTitle) {
+//		.and(StringOperators.SubstrCP.valueOf("articleContent").substringCP(0, 50)).as("articleContent");
+		AggregationOperation project = null;
+		if (onlyTitle) {
+			project = Aggregation.project("articleTitle","articleTime");
+		} else {
+			project = Aggregation.project("articleTitle","articleTime","articleReviews","articleContent","articleAuthor");
+		}
+		SkipOperation skip = Aggregation.skip((pageNumber * 10) - 10);
+ 		LimitOperation limit = Aggregation.limit(10);
+		SortOperation sort = Aggregation.sort(Sort.Direction.DESC, "articleTime");
+        Aggregation aggregation = Aggregation.newAggregation(project, skip, limit, sort);
+        AggregationResults<ArticleVO> results =  mongoTemplate.aggregate(aggregation, "ArticleContent", ArticleVO.class);
+        return results.getMappedResults();
 	}
 	
 	public void insertArticle(ArticleVO articleVO) {
