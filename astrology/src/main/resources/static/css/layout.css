@@ -133,28 +133,12 @@ header h1 a span {
 }
 /*-- // services section --*/
 
-/*-- introduce section --*/
 h1.heading, h2.heading, h3.heading {
 	font-size: 50px;
 	font-weight: 900;
 	letter-spacing: 8px;
 	color: #444;
 }
-
-.introduce h4 {
-	font-size: 28px;
-	color: #333;
-	letter-spacing: 2px;
-}
-
-.introduce p {
-	font-size: 15px;
-	letter-spacing: 1px;
-	line-height: 28px;
-	margin: 1em 0 0;
-	color: #666;
-}
-/*-- // introduce section --*/
 
 /*-- shop section--*/
 .agile_gallery_grids {
@@ -178,7 +162,7 @@ h1.heading, h2.heading, h3.heading {
 	cursor: pointer;
 }
 
-.gallery-grid1 .p-mask, .row .product .vm-product-media-container .p-mask
+.gallery-grid1 .p-mask, .row .p-mask
 	{
 	opacity: 0;
 	visibility: hidden;
@@ -218,7 +202,7 @@ h1.heading, h2.heading, h3.heading {
 	transform: translate3d(0px, 0px, 0px);
 }
 
-.p-mask h4 {
+.p-mask h3 {
 	color: #fff;
 	font-size: 1.2em;
 	text-decoration: none;
@@ -467,48 +451,18 @@ ul.footer-bottom-list li a:hover {
 
 @media ( max-width : 768px) {
 	.demo>li img {
-		width: 215px;
-	}
-}
-
-@media ( max-width : 736px) {
-	.demo>li img {
-		width: 203px;
-	}
-}
-
-@media ( max-width : 684px) {
-	.demo>li img {
-		width: 185px;
+		width: 100%;
 	}
 }
 
 @media ( max-width : 667px) {
-	.demo>li img {
-		width: 180px;
-	}
 	.p-mask p {
 		font-size: 13px;
 		letter-spacing: 0px;
 	}
 }
 
-@media ( max-width : 600px) {
-	.demo>li img {
-		width: 240px;
-	}
-}
-
-@media ( max-width : 568px) {
-	.demo>li img {
-		width: 222px;
-	}
-}
-
 @media ( max-width : 480px) {
-	.demo>li img {
-		width: 180px;
-	}
 	h1.heading, h2.heading, h3.heading {
 		letter-spacing: 2px;
 		font-size: 40px;
@@ -521,9 +475,6 @@ ul.footer-bottom-list li a:hover {
 	}
 	.footer-top input[type="submit"] {
 		width: 36%;
-	}
-	.demo>li img {
-		width: 100%;
 	}
 }
 

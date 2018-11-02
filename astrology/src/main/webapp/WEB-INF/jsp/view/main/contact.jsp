@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<main class="container" ng-controller="controller as ctrl" style="height:600px">
+<main class="container" ng-controller="controller as ctrl">
 	<h3 class="alert alert-primary heading text-center" style="font-size: 2rem; padding: .25rem 1rem">聯絡資訊</h3>
 	<div class="col-md-6 offset-md-3 col-12">
 		<table class="table table-borderless">

@@ -4,11 +4,14 @@
 <figure>
 	<div id="carouselBanner" class="carousel slide carousel-fade" data-ride="carousel">
   		<div class="carousel-inner">
-    		<div class="carousel-item active">
-     			 <img class="d-block w-75 marginLeftRight125" src="../images/calendar10.jpg">
+  			<div class="carousel-item active">
+     			 <img class="d-block w-75 marginLeftRight125" src="../images/calendar/november.jpg">
     		</div>
     		<div class="carousel-item">
-     			 <img class="d-block w-75 marginLeftRight125" src="../images/calendar9.jpg">
+     			 <img class="d-block w-75 marginLeftRight125" src="../images/calendar/october.jpg">
+    		</div>
+    		<div class="carousel-item">
+     			 <img class="d-block w-75 marginLeftRight125" src="../images/calendar/september.jpg">
     		</div>
  		</div>
   		<a class="carousel-control-prev" href="#carouselBanner" role="button" data-slide="prev">

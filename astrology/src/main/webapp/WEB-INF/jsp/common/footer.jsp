@@ -29,6 +29,7 @@
 					<li><a href="/constellation">星座命盤</a></li>
 					<li><a href="/article">時上專欄</a></li>
 					<li><a href="/analyze">數據分析</a></li>
+					<li><a href="/introduce">星座介紹</a></li>
 					<li><a href="/contact">聯絡我們</a></li>
 				</ul>
 			</div>

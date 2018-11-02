@@ -3,7 +3,7 @@
 <header style="margin-bottom:20px">
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light">
-			<a class="navbar-brand col-12 col-lg-5" href="/" >
+			<a class="navbar-brand col-12 col-lg-4" href="/" >
 				<img src="../images/header.jpg" style="width:100%"/>
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -27,6 +27,9 @@
 					</li>
 					<li class="nav-item  mr-lg-3" id="analyze">
 						<a class="nav-link" href="/analyze">數據分析</a>
+					</li>
+					<li class="nav-item  mr-lg-3" id="introduce">
+						<a class="nav-link" href="/introduce">星座介紹</a>
 					</li>
 					<li class="nav-item" id="contact">
 						<a class="nav-link" href="/contact">聯絡我們</a>
