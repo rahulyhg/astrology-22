@@ -94,11 +94,6 @@
 .blog-post-meta {
   	color: #999;
 }
-.blog-post-outline {
-  	height: 100px;
-  	overflow-y: hidden;
-  	margin-top: 10px;
-}
 .blog-post ul {
 	margin-left: 40px
 }
@@ -109,6 +104,12 @@
 .social-contact {
 	font-weight:700;
 	cursor:auto
+}
+#introduceContainer .border-warning {
+	border-color: rgb(184, 134, 11) !important;
+}
+#introduceContainer .text-warning {
+	color: rgb(184, 134, 11) !important;
 }
 
 /**for taiwan css------------------------------------------------------------------------**/

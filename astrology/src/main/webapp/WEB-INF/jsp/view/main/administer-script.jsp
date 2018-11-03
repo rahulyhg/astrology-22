@@ -27,7 +27,7 @@
 					});
 		    });
 		}).then(function() {
-			$http.get("/getArticleList/1/true")
+			$http.get("/getArticleList/1")
 		    .then(function(response) {
 		    	$scope.articleTitleList = response.data;
 		    }, function(response) {

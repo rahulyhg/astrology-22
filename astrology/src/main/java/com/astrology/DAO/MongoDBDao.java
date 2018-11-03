@@ -117,16 +117,12 @@ public class MongoDBDao {
 		mongoTemplate.insert(feedbackVO, "FeedbackContent");
 	}
 	
-	public List<ArticleVO> getArticleList(long pageNumber, boolean onlyTitle) {
+	public List<ArticleVO> getArticleList(long pageNumber) {
 //		.and(StringOperators.SubstrCP.valueOf("articleContent").substringCP(0, 50)).as("articleContent");
 		AggregationOperation project = null;
-		if (onlyTitle) {
-			project = Aggregation.project("articleTitle","articleTime");
-		} else {
-			project = Aggregation.project("articleTitle","articleTime","articleReviews","articleContent","articleAuthor");
-		}
-		SkipOperation skip = Aggregation.skip((pageNumber * 10) - 10);
- 		LimitOperation limit = Aggregation.limit(10);
+		project = Aggregation.project("articleTitle","articleTime","articleReviews","articleAuthor");
+		SkipOperation skip = Aggregation.skip((pageNumber * 20) - 20);
+ 		LimitOperation limit = Aggregation.limit(20);
 		SortOperation sort = Aggregation.sort(Sort.Direction.DESC, "articleTime");
         Aggregation aggregation = Aggregation.newAggregation(project, skip, limit, sort);
         AggregationResults<ArticleVO> results =  mongoTemplate.aggregate(aggregation, "ArticleContent", ArticleVO.class);

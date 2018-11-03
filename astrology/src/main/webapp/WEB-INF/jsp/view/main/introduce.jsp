@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<main class="container" ng-controller="controller as ctrl">
-	<h3 class="alert alert-primary heading text-center" style="font-size: 2rem; padding: .25rem 1rem">星座介紹</h3>
+<main class="container" ng-controller="controller as ctrl" id="introduceContainer">
+	<h3 class="alert alert-primary heading text-center" style="font-size: 2rem; padding: .25rem 1rem">星座神話</h3>
 	<div class="container-fluid">
 		<div class="agile_gallery_grids row" ng-repeat="vo in constellationList">
 			<div ng-if="isBigResolution && $odd" ng-class="vo.borderClass" class="card" style="width:{{vo.styleWidth}}">

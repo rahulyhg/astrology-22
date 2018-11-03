@@ -268,9 +268,9 @@ public class Controller {
 		return "";
 	}
 	
-	@GetMapping(value = "/getArticleList/{currentPage}/{onlyTitle}")
-	public String getArticleList(@PathVariable("currentPage") long currentPage, @PathVariable("onlyTitle") boolean onlyTitle) {
-		List<ArticleVO> articleList = mongoDBDao.getArticleList(currentPage, onlyTitle);
+	@GetMapping(value = "/getArticleList/{currentPage}")
+	public String getArticleList(@PathVariable("currentPage") long currentPage) {
+		List<ArticleVO> articleList = mongoDBDao.getArticleList(currentPage);
 		return gson.toJson(articleList);
 	}
 	
@@ -306,16 +306,6 @@ public class Controller {
 	public String getArticleDetail(@PathVariable("articleId") String articleId) {
 		ArticleVO articleVO = mongoDBDao.getArticleVOById(articleId);
 		return gson.toJson(articleVO);
-	}
-	
-	@GetMapping(value = "/updateArticleReviews/{articleId}", produces = "application/json;charset=UTF-8")
-	public void updateArticleReviews(@PathVariable("articleId") String articleId) {
-		try {
-			mongoDBDao.updateArticleReviewsById(articleId);
-		} catch (Exception e) {
-			messageVO.setResMessage("發生錯誤:" + e.getMessage());
-			log.info(e.getMessage());
-		}
 	}
 	
 	private void connectLineBot(String pushJson) {

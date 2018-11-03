@@ -12,8 +12,8 @@
   	
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css">
-	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
-	<link rel="stylesheet" href="css/fontawesome-all.css">
-	<link rel="stylesheet" href="css/layout.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="../css/fontawesome-all.css">
+	<link rel="stylesheet" href="../css/layout.css">
+	<link rel="stylesheet" href="../css/style.css">
 	

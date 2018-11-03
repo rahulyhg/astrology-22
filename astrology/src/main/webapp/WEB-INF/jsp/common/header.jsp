@@ -29,7 +29,7 @@
 						<a class="nav-link" href="/analyze">數據分析</a>
 					</li>
 					<li class="nav-item  mr-lg-3" id="introduce">
-						<a class="nav-link" href="/introduce">星座介紹</a>
+						<a class="nav-link" href="/introduce">星座神話</a>
 					</li>
 					<li class="nav-item" id="contact">
 						<a class="nav-link" href="/contact">聯絡我們</a>

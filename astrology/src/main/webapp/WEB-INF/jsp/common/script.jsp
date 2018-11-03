@@ -8,10 +8,10 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.1/angular-sanitize.min.js"></script>
 	<script src="//d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-	<script src="js/easing.js"></script>
-	<script src="js/move-top.js"></script>
-	<script src="js/SmoothScroll.min.js"></script>
-	<script src="js/angularConfig.js"></script>
+	<script src="../js/easing.js"></script>
+	<script src="../js/move-top.js"></script>
+	<script src="../js/SmoothScroll.min.js"></script>
+	<script src="../js/angularConfig.js"></script>
 	<div id="fb-root"></div>
 	<script>
 		(function(d, s, id) {

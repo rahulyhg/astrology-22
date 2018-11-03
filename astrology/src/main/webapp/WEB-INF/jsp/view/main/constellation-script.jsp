@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<script src="js/astrochart.js"></script>
+<script src="../js/astrochart.js"></script>
 <script src="//d3js.org/d3.v3.min.js"></script>
-<script src="js/d3-tip-v4.js"></script>
+<script src="../js/d3-tip-v4.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>
-<script src="js/moment-zh-tw.js"></script>
+<script src="../js/bootstrap-datetimepicker.min.js"></script>
+<script src="../js/moment-zh-tw.js"></script>
 <script type="text/javascript">
 	app.controller('controller', function ($scope, $http, anchorSmoothScroll, $timeout, $window, constellationService) {
 		$('#datepicker').datetimepicker({

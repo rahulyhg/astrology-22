@@ -2,7 +2,7 @@
 
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
-<script src="js/d3-tip-v4.js"></script>
+<script src="../js/d3-tip-v4.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
 <script type="text/javascript">
 	app.controller('controller', function ($scope, $http) {
