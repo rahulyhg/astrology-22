@@ -163,7 +163,7 @@ h1.heading, h2.heading, h3.heading {
 }
 
 .gallery-grid1 .p-mask, .row .p-mask
-	{
+{
 	opacity: 0;
 	visibility: hidden;
 	background: rgba(25, 24, 24, 0.8);

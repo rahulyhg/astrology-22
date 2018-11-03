@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 	<head>
 		<tiles:insertAttribute name="head" />
 		<title>李探長塔羅占星事務所</title>
