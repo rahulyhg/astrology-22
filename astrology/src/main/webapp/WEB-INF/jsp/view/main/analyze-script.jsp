@@ -6,6 +6,11 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
 <script type="text/javascript">
 	app.controller('controller', function ($scope, $http) {
+		$scope.isBigResolution = $(window).width() > 1200;
+		$(window).resize(function() {
+			location.reload();
+		});
+		
 		$scope.regionArr = ['基隆市','新北市','臺北市','桃園市','新竹縣','新竹市','苗栗縣','臺中市','彰化縣','南投縣','雲林縣','嘉義縣',
             				'嘉義市','臺南市','高雄市','屏東縣','宜蘭縣','花蓮縣','臺東縣','澎湖縣','金門縣','連江縣'];
 		$scope.boyList = [];
